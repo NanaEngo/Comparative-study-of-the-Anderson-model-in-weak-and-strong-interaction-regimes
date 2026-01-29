@@ -1,0 +1,58 @@
+{
+  "simulation_params": {
+    "temperature": 295,
+    "dephasing_rate": 20,
+    "time_points": 500,
+    "max_time": 500,
+    "n_filters": 3
+  },
+  "fmo_hamiltonian_params": {
+    "include_reaction_center": false
+  },
+  "opv_params": {
+    "opv_bandgap": 1.4,
+    "opv_absorption_coeff": 1.0
+  },
+  "quantum_metrics": {
+    "calculate_qfi": true,
+    "calculate_entropy": true,
+    "calculate_purity": true,
+    "calculate_concurrence": true,
+    "calculate_entanglement": true
+  },
+  "optimization_params": {
+    "maxiter": 100,
+    "popsize": 15,
+    "strategy": "best1bin",
+    "mutation": 0.5,
+    "recombination": 0.7,
+    "workers": -1
+  },
+  "solar_spectrum_params": {
+    "wavelength_min": 300,
+    "wavelength_max": 800,
+    "n_points": 801
+  },
+  "bath_params": {
+    "lambda_reorg": 35,
+    "gamma": 50,
+    "temperature": 295,
+    "omega_vib": [150, 200, 575, 1185],
+    "S_vib": [0.05, 0.02, 0.01, 0.005],
+    "Gamma_vib": [10, 10, 20, 20]
+  },
+  "process_tensor_params": {
+    "N_Mat": 10,
+    "eta_LTC": 10,
+    "epsilon_LTC": 1e-8
+  },
+  "sbd_params": {
+    "bundle_count": 50,
+    "adaptive_error_control": true,
+    "max_chromophores": 1000
+  },
+  "parallelization_params": {
+    "nproc": null,
+    "default_nproc_logic": "(nproc-4) if nproc>=8; else (nproc-2)"
+  }
+}

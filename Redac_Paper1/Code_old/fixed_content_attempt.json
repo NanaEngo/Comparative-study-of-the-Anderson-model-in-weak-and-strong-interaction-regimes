@@ -16,7 +16,7 @@
     "5. Electron Transport Rate (ETR) calculations with quantum advantage quantification\n",
     "6. Quantum coherence analysis and Mandel Q-parameter calculation\n",
     "7. Multi-objective optimization for sustainable materials design\n",
-    "8. Fukui function implementation for biodegradability prediction"
+    \"8. Fukui function implementation for biodegradability prediction\"
    ]
   },
   {
@@ -25,7 +25,7 @@
    "source": [
     "## GPU Acceleration Setup\n",
     "\n",
-    "The following cell checks for GPU availability and sets up accelerated computing. This notebook can run on CPU but will benefit from GPU acceleration for larger systems and longer simulations."
+    \"The following cell checks for GPU availability and sets up accelerated computing. This notebook can run on CPU but will benefit from GPU acceleration for larger systems and longer simulations.\"
    ]
   },
   {
@@ -46,8 +46,8 @@
     "    print(\"Running in Google Colab\")\n",
     "    \n",
     "    # Check GPU availability\n",
-    "    import subprocess\n",
-    "    gpu_info = subprocess.run(['nvidia-smi', '--query-gpu=name,memory.total,memory.used', '--format=csv,noheader,nounits'], \n",
+    "    import subprocess\n\",
+    \"    gpu_info = subprocess.run(['nvidia-smi', '--query-gpu=name,memory.total,memory.used', '--format=csv,noheader,nounits'], \n",
     "                             capture_output=True, text=True)\n",
     "    if gpu_info.returncode == 0:\n",
     "        print(\"\\nGPU Information:\")\n",
@@ -142,8 +142,8 @@
     "    print(\"scienceplots not available, using default style\")\n",
     "    pass\n",
     "\n",
-    "# Set up plotting parameters\n",
-    "plt.rcParams['font.size'] = 12\n",
+    "# Set up plotting parameters\n\",
+    \"plt.rcParams['font.size'] = 12\n",
     "plt.rcParams['figure.figsize'] = (12, 8)\n",
     "plt.rcParams['axes.grid'] = True\n",
     "sns.set_style(\"whitegrid\")\n",
@@ -162,7 +162,7 @@
    "source": [
     "## 1. FMO complex Hamiltonian model\n",
     "\n",
-    "We implement the Fenna-Matthews-Olsen (FMO) complex Hamiltonian based on experimental and theoretical parameters from the literature. The FMO complex consists of 7-8 bacteriochlorophyll-a molecules arranged to facilitate efficient energy transfer."
+    \"We implement the Fenna-Matthews-Olsen (FMO) complex Hamiltonian based on experimental and theoretical parameters from the literature. The FMO complex consists of 7-8 bacteriochlorophyll-a molecules arranged to facilitate efficient energy transfer.\"
    ]
   },
   {
@@ -207,8 +207,8 @@
     "    \"\"\"\n",
     "    # Standard FMO site energies (cm^-1) - from Adolphs & Renger 2006\n",
     "    if include_reaction_center:\n",
-    "        # Include 8 sites with reaction center\n",
-    "        site_energies = np.array([12200, 12070, 11980, 12050, 12140, 12130, 12260, 11700])  # Last is RC\n",
+    "        # Include 8 sites with reaction center\n\",
+    \"        site_energies = np.array([12200, 12070, 11980, 12050, 12140, 12130, 12260, 11700])  # Last is RC\n",
     "    else:\n",
     "        # Standard 7-site FMO complex\n",
     "        site_energies = np.array([12200, 12070, 11980, 12050, 12140, 12130, 12260])\n",
@@ -271,7 +271,7 @@
    "source": [
     "## 2. Spectral density and environment model\n",
     "\n",
-    "We implement the spectral density model with Drude-Lorentz bath for overdamped modes and discrete vibronic modes for underdamped vibrations."
+    \"We implement the spectral density model with Drude-Lorentz bath for overdamped modes and discrete vibronic modes for underdamped vibrations.\"
    ]
   },
   {
@@ -328,8 +328,8 @@
     "    Mathematical Framework:\n",
     "    Vibronic spectral densities model underdamped modes with specific frequencies\n",
     "    and are often represented by Lorentzian peaks:\n",
-    "    \n",
-    "    J_vib(\u03c9) = \u03a3_k S_k * \u03c9_k\u00b2 * \u0393_k / [(\u03c9 - \u03c9_k)\u00b2 + \u0393_k\u00b2]\n",
+    "    \n\",
+    \"    J_vib(\u03c9) = \u03a3_k S_k * \u03c9_k\u00b2 * \u0393_k / [(\u03c9 - \u03c9_k)\u00b2 + \u0393_k\u00b2]\n",
     "    \n",
     "    where:\n",
     "    - S_k is the Huang-Rhys factor for mode k (dimensionless, measures coupling strength)\n",
@@ -428,7 +428,7 @@
    "source": [
     "## 3. OPV transmission function models\n",
     "\n",
-    "We implement various models for the OPV transmission function $T(\\omega)$ that can be optimized for enhanced photosynthetic efficiency."
+    \"We implement various models for the OPV transmission function $T(\\omega)$ that can be optimized for enhanced photosynthetic efficiency.\"
    ]
   },
   {
@@ -523,8 +523,8 @@
     "    T = np.ones_like(wavelengths, dtype=float) * params.get('base_transmission', 0.2)\n",
     "    \n",
     "    # Add transmission windows as Gaussian peaks\n",
-    "    for center_wl, width, peak_trans in zip(\n",
-    "        params.get('center_wls', [600]), \n",
+    "    for center_wl, width, peak_trans in zip(\n\",
+    \"        params.get('center_wls', [600]), \n",
     "        params.get('widths', [100]), \n",
     "        params.get('peak_transmissions', [0.8])):\n",
     "        \n",
@@ -707,7 +707,7 @@
    "source": [
     "## 4. Quantum dynamics simulation\n",
     "\n",
-    "We implement a simplified quantum dynamics simulation to calculate the Electron Transport Rate (ETR) and coherence properties."
+    \"We implement a simplified quantum dynamics simulation to calculate the Electron Transport Rate (ETR) and coherence properties.\"
    ]
   },
   {
@@ -728,8 +728,8 @@
     "                      temperature_range=(273, 320), disorder_strengths=(0, 100)):\n",
     "    \"\"\"\n",
     "    Comprehensive robustness analysis across temperature and disorder\n",
-    "    \"\"\"\n",
-    "    results = {'temperature_sensitivity': [], 'disorder_sensitivity': []}\n",
+    "    \"\"\"\n\",
+    \"    results = {'temperature_sensitivity': [], 'disorder_sensitivity': []}\n",
     "    \n",
     "    # Temperature sweep\n",
     "    temperatures = np.linspace(*temperature_range, 10)\n",
@@ -874,7 +874,7 @@
    "source": [
     "## 5. Parameter optimization for enhanced photosynthetic efficiency\n",
     "\n",
-    "We implement an optimization routine to find OPV transmission functions that maximize ETR per absorbed photon."
+    \"We implement an optimization routine to find OPV transmission functions that maximize ETR per absorbed photon.\"
    ]
   },
   {
@@ -923,8 +923,8 @@
     "    transmitted_spectrum = solar_irradiance * transmission_func\n",
     "    \n",
     "    # Calculate total number of absorbed photons in PAR range (400-700 nm)\n",
-    "    par_mask = (wavelengths >= 400) & (wavelengths <= 700)\n",
-    "    absorbed_photons = np.trapz(transmitted_spectrum[par_mask], wavelengths[par_mask])\n",
+    "    par_mask = (wavelengths >= 400) & (wavelengths <= 700)\n\",
+    \"    absorbed_photons = np.trapz(transmitted_spectrum[par_mask], wavelengths[par_mask])\n",
     "    \n",
     "    # For simplicity, we'll create a frequency-dependent excitation rate\n",
     "    # based on the transmitted spectrum and pigment absorption\n",
@@ -1079,7 +1079,7 @@
    "source": [
     "## 6. Generate all Figures for the paper\n",
     "\n",
-    "We'll now create all the figures mentioned in the paper, including heatmaps, time traces, spectral overlays, and robustness analysis."
+    \"We'll now create all the figures mentioned in the paper, including heatmaps, time traces, spectral overlays, and robustness analysis.\"
    ]
   },
   {
@@ -1107,8 +1107,8 @@
     "        etr_per_photon, _ = calculate_etrs_for_transmission(\n",
     "            T, wavelengths, solar_irradiance, fmo_hamiltonian\n",
     ")\n",
-    "        \n",
-    "        etr_heatmap[i, j] = etr_per_photon\n",
+    "        \n\",
+    \"        etr_heatmap[i, j] = etr_per_photon\n",
     "\n",
     "# Create figure 1: ETR heatmap\n",
     "plt.figure(figsize=(15, 12))\n",
@@ -1271,7 +1271,7 @@
    "source": [
     "## 7. Quantum advantage quantification\n",
     "\n",
-    "We'll quantify the quantum advantage by comparing our non-Markovian results with Markovian approximations."
+    \"We'll quantify the quantum advantage by comparing our non-Markovian results with Markovian approximations.\"
    ]
   },
   {
@@ -1329,8 +1329,8 @@
     "    fmo_markov = QuantumDynamicsSimulator(fmo_hamiltonian, temperature=295, dephasing_rate=100)  # High dephasing\n",
     "    \n",
     "    # Calculate ETR with high dephasing (Markovian limit)\n",
-    "    initial_state = np.zeros((fmo_markov.n_sites, fmo_markov.n_sites), dtype=complex)\n",
-    "    initial_state[0, 0] = 1.0  # Start on site 1\n",
+    "    initial_state = np.zeros((fmo_markov.n_sites, fmo_markov.n_sites), dtype=complex)\n\",
+    \"    initial_state[0, 0] = 1.0  # Start on site 1\n",
     "    \n",
     "    time_points = np.linspace(0, 500, 500)\n",
     "    _, _, pops_markov, _, _ = fmo_markov.simulate_dynamics(\n",
@@ -1483,7 +1483,7 @@
     "After enabling GPU, run this code in a cell:\n",
     "```python\n",
     "# Install JAX with CUDA support\n",
-    "!pip install --upgrade \"jax[cuda]\" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html\n",
+    \"!pip install --upgrade \\"jax[cuda]\" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html\n",
     "\n",
     "# Verify GPU access\n",
     "import jax\n",
@@ -1535,7 +1535,7 @@
     "1. **Advanced Quantum Metrics**: Calculate quantum synergy index and Mandel Q parameter\n",
     "2. **Robustness Analysis**: Test how the system performs under varying temperatures and disorder\n",
     "3. **Multi-Objective Optimization**: Simultaneously optimize for ETR and PCE\n",
-    "4. **Publication-Quality Figures**: Generate all figures for the paper"
+    \"4. **Publication-Quality Figures**: Generate all figures for the paper\"
    ]
   },
   {
@@ -1570,7 +1570,7 @@
     "    fmo_hamiltonian, wavelengths, solar_irradiance\n",
     ")\n",
     "\n",
-    "print(f\"Temperature range: {temperatures[0]:.0f} - {temperatures[-1]:.0f} K\")\n",
+    \"print(f\\"Temperature range: {temperatures[0]:.0f} - {temperatures[-1]:.0f} K\")\n",
     "print(f\"Temperature sensitivity: {robustness_data['temperature_sensitivity'][0]:.4f} - {robustness_data['temperature_sensitivity'][-1]:.4f}\")\n",
     "print(f\"Disorder range: {disorder_strengths[0]} - {disorder_strengths[-1]} cm\u207b\u00b9\")\n",
     "print(f\"Disorder sensitivity: {robustness_data['disorder_sensitivity'][0]:.4f} - {robustness_data['disorder_sensitivity'][-1]:.4f}\")\n",
@@ -1617,7 +1617,7 @@
     "1. **Advanced Quantum Metrics**: Calculate quantum synergy index and Mandel Q parameter\n",
     "2. **Robustness Analysis**: Test how the system performs under varying temperatures and disorder\n",
     "3. **Multi-Objective Optimization**: Simultaneously optimize for ETR and PCE\n",
-    "4. **Publication-Quality Figures**: Generate all figures for the paper"
+    \"4. **Publication-Quality Figures**: Generate all figures for the paper\"
    ]
   },
   {
@@ -1652,7 +1652,7 @@
     "    fmo_hamiltonian, wavelengths, solar_irradiance\n",
     ")\n",
     "\n",
-    "print(f\"Temperature range: {temperatures[0]:.0f} - {temperatures[-1]:.0f} K\")\n",
+    \"print(f\\"Temperature range: {temperatures[0]:.0f} - {temperatures[-1]:.0f} K\")\n",
     "print(f\"Temperature sensitivity: {robustness_data['temperature_sensitivity'][0]:.4f} - {robustness_data['temperature_sensitivity'][-1]:.4f}\")\n",
     "print(f\"Disorder range: {disorder_strengths[0]} - {disorder_strengths[-1]} cm\u207b\u00b9\")\n",
     "print(f\"Disorder sensitivity: {robustness_data['disorder_sensitivity'][0]:.4f} - {robustness_data['disorder_sensitivity'][-1]:.4f}\")\n",
@@ -1699,7 +1699,7 @@
     "1. **Advanced Quantum Metrics**: Calculate quantum synergy index and Mandel Q parameter\n",
     "2. **Robustness Analysis**: Test how the system performs under varying temperatures and disorder\n",
     "3. **Multi-Objective Optimization**: Simultaneously optimize for ETR and PCE\n",
-    "4. **Publication-Quality Figures**: Generate all figures for the paper"
+    \"4. **Publication-Quality Figures**: Generate all figures for the paper\"
    ]
   },
   {
@@ -1734,7 +1734,7 @@
     "    fmo_hamiltonian, wavelengths, solar_irradiance\n",
     ")\n",
     "\n",
-    "print(f\"Temperature range: {temperatures[0]:.0f} - {temperatures[-1]:.0f} K\")\n",
+    \"print(f\\"Temperature range: {temperatures[0]:.0f} - {temperatures[-1]:.0f} K\")\n",
     "print(f\"Temperature sensitivity: {robustness_data['temperature_sensitivity'][0]:.4f} - {robustness_data['temperature_sensitivity'][-1]:.4f}\")\n",
     "print(f\"Disorder range: {disorder_strengths[0]} - {disorder_strengths[-1]} cm\u207b\u00b9\")\n",
     "print(f\"Disorder sensitivity: {robustness_data['disorder_sensitivity'][0]:.4f} - {robustness_data['disorder_sensitivity'][-1]:.4f}\")\n",
@@ -1781,7 +1781,7 @@
     "1. **Advanced Quantum Metrics**: Calculate quantum synergy index and Mandel Q parameter\n",
     "2. **Robustness Analysis**: Test how the system performs under varying temperatures and disorder\n",
     "3. **Multi-Objective Optimization**: Simultaneously optimize for ETR and PCE\n",
-    "4. **Publication-Quality Figures**: Generate all figures for the paper"
+    \"4. **Publication-Quality Figures**: Generate all figures for the paper\"
    ]
   },
   {
@@ -1816,7 +1816,7 @@
     "    fmo_hamiltonian, wavelengths, solar_irradiance\n",
     ")\n",
     "\n",
-    "print(f\"Temperature range: {temperatures[0]:.0f} - {temperatures[-1]:.0f} K\")\n",
+    \"print(f\\"Temperature range: {temperatures[0]:.0f} - {temperatures[-1]:.0f} K\")\n",
     "print(f\"Temperature sensitivity: {robustness_data['temperature_sensitivity'][0]:.4f} - {robustness_data['temperature_sensitivity'][-1]:.4f}\")\n",
     "print(f\"Disorder range: {disorder_strengths[0]} - {disorder_strengths[-1]} cm\u207b\u00b9\")\n",
     "print(f\"Disorder sensitivity: {robustness_data['disorder_sensitivity'][0]:.4f} - {robustness_data['disorder_sensitivity'][-1]:.4f}\")\n",
@@ -1863,7 +1863,7 @@
     "1. **Advanced Quantum Metrics**: Calculate quantum synergy index and Mandel Q parameter\n",
     "2. **Robustness Analysis**: Test how the system performs under varying temperatures and disorder\n",
     "3. **Multi-Objective Optimization**: Simultaneously optimize for ETR and PCE\n",
-    "4. **Publication-Quality Figures**: Generate all figures for the paper"
+    \"4. **Publication-Quality Figures**: Generate all figures for the paper\"
    ]
   },
   {
@@ -1898,7 +1898,7 @@
     "    fmo_hamiltonian, wavelengths, solar_irradiance\n",
     ")\n",
     "\n",
-    "print(f\"Temperature range: {temperatures[0]:.0f} - {temperatures[-1]:.0f} K\")\n",
+    \"print(f\\"Temperature range: {temperatures[0]:.0f} - {temperatures[-1]:.0f} K\")\n",
     "print(f\"Temperature sensitivity: {robustness_data['temperature_sensitivity'][0]:.4f} - {robustness_data['temperature_sensitivity'][-1]:.4f}\")\n",
     "print(f\"Disorder range: {disorder_strengths[0]} - {disorder_strengths[-1]} cm\u207b\u00b9\")\n",
     "print(f\"Disorder sensitivity: {robustness_data['disorder_sensitivity'][0]:.4f} - {robustness_data['disorder_sensitivity'][-1]:.4f}\")\n",
@@ -1945,7 +1945,7 @@
     "1. **Advanced Quantum Metrics**: Calculate quantum synergy index and Mandel Q parameter\n",
     "2. **Robustness Analysis**: Test how the system performs under varying temperatures and disorder\n",
     "3. **Multi-Objective Optimization**: Simultaneously optimize for ETR and PCE\n",
-    "4. **Publication-Quality Figures**: Generate all figures for the paper"
+    \"4. **Publication-Quality Figures**: Generate all figures for the paper\"
    ]
   },
   {
@@ -1980,7 +1980,7 @@
     "    fmo_hamiltonian, wavelengths, solar_irradiance\n",
     ")\n",
     "\n",
-    "print(f\"Temperature range: {temperatures[0]:.0f} - {temperatures[-1]:.0f} K\")\n",
+    \"print(f\\"Temperature range: {temperatures[0]:.0f} - {temperatures[-1]:.0f} K\")\n",
     "print(f\"Temperature sensitivity: {robustness_data['temperature_sensitivity'][0]:.4f} - {robustness_data['temperature_sensitivity'][-1]:.4f}\")\n",
     "print(f\"Disorder range: {disorder_strengths[0]} - {disorder_strengths[-1]} cm\u207b\u00b9\")\n",
     "print(f\"Disorder sensitivity: {robustness_data['disorder_sensitivity'][0]:.4f} - {robustness_data['disorder_sensitivity'][-1]:.4f}\")\n",
@@ -2027,7 +2027,7 @@
     "1. **Advanced Quantum Metrics**: Calculate quantum synergy index and Mandel Q parameter\n",
     "2. **Robustness Analysis**: Test how the system performs under varying temperatures and disorder\n",
     "3. **Multi-Objective Optimization**: Simultaneously optimize for ETR and PCE\n",
-    "4. **Publication-Quality Figures**: Generate all figures for the paper"
+    \"4. **Publication-Quality Figures**: Generate all figures for the paper\"
    ]
   },
   {
@@ -2062,7 +2062,7 @@
     "    fmo_hamiltonian, wavelengths, solar_irradiance\n",
     ")\n",
     "\n",
-    "print(f\"Temperature range: {temperatures[0]:.0f} - {temperatures[-1]:.0f} K\")\n",
+    \"print(f\\"Temperature range: {temperatures[0]:.0f} - {temperatures[-1]:.0f} K\")\n",
     "print(f\"Temperature sensitivity: {robustness_data['temperature_sensitivity'][0]:.4f} - {robustness_data['temperature_sensitivity'][-1]:.4f}\")\n",
     "print(f\"Disorder range: {disorder_strengths[0]} - {disorder_strengths[-1]} cm\u207b\u00b9\")\n",
     "print(f\"Disorder sensitivity: {robustness_data['disorder_sensitivity'][0]:.4f} - {robustness_data['disorder_sensitivity'][-1]:.4f}\")\n",
@@ -2109,7 +2109,7 @@
     "1. **Advanced Quantum Metrics**: Calculate quantum synergy index and Mandel Q parameter\n",
     "2. **Robustness Analysis**: Test how the system performs under varying temperatures and disorder\n",
     "3. **Multi-Objective Optimization**: Simultaneously optimize for ETR and PCE\n",
-    "4. **Publication-Quality Figures**: Generate all figures for the paper"
+    \"4. **Publication-Quality Figures**: Generate all figures for the paper\"
    ]
   },
   {
@@ -2144,7 +2144,7 @@
     "    fmo_hamiltonian, wavelengths, solar_irradiance\n",
     ")\n",
     "\n",
-    "print(f\"Temperature range: {temperatures[0]:.0f} - {temperatures[-1]:.0f} K\")\n",
+    \"print(f\\"Temperature range: {temperatures[0]:.0f} - {temperatures[-1]:.0f} K\")\n",
     "print(f\"Temperature sensitivity: {robustness_data['temperature_sensitivity'][0]:.4f} - {robustness_data['temperature_sensitivity'][-1]:.4f}\")\n",
     "print(f\"Disorder range: {disorder_strengths[0]} - {disorder_strengths[-1]} cm\u207b\u00b9\")\n",
     "print(f\"Disorder sensitivity: {robustness_data['disorder_sensitivity'][0]:.4f} - {robustness_data['disorder_sensitivity'][-1]:.4f}\")\n",
@@ -2191,7 +2191,7 @@
     "1. **Advanced Quantum Metrics**: Calculate quantum synergy index and Mandel Q parameter\n",
     "2. **Robustness Analysis**: Test how the system performs under varying temperatures and disorder\n",
     "3. **Multi-Objective Optimization**: Simultaneously optimize for ETR and PCE\n",
-    "4. **Publication-Quality Figures**: Generate all figures for the paper"
+    \"4. **Publication-Quality Figures**: Generate all figures for the paper\"
    ]
   },
   {
@@ -2226,7 +2226,7 @@
     "    fmo_hamiltonian, wavelengths, solar_irradiance\n",
     ")\n",
     "\n",
-    "print(f\"Temperature range: {temperatures[0]:.0f} - {temperatures[-1]:.0f} K\")\n",
+    \"print(f\\"Temperature range: {temperatures[0]:.0f} - {temperatures[-1]:.0f} K\")\n",
     "print(f\"Temperature sensitivity: {robustness_data['temperature_sensitivity'][0]:.4f} - {robustness_data['temperature_sensitivity'][-1]:.4f}\")\n",
     "print(f\"Disorder range: {disorder_strengths[0]} - {disorder_strengths[-1]} cm\u207b\u00b9\")\n",
     "print(f\"Disorder sensitivity: {robustness_data['disorder_sensitivity'][0]:.4f} - {robustness_data['disorder_sensitivity'][-1]:.4f}\")\n",
@@ -2280,7 +2280,7 @@
     "\n",
     "The results demonstrate that by engineering the spectral transmission properties of OPV panels, we can enhance photosynthetic efficiency through quantum coherence effects. The optimized transmission functions show up to {eta_quantum*100:.2f}% improvement in ETR per absorbed photon compared to Markovian models, providing a clear quantum advantage for agrivoltaic applications.\n",
     "\n",
-    "This framework bridges quantum physics and agronomy, providing a new paradigm for designing symbiotic systems that co-optimize energy generation and agricultural productivity through quantum spectral engineering."
+    \"This framework bridges quantum physics and agronomy, providing a new paradigm for designing symbiotic systems that co-optimize energy generation and agricultural productivity through quantum spectral engineering.\"
    ]
   },
 {
@@ -2320,8 +2320,8 @@
   "        'time_fs': time_points\\n",
   "    }\\n",
   "    \\n",
-  "    # Add populations for each site\\n",
-  "    n_sites = populations.shape[1]\\n",
+  "    # Add populations for each site\\n\",
+  \"    n_sites = populations.shape[1]\\n",
   "    for i in range(n_sites):\\n",
   "        data[f'population_site_{i+1}'] = populations[:, i]\\n",
   "    \\n",
@@ -2484,8 +2484,7 @@
   "os.makedirs(\"figures\", exist_ok=True)\\n",
   "print(\"CSV storage functions are ready and figures/ directory has been created.\")\\n",
   "print(\"You can now save simulation data using the provided functions.\")\\n",
-  "\\n"
-  ]
+  "\\n" ]
  },
  "metadata": {
   "kernelspec": {

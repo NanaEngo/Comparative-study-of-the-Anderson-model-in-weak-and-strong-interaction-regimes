@@ -1,19 +1,19 @@
 % Theory and Methods Section - EES Version
 % Quantum Spectral Engineering for Enhanced Agrivoltaic Efficiency
 
-\section{Theory and Methods}\label{sec:Theory}
+\section{Theory and methods}\label{sec:Theory}
 
 \subsection{Open quantum system framework}
 
-We treat the photosynthetic unit as an open quantum system coupled to a structured vibrational environment (protein-solvent and intramolecular modes) and a spectrally filtered photon bath determined by the OPV transmission function. The reduced density matrix $\bm{\rho}(t)$ of the excitonic system evolves according to:
+We treat the photosynthetic unit as an open quantum system coupled to a structured vibrational environment (protein-solvent and intramolecular modes) and a spectrally filtered photon bath. The reduced density matrix $\bm{\rho}(t)$ of the excitonic system evolves according to:
 \begin{equation}\label{eq:master_eq}
-\frac{d\bm{\rho}(t)}{dt} = \mathcal{L}(t)\bm{\rho}(t) = -\frac{i}{\hbar}[\hat{H}_S, \bm{\rho}(t)] + \mathcal{D}[\bm{\rho}(t)]
+\frac{d\bm{\rho}(t)}{dt} = \mathcal{L}(t)\bm{\rho}(t) = -\frac{i}{\hbar}[\hat{H}_S, \bm{\rho}(t)] + \mathcal{D}[\bm{\rho}(t)],
 \end{equation}
-where $\hat{H}_S$ is the system Hamiltonian and $\mathcal{D}[\bm{\rho}(t)]$ represents dissipative system-bath interactions. The key idea for agrivoltaic applications is that $\mathcal{D}[\bm{\rho}(t)]$ can be engineered through control of the incident spectral density via $T(\omega)$.
+where $\hat{H}_S$ is the system Hamiltonian and $\mathcal{D}[\bm{\rho}(t)]$ represents system-bath dissipative interactions. For agrivoltaic applications, $\mathcal{D}[\bm{\rho}(t)]$ is engineered through control of the incident spectral density via $T(\omega)$.
 
 The electronic Hamiltonian is:
 \begin{equation}\label{eq:excitonic_hamiltonian}
-\hat{H}_{\rm el} = \sum_n \varepsilon_n \dyad{n} + \sum_{n \neq m} J_{nm} \dyad{n}{m}
+\hat{H}_{\rm el} = \sum_n \varepsilon_n \dyad{n} + \sum_{n \neq m} J_{nm} \dyad{n}{m},
 \end{equation}
 where $\varepsilon_n$ is the site energy of chromophore $n$ and $J_{nm}$ is the electronic coupling between chromophores $n$ and $m$. The interplay between site energies and couplings determines the exciton delocalization landscape, which is modulated by the spectral properties of the driving light field.
 
@@ -21,63 +21,64 @@ where $\varepsilon_n$ is the site energy of chromophore $n$ and $J_{nm}$ is the 
 
 The total Hamiltonian includes system, bath, and interaction terms:
 \begin{equation}\label{eq:system_bath_hamiltonian}
-\hat{H} = \hat{H}_S + \hat{H}_B + \hat{H}_{SB}
+\hat{H} = \hat{H}_S + \hat{H}_B + \hat{H}_{SB}.
 \end{equation}
 
 We characterize the system-bath coupling through a composite spectral density:
 \begin{equation}\label{eq:spectral_density}
-J_{\rm bath}(\omega) = \frac{2\lambda\gamma\omega}{\omega^2 + \gamma^2} + \sum_k \frac{2\lambda_k\omega_k^2\gamma_k}{(\omega-\omega_k)^2 + \gamma_k^2}
+J_{\rm bath}(\omega) = \frac{2\lambda\gamma\omega}{\omega^2 + \gamma^2} + \sum_k \frac{2\lambda_k\omega_k^2\gamma_k}{(\omega-\omega_k)^2 + \gamma_k^2}.
 \end{equation}
 The first term describes overdamped protein-solvent modes (reorganization energy $\lambda$, cutoff frequency $\gamma$), and the second represents underdamped intramolecular vibrations (reorganization energies $\lambda_k$, frequencies $\omega_k$, damping rates $\gamma_k$).
 
-The central element of our approach is spectral density engineering of the photon bath. The effective incident spectral density seen by the plant becomes:
+Our approach centers on spectral density engineering of the photon bath. The effective incident spectral density seen by the plant is:
 \begin{equation}\label{eq:filtered_spectral_density}
-J_{\rm plant}(\omega) = T(\omega) \times J_{\rm solar}(\omega)
+J_{\rm plant}(\omega) = T(\omega) \times J_{\rm solar}(\omega),
 \end{equation}
-where $T(\omega)$ is the OPV transmission function and $J_{\rm solar}(\omega)$ is the solar spectral irradiance (AM1.5G standard, \num{1000}\,W/m$^2$ integrated). Engineering $T(\omega)$ to align with vibronic resonances can extend quantum coherence lifetimes and open energy transfer pathways that remain suppressed under broadband illumination.
+where $T(\omega)$ is the OPV transmission function and $J_{\rm solar}(\omega)$ is the solar spectral irradiance (AM1.5G standard, \SI{1000}{\watt\per\metre\squared} integrated). Engineering $T(\omega)$ to align with vibronic resonances extends quantum coherence and opens energy transfer pathways that remain suppressed under broadband illumination.
 
 \subsection{Adaptive Hierarchy of Pure States (adHOPS)}
 
 Simulations use the adaptive Hierarchy of Pure States method, implemented in the open-source MesoHOPS library \cite{Citty2024, Varvelo2021}. This numerically exact technique exploits the dynamic localisation of excitons to achieve size-invariant $\mathcal{O}(1)$ scaling for large molecular aggregates ($N>100$), bypassing the exponential cost of traditional HEOM \cite{Varvelo2021, Suess2014}. It captures full non-Markovian environmental memory without weak-coupling approximations and achieves an additional $10\times$ speedup through efficient Matsubara mode treatment (PT-HOPS+LTC).
 
-Unlike Markovian approximations (Lindblad, Redfield) that assume instantaneous environmental relaxation, the non-Markovian treatment preserves structured bath fluctuations that enhance energy transfer efficiency under appropriately engineered spectral conditions.
+Unlike Markovian approximations (Lindblad, Redfield) that assume instantaneous environmental relaxation, non-Markovian treatment preserves structured bath fluctuations that enhance energy transfer efficiency under engineered spectral conditions.
 
 \subsection{FMO complex model system}
 
-The well-characterised FMO complex serves as our benchmark system. Each monomer consists of 7 bacteriochlorophyll-a molecules with site energies $\varepsilon_n$ spanning \numrange{12000}{13000}\,\si{\per\cm} and electronic couplings $J_{nm}$ from \numrange{5}{300}\,\si{\per\cm}, based on the Adolphs \& Renger parametrisation \cite{Renger2004}. The FMO complex is well suited to this study because it exhibits experimentally observed quantum coherence effects \cite{Engel2007} in the intermediate coupling regime where non-Markovian effects are pronounced, yet remains sufficiently compact for rigorous benchmarking.
+The FMO complex serves as our benchmark system. Each monomer contains seven bacteriochlorophyll-a molecules with site energies $\varepsilon_n$ spanning \SIrange{12000}{13000}{\per\cm} and electronic couplings $J_{nm}$ from \SIrange{5}{300}{\per\cm} \cite{Renger2004}. The system exhibits experimentally observed coherence effects \cite{Engel2007} in the intermediate coupling regime where non-Markovian effects are pronounced.
 
-The composite spectral density comprises a Drude-Lorentz contribution ($\lambda = \num{35}$\,\si{\per\cm}, $\gamma = \num{50}$\,\si{\per\cm}) for protein-solvent modes and underdamped vibronic modes at $\omega_k = \numlist{150;200;575;1185}$\,\si{\per\cm} with Huang-Rhys factors $S_k = \{0.05, 0.02, 0.01, 0.005\}$. These parameters have been validated against experimental absorption spectra and ultrafast spectroscopy data \cite{Adolphs2006, Moix2011}.
+The composite spectral density comprises a Drude-Lorentz contribution ($\lambda = \SI{35}{\per\cm}$, $\gamma = \SI{50}{\per\cm}$) for protein-solvent modes and underdamped vibronic modes at $\omega_k = \SIlist{150;200;575;1185}{\per\cm}$ with Huang-Rhys factors $S_k = \{\numlist{0.05; 0.02; 0.01; 0.005}\}$. These parameters have been validated against experimental absorption spectra and ultrafast spectroscopy data \cite{Adolphs2006, Moix2011}.
 
 \subsection{Multi-objective optimisation framework}
 
 Agrivoltaic design requires simultaneous optimisation of two competing objectives:
-
-\textbf{Electrical energy harvesting:}
+\begin{enumerate}
+\item \textbf{Electrical energy harvesting,}
 \begin{equation}\label{eq:PCE}
-\mathrm{PCE} = \frac{\int_0^\infty [1-T(\omega)] J_{\rm solar}(\omega) \eta_{\rm PV}(\omega) d\omega}{\int_0^\infty J_{\rm solar}(\omega) d\omega}
+\mathrm{PCE} = \frac{\int_0^\infty [1-T(\omega)] J_{\rm solar}(\omega) \eta_{\rm PV}(\omega) d\omega}{\int_0^\infty J_{\rm solar}(\omega) d\omega},
 \end{equation}
 where $\eta_{\rm PV}(\omega)$ is the wavelength-dependent photovoltaic conversion efficiency.
 
-\textbf{Biological energy transfer:}
+\item \textbf{Biological energy transfer,}
 \begin{equation}\label{eq:ETR}
-\mathrm{ETR} = k_{\rm RC} \int_0^{t_{\rm max}} \Tr[\bm{\rho}_{\rm RC}(t)] \dd{t}
+\mathrm{ETR} = k_{\rm RC} \int_0^{t_{\rm max}} \Tr[\bm{\rho}_{\rm RC}(t)] \dd{t},
 \end{equation}
 where $\bm{\rho}_{\rm RC}(t)$ is the reduced density matrix projected onto the reaction centre site and $k_{\rm RC}$ is the charge separation rate constant.
+\end{enumerate}
 
 These objectives are inherently conflicting: increasing $T(\omega)$ enhances ETR but reduces PCE. We formulate a constrained multi-objective optimisation:
 \begin{equation}\label{eq:pareto_optimization}
-\max_{\{T(\omega)\}} \left\{ \mathrm{PCE}[T(\omega)], \mathrm{ETR}[T(\omega)] \right\}
+\max_{\{T(\omega)\}} \left\{ \mathrm{PCE}[T(\omega)], \mathrm{ETR}[T(\omega)] \right\},
 \end{equation}
 subject to:
 \begin{align}
-0 &\leq T(\omega) \leq 1 \quad \forall \omega \label{eq:constraint1}\\
-\mathrm{PCE} &\geq \mathrm{PCE}_{\rm min} = \num{15}\% \label{eq:constraint2}\\
-\mathrm{FWHM} &\in \numrange{50}{200}\,nm \label{eq:constraint3}
+0 &\leq T(\omega) \leq 1 \quad \forall \omega, \label{eq:constraint1}\\
+\mathrm{PCE} &\geq \mathrm{PCE}_{\rm min} = \SI{15}{\percent}, \label{eq:constraint2}\\
+\mathrm{FWHM} &\in \SIrange{50}{200}{\nano\meter}. \label{eq:constraint3}
 \end{align}
 
 The constraint in \cref{eq:constraint2} ensures commercially viable OPV efficiency, while \cref{eq:constraint3} restricts spectral windows to physically realisable bandwidths. We parameterise the transmission function as a sum of Gaussian filters:
 \begin{equation}\label{eq:transmission_function}
-T(\omega) = T_{\rm peak} \sum_i w_i \exp\left[-\frac{(\omega - \omega_{c,i})^2}{2\sigma_i^2}\right]
+T(\omega) = T_{\rm peak} \sum_i w_i \exp\left[-\frac{(\omega - \omega_{c,i})^2}{2\sigma_i^2}\right],
 \end{equation}
 where $T_{\rm peak}$ is peak transmission, $\omega_{c,i}$ are centre frequencies targeting vibronic resonances, $\sigma_i$ are bandwidths (FWHM$\approx 2.355\sigma_i$), and $w_i$ are normalised weights. Pareto frontier analysis identifies optimal trade-offs where neither objective can be improved without degrading the other.
 
@@ -85,24 +86,24 @@ where $T_{\rm peak}$ is peak transmission, $\omega_{c,i}$ are centre frequencies
 
 We quantify coherence and transport with standard measures. The $l_1$-norm of coherence,
 \begin{equation}\label{eq:l1_coherence}
-C_{l_1}(\rho) = \sum_{i \neq j} |\rho_{ij}|
+C_{l_1}(\rho) = \sum_{i \neq j} |\rho_{ij}|,
 \end{equation}
 quantifies total coherence across excitonic pairs. The coherence lifetime $\tau_c$ is the $1/e$ decay time of off-diagonal density matrix elements, extracted via $|\rho_{ij}(t)| \approx |\rho_{ij}(0)| \exp(-t/\tau_c)$. The inverse participation ratio,
 \begin{equation}\label{eq:IPR}
-\xi_{\rm deloc} = \left( \sum_n |\psi_n|^4 \right)^{-1}
+\xi_{\rm deloc} = \left( \sum_n |\psi_n|^4 \right)^{-1},
 \end{equation}
 quantifies spatial exciton delocalization, with values approaching the number of chromophores indicating strong delocalization. The quantum advantage metric,
 \begin{equation}\label{eq:quantum_advantage}
-\eta_{\rm quantum} = \frac{\mathrm{ETR}_{\rm HOPS}}{\mathrm{ETR}_{\rm Markovian}} - 1
+\eta_{\rm quantum} = \frac{\mathrm{ETR}_{\rm HOPS}}{\mathrm{ETR}_{\rm Markovian}} - 1,
 \end{equation}
 measures ETR enhancement relative to Markovian (Redfield) models under identical conditions; positive values indicate genuine non-Markovian advantages. Finally, the Quantum Fisher Information,
 \begin{equation}\label{eq:QFI}
-F_Q[\rho, \hat{O}] = \Tr[\rho L_{\hat{O}}^2]
+F_Q[\rho, \hat{O}] = \Tr[\rho L_{\hat{O}}^2],
 \end{equation}
 where $L_{\hat{O}}$ is the symmetric logarithmic derivative, measures parameter estimation sensitivity and quantum resource utilisation.
 
 \subsection{Validation framework}
 
-We implement a 12-test validation suite organised in three categories---convergence (4 tests), physical consistency (4 tests), and environmental robustness (4 tests)---to ensure observed quantum advantages are genuine physical effects rather than numerical artefacts. Details of each test, including acceptance thresholds, are provided in Section~S3 of the Supporting Information. The convergence tests include benchmarking against numerically exact HEOM results ($< \num{2}\%$ deviation for 3-site systems); physical consistency tests verify trace preservation ($|{\rm Tr}(\rho) - 1| < \num{e-12}$) and detailed balance; robustness tests confirm that quantum advantages persist under temperature variations ($\pm \num{10}$\,K), static disorder ($\sigma = \num{50}$\,\si{\per\cm}), and bath parameter fluctuations ($\pm \num{20}\%$).
+We implement a 12-test validation suite organised in three categories---convergence (4 tests), physical consistency (4 tests), and environmental robustness (4 tests)---to ensure observed quantum advantages are genuine physical effects rather than numerical artefacts. Details of each test, including acceptance thresholds, are provided in Section~S3 of the Supporting Information. The convergence tests include benchmarking against numerically exact HEOM results (\SI{< 2}{\percent} deviation for 3-site systems); physical consistency tests verify trace preservation ($|{\rm Tr}(\rho) - 1| < \num{1e-12}$) and detailed balance; robustness tests confirm that quantum advantages persist under temperature variations (\SI{\pm 10}{\kelvin}), static disorder ($\sigma = \SI{50}{\per\cm}$), and bath parameter fluctuations (\SI{\pm 20}{\percent}).
 
-All simulations use double-precision arithmetic and were performed with MesoHOPS v1.2.0 on 32-core AMD EPYC processors. A typical FMO simulation (7 chromophores, \SI{100}{ps} dynamics) requires approximately 4~hours per node.
+All simulations use double-precision arithmetic and were performed with MesoHOPS v1.2.0 on 32-core AMD EPYC processors. A typical FMO simulation (7 chromophores, \SI{100}{\pico\second} dynamics) requires approximately 4~hours per node.

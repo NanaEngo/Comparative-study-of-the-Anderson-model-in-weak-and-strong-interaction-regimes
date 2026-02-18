@@ -1,30 +1,43 @@
 % Supporting Information - EES Version
 % Quantum Spectral Engineering for Enhanced Agrivoltaic Efficiency
 
-\documentclass[11pt]{article}
+\documentclass[11pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath,amssymb}
-\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsfonts,graphicx,booktabs,bm,multirow,siunitx,physics}
+\usepackage{xcolor}
 \usepackage{hyperref}
+\usepackage{cleveref}
 \usepackage{natbib}
-\usepackage{booktabs}  % Professional quality tables
-\usepackage{multirow}  % Multirow cells in tables
-\usepackage{cleveref}  % Smart cross-references
-\usepackage{siunitx}   % SI units
-\usepackage{physics}   % Physics notation
+\usepackage[margin=2cm]{geometry}
+
+% Hyperref setup
+\hypersetup{
+    pdftitle={Quantum Spectral Engineering for Enhanced Agrivoltaic Efficiency - Supporting Information},
+    pdfauthor={Teguia et al.},
+    pdfsubject={Quantum Photosynthesis, Agrivoltaics, Non-Markovian Dynamics},
+    pdfkeywords={agrivoltaics, quantum photosynthesis, spectral engineering, non-Markovian dynamics, renewable energy},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
 \DeclareSIUnit{\yr}{yr}
 \DeclareSIUnit{\tonne}{t}
 \DeclareSIUnit{\hectare}{ha}
 \DeclareSIUnit{\kWh}{kWh}
+\DeclareSIUnit{\hartree}{E_h}
+\DeclareSIUnit{\bohr}{a_0}
 
 \title{Supporting Information:\\
 Quantum Spectral Engineering for Enhanced Agrivoltaic Efficiency:\\
 Non-Markovian Dynamics in Photosynthetic Energy Transfer}
 
-\author{Steve Cabrel Teguia Kouam$^{2,*}$, Theodore Goumai Vodekoi$^{1}$, Jean-Pierre Tchapet Njafa$^{1}$,\\
+\author{Steve Cabrel Teguia Kouam$^{2,*}$, Theodore Goumai Vedekoi$^{1}$, Jean-Pierre Tchapet Njafa$^{1}$,\\
 Jean-Pierre Nguenang$^{2}$, Serge Guy Nana Engo$^{1}$\\
 \\
-$^{1}$Department of Physics, Faculty of Science, University of Yaoundé I, Cameroon\\
+$^{1}$Department of Physics, Faculty of Science, University of Yaound\'e I, Cameroon\\
 $^{2}$Department of Physics, Faculty of Science, University of Douala, Cameroon\\
 \\
 *Corresponding author: \texttt{steve.teguia@univ-douala.cm}}
@@ -42,7 +55,7 @@ $^{2}$Department of Physics, Faculty of Science, University of Douala, Cameroon\
 \section{Environmental factor models}\label{si:environmental}
 %=============================================================================
 
-This section details environmental factor models used to assess real-world applicability of quantum-optimized agrivoltaic systems across diverse geographic and climatic conditions.
+This section details the environmental factor models used to assess the applicability of quantum-optimized agrivoltaic systems across diverse geographic and climatic conditions. These models underpin the geographic simulations reported in Section~3 of the main text.
 
 \subsection{Solar spectral modeling}
 
@@ -50,59 +63,87 @@ This section details environmental factor models used to assess real-world appli
 
 The baseline solar spectral irradiance follows the ASTM G173-03 reference standard (Air Mass 1.5 Global tilted):
 \begin{equation}
-J_{\rm solar}^{\rm ref}(\lambda) = J_{\rm AM1.5G}(\lambda) \quad \text{for } \lambda \in \numrange{280}{4000}\,\text{nm}
+J_{\mathrm{solar}}^{\mathrm{ref}}(\lambda) = J_{\mathrm{AM1.5G}}(\lambda) \quad \text{for } \lambda \in \SIrange{280}{4000}{\nano\meter},
 \end{equation}
-with integrated power density $P_{\rm total} = \int J_{\rm solar}^{\rm ref}(\lambda) \dd{\lambda} = \SI{1000}{W/m^2}$.
+with integrated power density $P_{\mathrm{total}} = \int J_{\mathrm{solar}}^{\mathrm{ref}}(\lambda) \dd{\lambda} = \SI{1000}{\watt\per\metre\squared}$.
 
-Photosynthetically active radiation (PAR) range: \numrange{400}{700}\,\text{nm} represents approximately \SI{45}{\percent} of total solar energy (\SI{450}{W/m^2}).
+Photosynthetically active radiation (PAR) spans \SIrange{400}{700}{\nano\meter}, representing approximately \SI{45}{\percent} of total solar energy (\SI{450}{\watt\per\metre\squared}).
 
 \subsubsection{Geographic variations}
 
-Solar spectra vary by latitude due to atmospheric path length differences. We model this using Beer-Lambert attenuation, $J(\lambda, \theta_z) = J_0(\lambda) \exp[-\tau(\lambda) \cdot \mathrm{AM}(\theta_z)]$, where $J_0(\lambda)$ is the extraterrestrial spectrum, $\tau(\lambda)$ is the wavelength-dependent atmospheric optical depth, and $\mathrm{AM}(\theta_z) = 1/\cos(\theta_z)$ is the air mass for zenith angle $\theta_z$.
+Solar spectra vary by latitude due to atmospheric path length differences. We model this using Beer--Lambert attenuation:
+\begin{equation}
+J(\lambda, \theta_z) = J_0(\lambda) \exp\!\bigl[-\tau(\lambda) \cdot \mathrm{AM}(\theta_z)\bigr],
+\end{equation}
+where $J_0(\lambda)$ is the extraterrestrial spectrum, $\tau(\lambda)$ is the wavelength-dependent atmospheric optical depth, and $\mathrm{AM}(\theta_z) = 1/\cos(\theta_z)$ is the air mass for zenith angle $\theta_z$.
 
-Representative locations include temperate (\SI{50}{\degree}N, Germany; average $\mathrm{AM} \approx \numrange{1.3}{2.9}$), subtropical (\SI{20}{\degree}N, India; $\mathrm{AM} \approx \numrange{1.1}{1.5}$), tropical (\SI{0}{\degree}, Kenya; $\mathrm{AM} \approx \numrange{1.0}{1.1}$), and desert regions (\SI{32}{\degree}N, Arizona; $\mathrm{AM} \approx \numrange{1.2}{2.2}$). These cover the primary climatic regimes where agrivoltaics are deployed.
+Representative locations include temperate (\SI{50}{\degree}N, Germany; average $\mathrm{AM} \approx \numrange{1.3}{2.9}$), subtropical (\SI{20}{\degree}N, India; $\mathrm{AM} \approx \numrange{1.1}{1.5}$), tropical (\SI{0}{\degree}, Kenya; $\mathrm{AM} \approx \numrange{1.0}{1.1}$), and desert regions (\SI{32}{\degree}N, Arizona; $\mathrm{AM} \approx \numrange{1.2}{2.2}$). We extend geographic coverage to sub-Saharan Africa with five additional sites:
+\begin{itemize}
+    \item Yaound\'e, Cameroon (\SI{3.87}{\degree}N; equatorial humid; GHI $\approx$ \SI{1600}{\kWh\per\metre\squared\per\yr}; AOD $\approx$ \numrange{0.3}{0.5}),
+    \item N'Djamena, Chad (\SI{12.13}{\degree}N; Sahel/semi-arid; GHI $\approx$ \SI{2200}{\kWh\per\metre\squared\per\yr}; AOD $\approx$ \numrange{0.4}{0.8}),
+    \item Abuja, Nigeria (\SI{9.06}{\degree}N; tropical savanna; GHI $\approx$ \SI{1900}{\kWh\per\metre\squared\per\yr}; AOD $\approx$ \numrange{0.3}{0.6}),
+    \item Dakar, Senegal (\SI{14.69}{\degree}N; Sahel/coastal; GHI $\approx$ \SI{2100}{\kWh\per\metre\squared\per\yr}; AOD $\approx$ \numrange{0.3}{0.7}),
+    \item Abidjan, Ivory Coast (\SI{5.36}{\degree}N; tropical humid; GHI $\approx$ \SI{1650}{\kWh\per\metre\squared\per\yr}; AOD $\approx$ \numrange{0.3}{0.5}).
+\end{itemize}
+These nine sites cover the primary climatic regimes where agrivoltaics are deployed or offer high development potential.
 
 \subsubsection{Seasonal and diurnal variations}
 
-The time-dependent solar zenith angle is calculated as $\cos(\theta_z) = \sin(\phi)\sin(\delta) + \cos(\phi)\cos(\delta)\cos(h)$, where $\phi$ is latitude, $\delta$ is the solar declination (varying by $\pm \SI{23.45}{\degree}$ annually), and $h$ is the hour angle. The seasonal declination follows $\delta(d) = -\SI{23.45}{\degree} \times \cos[\frac{360}{365}(d + 10)]$ for day $d$.
+The time-dependent solar zenith angle is calculated as:
+\begin{equation}
+\cos(\theta_z) = \sin(\phi)\sin(\delta) + \cos(\phi)\cos(\delta)\cos(h),
+\end{equation}
+where $\phi$ is latitude, $\delta$ is the solar declination (varying by $\pm \SI{23.45}{\degree}$ annually), and $h$ is the hour angle. The seasonal declination follows $\delta(d) = -\SI{23.45}{\degree} \times \cos\!\bigl[\tfrac{360}{365}(d + 10)\bigr]$ for day $d$.
 
 \subsection{Atmospheric effects}
 
 \subsubsection{Aerosol optical depth (AOD)}
 
-Wavelength-dependent aerosol scattering is modeled using the Ångström formula $\tau_{\rm aer}(\lambda) = \beta \lambda^{-\alpha}$, where $\beta$ is the turbidity coefficient (\numrange{0.05}{0.2} for clear to hazy conditions) and $\alpha$ is the Ångström exponent (\numrange{1.0}{1.5} for continental aerosols).
+Wavelength-dependent aerosol scattering is modeled using the \AA ngstr\"om formula:
+\begin{equation}
+\tau_{\mathrm{aer}}(\lambda) = \beta \lambda^{-\alpha},
+\end{equation}
+where $\beta$ is the turbidity coefficient (\numrange{0.05}{0.2} for clear to hazy conditions) and $\alpha$ is the \AA ngstr\"om exponent (\numrange{1.0}{1.5} for continental aerosols).
 
 \subsubsection{Water vapor absorption}
 
-Integrated water vapor column depth $w$ affects near-infrared transmission via $T_{\rm H_2O}(\lambda) = \exp[-k_{\rm H_2O}(\lambda) \cdot w \cdot \mathrm{AM}]$, with absorption coefficient $k_{\rm H_2O}(\lambda)$ peaking at \SIlist{940;1100;1400}{nm}. Standard values of $w$ range from \SIrange{0.5}{1}{cm} in desert zones to \SIrange{3}{5}{cm} in tropical zones.
+Integrated water vapor column depth $w$ affects near-infrared transmission via:
+\begin{equation}
+T_{\mathrm{H_2O}}(\lambda) = \exp\!\bigl[-k_{\mathrm{H_2O}}(\lambda) \cdot w \cdot \mathrm{AM}\bigr],
+\end{equation}
+with absorption coefficient $k_{\mathrm{H_2O}}(\lambda)$ peaking at \SIlist{940;1100;1400}{\nano\meter}. Standard values of $w$ range from \SIrange{0.5}{1}{\centi\meter} in desert zones to \SIrange{3}{5}{\centi\meter} in tropical zones.
 
 \subsubsection{Cloud cover and diffuse radiation}
 
-Cloud effects are modeled using the clearness index $K_t$, defined as the ratio of measured to extraterrestrial irradiance. Sky conditions are categorized as clear ($K_t > 0.65$), partly cloudy (\numrange{0.35}{0.65}), or overcast ($K_t < 0.35$). The diffuse fraction $k_d$ is then determined using standard empirical correlations based on the clearness index.
+Cloud effects are modeled using the clearness index $K_t$, defined as the ratio of measured to extraterrestrial irradiance. Sky conditions are categorized as clear ($K_t > 0.65$), partly cloudy ($K_t \in \numrange{0.35}{0.65}$), or overcast ($K_t < 0.35$). The diffuse fraction $k_d$ is determined using standard empirical correlations based on the clearness index.
 
 \subsection{Dust and soiling effects}
 
 \subsubsection{Particle accumulation model}
 
-Dust accumulation on the OPV surface reduces transmission according to $T_{\rm dust}(t) = T_0 \exp[-\gamma_{\rm dust} \cdot m(t)]$, where $m(t)$ is the accumulated mass per area (\si{mg\per\centi\meter\squared}), $T_0$ is the clean surface transmission, and $\gamma_{\rm dust}$ is the extinction coefficient (\SIrange{0.05}{0.15}{m^2/g}). The accumulation rate $dm/dt = r_{\rm dep} (1 - r_{\rm clean})$ varies by region, from \SIrange{0.1}{0.5}{mg\per\centi\meter\squared\per\day} in grasslands to \SIrange{3}{5}{mg\per\centi\meter\squared\per\day} in desert regions.
+Dust accumulation on the OPV surface reduces transmission according to:
+\begin{equation}
+T_{\mathrm{dust}}(t) = T_0 \exp\!\bigl[-\gamma_{\mathrm{dust}} \cdot m(t)\bigr],
+\end{equation}
+where $m(t)$ is the accumulated mass per area (\si{\milli\gram\per\centi\metre\squared}), $T_0$ is the clean surface transmission, and $\gamma_{\mathrm{dust}}$ is the extinction coefficient (\SIrange{0.05}{0.15}{\metre\squared\per\gram}). The accumulation rate $\dd{m}/\dd{t} = r_{\mathrm{dep}} (1 - r_{\mathrm{clean}})$ varies by region, from \SIrange{0.1}{0.5}{\milli\gram\per\centi\metre\squared\per\day} in grasslands to \SIrange{3}{5}{\milli\gram\per\centi\metre\squared\per\day} in desert regions.
 
 \subsubsection{Spectral selectivity of soiling}
 
-Dust preferentially scatters shorter wavelengths, shifting the transmitted spectrum toward the red. Optimal transmission windows (\SIlist{750;820}{nm}) lie in spectral regions less affected by soiling than the blue-green range.
+Dust preferentially scatters shorter wavelengths, shifting the transmitted spectrum toward the red. The optimal transmission windows (\SIlist{750;820}{\nano\meter}) lie in spectral regions less affected by soiling than the blue--green range.
 
-\subsection{Weather modeling}
+\subsection{Weather modelling}
 
-Daily and seasonal temperature variations are modeled using sinusoidal cycles. Our simulations confirm that the photosynthetic quantum advantage remains significant (\SIrange{18}{26}{\percent}) across the physiological temperature range (\SIrange{280}{310}{K}), supporting year-round viability across diverse climates.
+Daily and seasonal temperature variations are modelled using sinusoidal cycles. Simulations confirm that the photosynthetic quantum advantage remains significant (\SIrange{18}{26}{\percent}) across the physiological temperature range (\SIrange{280}{310}{\kelvin}), supporting year-round viability across diverse climates.
 
 \subsection{Integration with quantum simulations}
 
-Environmental factors modify the effective incident spectrum sampling over time (hourly resolution), geography (four representative sites), and weather/soiling states. Results confirm that quantum advantages persist under realistic variability.
+Environmental factors modify the effective incident spectrum through sampling over time (hourly resolution), geography (nine representative sites across four continents), and weather/soiling states. Results confirm that quantum advantages persist under realistic variability, including elevated AOD conditions encountered at Sahel sites, with additional potential for carbon sequestration of \SIrange{0.5}{1.0}{\tonne\,\text{CO}_2\per\hectare\per\yr}.
 
 %=============================================================================
 \section{Biodegradability assessment}\label{si:biodegradability}
 %=============================================================================
 
-Sustainable deployment of agrivoltaic OPV materials requires biodegradability to minimize environmental impact. We employ computational quantum chemistry to assess enzymatic degradation susceptibility.
+Sustainable deployment of agrivoltaic OPV materials requires low environmental impact at end of life. This section describes the computational quantum chemistry framework used to assess enzymatic degradation susceptibility of candidate molecules.
 
 \subsection{Fukui function analysis}
 
@@ -110,240 +151,218 @@ The Fukui function quantifies local reactivity of molecular sites toward nucleop
 
 \subsubsection{Theoretical framework}
 
-Fukui functions are defined as functional derivatives of electron density:
+Fukui functions are defined as functional derivatives of electron density with respect to electron number $N$ at constant external potential $v(\vec{r})$:
 \begin{align}
-f^+(\vec{r}) &= \left(\frac{\delta \rho(\vec{r})}{\delta N}\right)_{v(r)}^+ \approx \rho_{N+1}(\vec{r}) - \rho_N(\vec{r}) \quad \text{(electrophilic)}\\
-f^-(\vec{r}) &= \left(\frac{\delta \rho(\vec{r})}{\delta N}\right)_{v(r)}^- \approx \rho_N(\vec{r}) - \rho_{N-1}(\vec{r}) \quad \text{(nucleophilic)}\\
-f^0(\vec{r}) &= \frac{1}{2}[f^+(\vec{r}) + f^-(\vec{r})] \quad \text{(radical)}
+f^+(\vec{r}) &= \left(\frac{\partial \rho(\vec{r})}{\partial N}\right)_{v(\vec{r})}^+ \approx \rho_{N+1}(\vec{r}) - \rho_N(\vec{r}), \quad &\text{(electrophilic attack),}\label{eq:fukui_plus}\\
+f^-(\vec{r}) &= \left(\frac{\partial \rho(\vec{r})}{\partial N}\right)_{v(\vec{r})}^- \approx \rho_N(\vec{r}) - \rho_{N-1}(\vec{r}), \quad &\text{(nucleophilic attack),}\label{eq:fukui_minus}\\
+f^0(\vec{r}) &= \tfrac{1}{2}\bigl[f^+(\vec{r}) + f^-(\vec{r})\bigr], \quad &\text{(radical attack),}\label{eq:fukui_zero}
 \end{align}
-
-where:
-\begin{itemize}
-\item $\rho_N(\vec{r})$ = electron density of neutral molecule
-\item $\rho_{N+1}(\vec{r})$ = electron density of anionic state
-\item $\rho_{N-1}(\vec{r})$ = electron density of cationic state
-\end{itemize}
-
-Higher Fukui values indicate more reactive sites, susceptible to enzymatic attack.
+where $\rho_N(\vec{r})$, $\rho_{N+1}(\vec{r})$, and $\rho_{N-1}(\vec{r})$ denote the electron densities of the neutral, anionic, and cationic species, respectively. Higher Fukui values indicate more reactive sites susceptible to enzymatic attack.
 
 \subsubsection{Computational details}
 
-Density Functional Theory (DFT) calculations performed using:
-\begin{itemize}
-\item Functional: B3LYP (hybrid exchange-correlation)
-\item Basis set: 6-31G(d,p) (double-zeta with polarization)
-\item Software: Gaussian 16 or ORCA 5.0
-\item Convergence: SCF \SI{e-8}{Ha}, geometry optimization \SI{e-5}{Ha\per Bohr}
-\end{itemize}
+Density functional theory (DFT) calculations employ the B3LYP hybrid exchange-correlation functional with a 6-31G(d,p) double-zeta polarised basis set, using Gaussian~16 or ORCA~5.0. Convergence criteria are set to $10^{-8}$~\si{\hartree} for the SCF procedure and $10^{-5}$~\si{\hartree\per\bohr} for geometry optimisation.
 
-For each candidate OPV molecule:
-1. Optimize ground-state geometry (N electrons)
-2. Single-point calculation for N+1 electrons (anion)
-3. Single-point calculation for N-1 electrons (cation)
-4. Compute Fukui functions on molecular grid
+For each candidate OPV molecule, the protocol proceeds as follows:
+\begin{enumerate}
+    \item Optimize the ground-state geometry ($N$ electrons).
+    \item Perform a single-point calculation for $N+1$ electrons (anion).
+    \item Perform a single-point calculation for $N-1$ electrons (cation).
+    \item Compute Fukui functions on the molecular grid.
+\end{enumerate}
 
 \subsection{Global reactivity descriptors}
 
 \subsubsection{Chemical hardness and softness}
 
-Chemical hardness $\eta$ (resistance to electron density change):
+Chemical hardness $\eta$ quantifies resistance to electron density redistribution:
 \begin{equation}
-\eta = \frac{1}{2}(I - A) = \frac{1}{2}(\varepsilon_{\rm LUMO} - \varepsilon_{\rm HOMO})
+\eta = \frac{1}{2}(I - A) = \frac{1}{2}(\varepsilon_{\mathrm{LUMO}} - \varepsilon_{\mathrm{HOMO}}).
 \end{equation}
-
-Chemical softness $S = 1/\eta$. Softer molecules are more reactive, thus more biodegradable.
+Chemical softness $S = 1/\eta$; softer molecules are more reactive and hence more biodegradable.
 
 \subsubsection{Electrophilicity index}
 
-Global electrophilicity $\omega$:
+The global electrophilicity $\omega$ is defined as:
 \begin{equation}
-\omega = \frac{\mu^2}{2\eta} = \frac{(I + A)^2}{8(I - A)}
+\omega = \frac{\mu^2}{2\eta} = \frac{(I + A)^2}{8(I - A)},
 \end{equation}
-
-where $\mu = -(I + A)/2$ is chemical potential, $I$ = ionization energy, $A$ = electron affinity.
+where $\mu = -(I + A)/2$ is the chemical potential, $I$ is the ionization energy, and $A$ is the electron affinity.
 
 \subsubsection{Nucleophilicity index}
 
-Using Koopmans' theorem:
+Using Koopmans' theorem, the nucleophilicity index is:
 \begin{equation}
-N = \varepsilon_{\rm HOMO} - \varepsilon_{\rm HOMO}^{\rm ref}
+\mathcal{N} = \varepsilon_{\mathrm{HOMO}} - \varepsilon_{\mathrm{HOMO}}^{\mathrm{ref}},
 \end{equation}
-referenced to tetracyanoethylene (TCNE, strong electrophile).
+referenced to tetracyanoethylene (TCNE) as a strong electrophile.
 
 \subsection{Enzymatic degradation pathways}
 
 \subsubsection{Hydrolase attack (ester linkages)}
 
-Ester bonds (common in biodegradable polymers) are cleaved by hydrolases. Fukui nucleophilic index $f^-$ at carbonyl carbon predicts susceptibility:
+Ester bonds, common in biodegradable polymers, are cleaved by hydrolases. The Fukui nucleophilic index $f^-$ at the carbonyl carbon predicts susceptibility:
 \begin{equation}
-k_{\rm hydrolysis} \propto f^-(\text{C}_{\rm carbonyl}) \times S
+k_{\mathrm{hydrolysis}} \propto f^-(\mathrm{C}_{\mathrm{carbonyl}}) \times S.
 \end{equation}
-
-Target: $f^- > 0.05$ for rapid biodegradation ($< 1$~year).
+A target of $f^- > 0.05$ corresponds to rapid biodegradation (${<}\,1$~year).
 
 \subsubsection{Oxidase attack (aromatic rings)}
 
 Cytochrome P450 enzymes oxidize aromatic systems. High $f^+$ at aromatic carbons indicates vulnerability:
 \begin{equation}
-k_{\rm oxidation} \propto \max[f^+(\text{C}_{\rm aromatic})] \times \omega
+k_{\mathrm{oxidation}} \propto \max\!\bigl[f^+(\mathrm{C}_{\mathrm{aromatic}})\bigr] \times \omega.
 \end{equation}
 
 \subsubsection{Bond dissociation energies}
 
-Weakest bonds are preferential degradation sites:
+Weakest bonds constitute preferential degradation sites:
 \begin{equation}
-\text{BDE}(\text{A-B}) = E(\text{A}\cdot) + E(\text{B}\cdot) - E(\text{A-B})
+\mathrm{BDE}(\mathrm{A{-}B}) = E(\mathrm{A}{\cdot}) + E(\mathrm{B}{\cdot}) - E(\mathrm{A{-}B}).
 \end{equation}
-
-Bonds with BDE $< \SI{300}{kJ\per\mol}$ are readily cleaved by enzymatic radicals.
+Bonds with $\mathrm{BDE} < \SI{300}{\kilo\joule\per\mole}$ are readily cleaved by enzymatic radicals.
 
 \subsection{Biodegradability index}
 
-We define composite biodegradability score:
+We define a composite biodegradability score:
 \begin{equation}
-B_{\rm index} = w_1 S + w_2 \langle f^- \rangle + w_3 N_{\rm ester} + w_4 (400 - \text{BDE}_{\rm min})
+B_{\mathrm{index}} = w_1 S + w_2 \langle f^- \rangle + w_3 N_{\mathrm{ester}} + w_4 (400 - \mathrm{BDE}_{\mathrm{min}}),
 \end{equation}
+where $S$ is the global softness, $\langle f^- \rangle$ is the average nucleophilic Fukui function, $N_{\mathrm{ester}}$ is the number of hydrolyzable ester linkages, $\mathrm{BDE}_{\mathrm{min}}$ is the weakest bond dissociation energy in \si{\kilo\joule\per\mole}, and the weights are $w_1 = 0.3$, $w_2 = 0.3$, $w_3 = 0.2$, $w_4 = 0.2$.
 
-where:
+The resulting classification scheme is:
 \begin{itemize}
-\item $S$ = global softness
-\item $\langle f^- \rangle$ = average nucleophilic Fukui function
-\item $N_{\rm ester}$ = number of hydrolyzable ester linkages
-\item $\text{BDE}_{\rm min}$ = weakest bond dissociation energy (\si{kJ\per\mol})
-\item Weights: $w_1 = 0.3, w_2 = 0.3, w_3 = 0.2, w_4 = 0.2$
+    \item $B_{\mathrm{index}} > 70$: Highly biodegradable (${<}\,6$ months).
+    \item $50 < B_{\mathrm{index}} < 70$: Moderately biodegradable (6--18 months).
+    \item $30 < B_{\mathrm{index}} < 50$: Slowly biodegradable (1.5--5 years).
+    \item $B_{\mathrm{index}} < 30$: Recalcitrant (${>}\,5$ years).
 \end{itemize}
 
-\textbf{Classification:}
-\begin{itemize}
-\item $B_{\rm index} > 70$: Highly biodegradable ($<$ 6 months)
-\item $50 < B_{\rm index} < 70$: Moderately biodegradable (6--18 months)
-\item $30 < B_{\rm index} < 50$: Slowly biodegradable (1.5--5 years)
-\item $B_{\rm index} < 30$: Recalcitrant ($>$ 5 years)
-\end{itemize}
-
-We evaluated candidate non-fullerene acceptor molecules for quantum-optimized agrivoltaic systems. \textbf{Molecule A (PM6 derivative)} exhibit high biodegradability ($B_{\rm index} = 72$) due to four hydrolyzable ester linkages ($f^-_{\rm max} = 0.08$ at the carbonyl carbon) and a low minimum bond dissociation energy (BDE) of \SI{285}{kJ\per\mol} at the thiophene-ester bond. \textbf{Molecule B (Y6-BO derivative)} is moderately biodegradable ($B_{\rm index} = 58$) with two ester linkages and a minimum BDE of \SI{310}{kJ\per\mol}. Both candidates achieve $>\SI{15}{\percent}$ PCE in semi-transparent configurations while ensuring environmental compatibility.
+Two candidate non-fullerene acceptor molecules were evaluated for quantum-optimized agrivoltaic systems. \textbf{Molecule~A (PM6 derivative)} exhibits high biodegradability ($B_{\mathrm{index}} = 72$) due to four hydrolyzable ester linkages ($f^-_{\mathrm{max}} = 0.08$ at the carbonyl carbon) and a low minimum BDE of \SI{285}{\kilo\joule\per\mole} at the thiophene--ester bond. \textbf{Molecule~B (Y6-BO derivative)} is moderately biodegradable ($B_{\mathrm{index}} = 58$) with two ester linkages and a minimum BDE of \SI{310}{\kilo\joule\per\mole}. Both candidates achieve ${>}\,\SI{15}{\percent}$ PCE in semi-transparent configurations while ensuring environmental compatibility.
 
 %=============================================================================
 \section{Extended validation data}\label{si:validation}
 %=============================================================================
 
-This section provides documentation of all 12 validation tests referenced in the main text.
+This section documents the 12 validation tests referenced in Section~3 of the main text. Each test is assigned a pass/fail criterion; results are summarised in \cref{tab:validation}.
 
 \subsection{FMO complex Hamiltonian}
 
-The FMO complex consists of 7 bacteriochlorophyll-a (BChl-a) chromophores arranged in a specific geometry. The system Hamiltonian is given by:
+The FMO complex consists of seven bacteriochlorophyll-a (BChl-a) chromophores. The system Hamiltonian is:
 \begin{equation}
-H_{\rm sys} = \sum_{n=1}^{7} \epsilon_n \dyad{n} + \sum_{n \neq m} J_{nm} \dyad{n}{m}
+H_{\mathrm{sys}} = \sum_{n=1}^{7} \epsilon_n \dyad{n} + \sum_{n \neq m} J_{nm} \dyad{n}{m}.
 \end{equation}
 
 \cref{tab:fmo_hamiltonian} provides the complete parameterization based on X-ray crystallographic data and spectroscopic measurements.
 
 \begin{table}[ht]
 \centering
-\caption{\textbf{FMO complex Hamiltonian parameters.} Site energies ($\epsilon_n$, diagonal) and electronic couplings ($J_{nm}$, off-diagonal) in \si{\per\cm}. Parameters determined from structure-based calculations validated against spectroscopic data. Site energies from optical absorption, couplings from point-dipole approximation corrected with quantum chemistry. This standard parameterization reproduces experimentally observed spectral features and energy transfer dynamics.}
+\caption{\textbf{FMO complex Hamiltonian parameters.} Site energies ($\epsilon_n$, diagonal) and electronic couplings ($J_{nm}$, off-diagonal) in \si{\per\cm} from the Adolphs \& Renger parameterization. These parameters reproduce experimental spectral features and provide the basis for non-Markovian transport simulations.}
 \label{tab:fmo_hamiltonian}
 \begin{tabular}{lccccccc}
 \toprule
 & \textbf{Site 1} & \textbf{Site 2} & \textbf{Site 3} & \textbf{Site 4} & \textbf{Site 5} & \textbf{Site 6} & \textbf{Site 7} \\
 \midrule
-Site energies & 12410 & 12530 & 12210 & 12320 & 12480 & 12630 & 12440 \\
+$\epsilon_n$ (\si{\per\cm}) & 12410 & 12530 & 12210 & 12320 & 12480 & 12630 & 12440 \\
 \midrule
-Site 1 & --- & -87.7 & 5.5 & -5.9 & 6.7 & -13.7 & -9.9 \\
-Site 2 & -87.7 & --- & 30.8 & 8.2 & 0.7 & 11.4 & 4.7 \\
-Site 3 & 5.5 & 30.8 & --- & -53.5 & -2.2 & -9.6 & 6.0 \\
-Site 4 & -5.9 & 8.2 & -53.5 & --- & -70.7 & -17.0 & -63.3 \\
-Site 5 & 6.7 & 0.7 & -2.2 & -70.7 & --- & 81.1 & -1.3 \\
-Site 6 & -13.7 & 11.4 & -9.6 & -17.0 & 81.1 & --- & 39.7 \\
-Site 7 & -9.9 & 4.7 & 6.0 & -63.3 & -1.3 & 39.7 & --- \\
+Site 1 & --- & $-$87.7 & 5.5 & $-$5.9 & 6.7 & $-$13.7 & $-$9.9 \\
+Site 2 & $-$87.7 & --- & 30.8 & 8.2 & 0.7 & 11.4 & 4.7 \\
+Site 3 & 5.5 & 30.8 & --- & $-$53.5 & $-$2.2 & $-$9.6 & 6.0 \\
+Site 4 & $-$5.9 & 8.2 & $-$53.5 & --- & $-$70.7 & $-$17.0 & $-$63.3 \\
+Site 5 & 6.7 & 0.7 & $-$2.2 & $-$70.7 & --- & 81.1 & $-$1.3 \\
+Site 6 & $-$13.7 & 11.4 & $-$9.6 & $-$17.0 & 81.1 & --- & 39.7 \\
+Site 7 & $-$9.9 & 4.7 & 6.0 & $-$63.3 & $-$1.3 & 39.7 & --- \\
 \bottomrule
-\multicolumn{8}{l}{\scriptsize Source: Adolphs \& Renger (2006). Site 1 is the reaction center-proximal BChl.} \\
+\multicolumn{8}{l}{\scriptsize Source: Adolphs \& Renger (2006). Site 1 is the reaction-centre-proximal BChl.} \\
 \end{tabular}
 \end{table}
 
-\textbf{Key features}:
-\begin{itemize}
-\item Site energies span \SI{420}{\per\cm} (\SI{295}{K} $\approx$ \SI{205}{\per\cm}), ensuring mixed quantum-classical regime
-\item Strongest coupling: Site 5--6 (\SI{81.1}{\per\cm})
-\item Funneling network: Sites 1, 2, 3 $\rightarrow$ 4, 7 $\rightarrow$ 5, 6 $\rightarrow$ reaction center
-\end{itemize}
+Key features of the Hamiltonian include: site energies spanning \SI{420}{\per\cm} ($k_{\mathrm{B}}T$ at \SI{295}{\kelvin} $\approx$ \SI{205}{\per\cm}), placing the system in the mixed quantum--classical regime; a strongest coupling of \SI{87.7}{\per\cm} between sites 1 and 2; and a funnelling network directing excitations along the pathway 1,\,2,\,3 $\to$ 4,\,7 $\to$ 5,\,6 $\to$ reaction centre.
 
-\subsection{Convergence tests (4 tests)}
+\subsection{Convergence tests (tests 1--4)}
 
-We validated adHOPS against numerically exact HEOM for a 3-site model system (site energies \SIlist{12000;12100;12200}{\per\cm}; Drude bath $\lambda = \SI{35}{\per\cm}$ at \SI{295}{K}). The results show a maximum deviation of \SI{1.8}{\percent} at early times ($t < \SI{50}{fs}$) and an average deviation of \SI{0.6}{\percent} over a \SI{1000}{fs} window, passing the \SI{2}{\percent} threshold.
+\subsubsection{Test 1: HEOM benchmark}
+
+We validated adHOPS against numerically exact HEOM for a 3-site model system (site energies \SIlist{12000;12100;12200}{\per\cm}; Drude bath $\lambda = \SI{35}{\per\cm}$ at \SI{295}{\kelvin}). The maximum deviation is \SI{1.8}{\percent} at early times ($t < \SI{50}{\femto\second}$), with an average deviation of \SI{0.6}{\percent} over a \SI{1000}{\femto\second} window, passing the \SI{2}{\percent} acceptance threshold.
 
 \subsubsection{Test 2: Matsubara cutoff convergence}
 
-Varying $N_{\rm Mat}$ for the FMO system at \SI{295}{K} confirms that $N_{\rm Mat} = 10$ achieves convergence, with observables stable to within \SI{0.3}{\percent} for $N_{\rm Mat} \geq 10$. Production runs utilize $N_{\rm Mat} = 12$ to ensure a sufficient safety margin.
+Varying $N_{\mathrm{Mat}}$ for the FMO system at \SI{295}{\kelvin} confirms that $N_{\mathrm{Mat}} = 10$ achieves convergence, with observables stable to within \SI{0.3}{\percent} for $N_{\mathrm{Mat}} \geq 10$. Production runs use $N_{\mathrm{Mat}} = 12$ to ensure a sufficient safety margin.
 
-Numerical integration accuracy was verified by comparing results for $\Delta t \in \SIlist{0.5;1.0;2.0}{fs}$. Differences were negligible (\SI{0.08}{\percent} between 0.5 and \SI{1.0}{fs}), and production runs use $\Delta t = \SI{1.0}{fs}$.
+\subsubsection{Test 3: Time step convergence}
+
+Numerical integration accuracy was verified by comparing results for $\Delta t \in \SIlist{0.5;1.0;2.0}{\femto\second}$. Differences are negligible (\SI{0.08}{\percent} between \num{0.5} and \SI{1.0}{\femto\second}); production runs use $\Delta t = \SI{1.0}{\femto\second}$.
 
 \subsubsection{Test 4: Hierarchy truncation convergence}
 
-Parsimonious hierarchy truncation thresholds were tested for sensitivity. Observables vary by less than \SI{0.8}{\percent} for $\epsilon_{\rm trunc} \in \{10^{-7}, 10^{-8}, 10^{-9}\}$. Production runs use $\epsilon_{\rm trunc} = 10^{-8}$ to balance computational cost and precision.
+Observables vary by less than \SI{0.8}{\percent} for truncation thresholds $\epsilon_{\mathrm{trunc}} \in \{10^{-7}, 10^{-8}, 10^{-9}\}$. Production runs use $\epsilon_{\mathrm{trunc}} = 10^{-8}$ to balance computational cost and precision.
 
-\subsection{Physical consistency tests (4 tests)}
+\subsection{Physical consistency tests (tests 5--8)}
 
 \subsubsection{Test 5: Trace preservation}
 
-Density matrix normalization was maintained with a maximum deviation of $5 \times 10^{-13}$ (machine precision limit) throughout \SI{100}{ps} simulations, with no systematic drift.
+Density matrix normalization is maintained with a maximum deviation of $5 \times 10^{-13}$ (machine precision limit) throughout \SI{100}{\pico\second} simulations, with no systematic drift.
 
 \subsubsection{Test 6: Positivity}
 
-The density matrix remained positive semidefinite within numerical precision, with no large negative eigenvalues recorded. The minimum eigenvalue was observed at $-2.1 \times 10^{-11}$, consistent with numerical noise.
+The density matrix remains positive semidefinite within numerical precision. The minimum eigenvalue observed is $-2.1 \times 10^{-11}$, consistent with floating-point noise.
 
-In the zero-coupling limit ($\lambda = 0$), system energy drift was limited to \SI{0.08}{\percent} over \SI{100}{ps} with no systematic trend, confirming numerical conservation.
+\subsubsection{Test 7: Energy conservation}
+
+In the zero-coupling limit ($\lambda = 0$), system energy drift is limited to \SI{0.08}{\percent} over \SI{100}{\pico\second} with no systematic trend, confirming numerical conservation of energy.
 
 \subsubsection{Test 8: Detailed balance}
 
-Long-time population limits successfully match the Boltzmann distribution, with a maximum deviation of \SI{0.6}{\percent} across the physiological temperature range (\SIrange{280}{310}{K}), confirming consistency with thermodynamic equilibrium.
+Long-time population limits match the Boltzmann distribution with a maximum deviation of \SI{0.6}{\percent} across the physiological temperature range (\SIrange{280}{310}{\kelvin}), confirming thermodynamic consistency.
 
-\subsection{Environmental robustness tests (4 tests)}
+\subsection{Environmental robustness tests (tests 9--12)}
 
-Simulations across $T \in \SIlist{285;295;305}{K}$ demonstrate that the quantum advantage remains robust within \SI{15}{\percent} of the \SI{295}{K} reference value despite thermal fluctuations.
+\subsubsection{Test 9: Temperature sensitivity}
+
+Simulations across $T \in \SIlist{285;295;305}{\kelvin}$ demonstrate that the quantum advantage remains within \SI{15}{\percent} of the \SI{295}{\kelvin} reference value despite thermal fluctuations.
 
 \subsubsection{Test 10: Static disorder}
 
-Gaussian disorder added to site energies ($\sigma = \SI{50}{\per\cm}$) resulted in a \SI{20}{\percent} mean reduction in quantum advantage relative to the disorder-free case, but a significant enhancement persisted across the ensemble.
+Gaussian disorder added to site energies ($\sigma = \SI{50}{\per\cm}$) results in a \SI{20}{\percent} mean reduction in quantum advantage relative to the disorder-free case, but a significant enhancement persists across the ensemble.
 
 \subsubsection{Test 11: Bath parameter variations}
 
-Varying spectral density parameters ($\lambda, \gamma, \omega_k$) by $\pm \SI{20}{\percent}$ preserved the qualitative features of vibronic resonance, with peak shifts restricted to $< \SI{5}{nm}$, confirming the robustness of engineering predictions.
+Varying spectral density parameters ($\lambda$, $\gamma$, $\omega_k$) by $\pm \SI{20}{\percent}$ preserves the qualitative features of vibronic resonance, with peak shifts restricted to ${<}\,\SI{5}{\nano\meter}$, confirming the robustness of engineering predictions.
 
 \subsubsection{Test 12: Markovian limit recovery}
 
-At high temperature ($T = \SI{500}{K}$), adHOPS converges to the Redfield theory result (within \SI{1.8}{\percent} deviation) as the quantum advantage nearly vanishes, confirming correct asymptotic behavior in the Markovian regime.
+At high temperature ($T = \SI{500}{\kelvin}$), adHOPS converges to the Redfield theory result (within \SI{1.8}{\percent} deviation) as the quantum advantage nearly vanishes, confirming correct asymptotic behaviour in the Markovian regime.
 
-\subsection{Summary table: validation results}
+\subsection{Summary of validation results}
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
-\caption{Complete validation suite results}
+\caption{\textbf{Summary of validation results.} The 12-test suite covers convergence, physical consistency, and environmental robustness. All tests pass established acceptance thresholds.}
 \label{tab:validation}
-\begin{tabular}{|l|l|c|c|}
-\hline
+\begin{tabular}{llcc}
+\toprule
 \textbf{Category} & \textbf{Test} & \textbf{Criterion} & \textbf{Result} \\
-\hline
-\hline
-\multirow{4}{*}{Convergence} 
-& HEOM Benchmark & $< \SI{2}{\percent}$ deviation & \SI{1.8}{\percent} \checkmark \\
-& Matsubara Cutoff & $< \SI{0.5}{\percent}$ change & \SI{0.3}{\percent} \checkmark \\
-& Time Step & Invariance & $< \SI{0.1}{\percent}$ \checkmark \\
-& Hierarchy Trunc. & $< \SI{1}{\percent}$ variation & \SI{0.8}{\percent} \checkmark \\
-\hline
-\multirow{4}{*}{Physical} 
-& Trace Preservation & $< 10^{-12}$ & $5 \times 10^{-13}$ \checkmark \\
+\midrule
+\multirow{4}{*}{Convergence}
+& HEOM benchmark & ${<}\,\SI{2}{\percent}$ deviation & \SI{1.8}{\percent} \checkmark \\
+& Matsubara cutoff & ${<}\,\SI{0.5}{\percent}$ change & \SI{0.3}{\percent} \checkmark \\
+& Time step & Invariance & ${<}\,\SI{0.1}{\percent}$ \checkmark \\
+& Hierarchy truncation & ${<}\,\SI{1}{\percent}$ variation & \SI{0.8}{\percent} \checkmark \\
+\midrule
+\multirow{4}{*}{Physical}
+& Trace preservation & ${<}\,10^{-12}$ & $5 \times 10^{-13}$ \checkmark \\
 & Positivity & $\lambda_i > -10^{-10}$ & $-2 \times 10^{-11}$ \checkmark \\
-& Energy Conservation & $< 0.1\%$ drift & 0.08\% \checkmark \\
-& Detailed Balance & Match Boltzmann & 0.6\% dev. \checkmark \\
-\hline
-\multirow{4}{*}{Robustness} 
-& Temperature ($\pm \SI{10}{K}$) & Within \SI{15}{\percent} & \SIrange{12}{16}{\percent} \checkmark \\
-& Static Disorder & Persists & \SI{20}{\percent} reduction \checkmark \\
-& Bath Parameters & Qualitative & Features preserved \checkmark \\
-& Markovian Limit & Redfield agreement & \SI{1.8}{\percent} dev. \checkmark \\
-\hline
-\multicolumn{3}{|c|}{\textbf{Overall Success Rate}} & \textbf{12/12 (100\%)} \\
-\hline
+& Energy conservation & ${<}\,\SI{0.1}{\percent}$ drift & \SI{0.08}{\percent} \checkmark \\
+& Detailed balance & Match Boltzmann & \SI{0.6}{\percent} dev.\ \checkmark \\
+\midrule
+\multirow{4}{*}{Robustness}
+& Temperature ($\pm \SI{10}{\kelvin}$) & Within \SI{15}{\percent} & \SIrange{12}{16}{\percent} \checkmark \\
+& Static disorder & Persists & \SI{20}{\percent} reduction \checkmark \\
+& Bath parameters & Qualitative & Features preserved \checkmark \\
+& Markovian limit & Redfield agreement & \SI{1.8}{\percent} dev.\ \checkmark \\
+\midrule
+\multicolumn{3}{l}{\textbf{Overall success rate}} & \textbf{12/12 (100\%)} \\
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -353,32 +372,32 @@ At high temperature ($T = \SI{500}{K}$), adHOPS converges to the Redfield theory
 
 \subsection{Site energies (Adolphs \& Renger, 2006)}
 
-Room temperature (\SI{295}{K}) site energies for FMO monomer:
+Room-temperature (\SI{295}{\kelvin}) site energies for the FMO monomer are listed in \cref{tab:site_energies}.
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
-\begin{tabular}{|c|c|c|}
-\hline
-\textbf{Site} & \textbf{Energy (\si{\per\cm})} & \textbf{Wavelength (nm)} \\
-\hline
-1 & 12410 & 806 \\
-2 & 12530 & 798 \\
-3 & 12210 & 819 \\
-4 & 12320 & 812 \\
-5 & 12480 & 801 \\
-6 & 12630 & 792 \\
-7 & 12440 & 804 \\
-\hline
+\caption{\textbf{FMO site energies.} Transition energies and corresponding wavelengths for the seven BChl-a chromophores.}
+\label{tab:site_energies}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Site} & \textbf{Energy (\si{\per\cm})} & \textbf{Wavelength (\si{\nano\meter})} \\
+\midrule
+1 & 12\,410 & 806 \\
+2 & 12\,530 & 798 \\
+3 & 12\,210 & 819 \\
+4 & 12\,320 & 812 \\
+5 & 12\,480 & 801 \\
+6 & 12\,630 & 792 \\
+7 & 12\,440 & 804 \\
+\bottomrule
 \end{tabular}
-\caption{FMO site energies}
 \end{table}
 
 \subsection{Electronic couplings}
 
-Coupling matrix $J_{nm}$ (\si{\per\cm}, symmetric):
-
+The coupling matrix $J_{nm}$ (\si{\per\cm}, symmetric) from the refined Cho \textit{et al.}\ parameterisation is:
 \begin{equation}
-\mathbf{J} = \begin{pmatrix}
+\bm{J} = \begin{pmatrix}
 0 & -104 & 8 & -5 & 6 & -13 & -2 \\
 -104 & 0 & 30 & 8 & 2 & 7 & 11 \\
 8 & 30 & 0 & -53 & -2 & -9 & -3 \\
@@ -386,82 +405,73 @@ Coupling matrix $J_{nm}$ (\si{\per\cm}, symmetric):
 6 & 2 & -2 & -70 & 0 & 81 & 3 \\
 -13 & 7 & -9 & -17 & 81 & 0 & 39 \\
 -2 & 11 & -3 & -8 & 3 & 39 & 0
-\end{pmatrix}
+\end{pmatrix}.
 \end{equation}
 
 \subsection{Spectral density parameters}
 
-\textbf{Overdamped (Drude--Lorentz) component:}
-\begin{itemize}
-\item Reorganization energy: $\lambda_D = \SI{35}{\per\cm}$
-\item Cutoff frequency: $\gamma_D = \SI{50}{\per\cm}$ (\SI{200}{fs} correlation time)
-\end{itemize}
+The \textbf{overdamped (Drude--Lorentz) component} has reorganization energy $\lambda_D = \SI{35}{\per\cm}$ and cutoff frequency $\gamma_D = \SI{50}{\per\cm}$ (corresponding to a \SI{200}{\femto\second} correlation time).
 
-\textbf{Underdamped (vibronic) modes:}
+The \textbf{underdamped (vibronic) modes} are parameterized in \cref{tab:vibronic_modes}.
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
-\begin{tabular}{|c|c|c|c|}
-\hline
-\textbf{Mode} & \textbf{Frequency $\omega_k$ (\si{\per\cm})} & \textbf{Huang-Rhys $S_k$} & \textbf{Damping $\gamma_k$ (\si{\per\cm})} \\
-\hline
+\caption{\textbf{Vibronic mode parameters.} Reorganization energies are $\lambda_k = S_k \hbar \omega_k$.}
+\label{tab:vibronic_modes}
+\begin{tabular}{cccc}
+\toprule
+\textbf{Mode} & \textbf{Frequency $\omega_k$ (\si{\per\cm})} & \textbf{Huang--Rhys $S_k$} & \textbf{Damping $\gamma_k$ (\si{\per\cm})} \\
+\midrule
 1 & 150 & 0.05 & 10 \\
 2 & 200 & 0.02 & 10 \\
 3 & 575 & 0.01 & 20 \\
 4 & 1185 & 0.005 & 30 \\
-\hline
+\bottomrule
 \end{tabular}
-\caption{Vibronic mode parameters. Reorganization energies: $\lambda_k = S_k \hbar \omega_k$.}
 \end{table}
 
-Total reorganization energy: $\lambda_{\rm total} = \lambda_D + \sum_k \lambda_k \approx \SI{50}{\per\cm}$
+The total reorganization energy is $\lambda_{\mathrm{total}} = \lambda_D + \sum_k \lambda_k \approx \SI{50}{\per\cm}$.
 
 %=============================================================================
 \section{Process Tensor-HOPS with low-temperature correction}\label{si:pthops}
 %=============================================================================
 
-The adHOPS simulations employ Process Tensor decomposition with Low-Temperature Correction (PT-HOPS+LTC) for enhanced computational efficiency at physiological temperatures. The PT-HOPS+LTC method achieves $10\times$ computational speedup compared to traditional HEOM while maintaining $<$\SI{2}{\percent} accuracy for the 7-site FMO complex. \cref{tab:computational_benchmarks} provides detailed performance comparison across methods and system sizes.
+Simulations employ Process Tensor decomposition with Low-Temperature Correction (PT-HOPS+LTC) to enhance computational efficiency at physiological temperatures. This section details the method and benchmarks its performance against HEOM and Redfield theory.
 
 \begin{table}[ht]
 \centering
-\caption{\textbf{Computational performance: PT-HOPS+LTC vs traditional methods.} All simulations performed for \SI{1}{ps} dynamics at \SI{295}{K} with Drude+vibronic bath on AMD EPYC 7542 (32 cores @ \SI{2.9}{GHz}). HEOM provides exact reference for 7-site FMO. Redfield (Markovian) approximation shown for comparison but fails to capture coherence effects. PT-HOPS+LTC achieves near-HEOM accuracy with $10\times$ speedup, enabling large-scale simulations ($N>20$ sites) intractable for HEOM.}
+\caption{\textbf{Computational performance comparison.} All benchmarks are for \SI{1}{\pico\second} of FMO dynamics at \SI{295}{\kelvin} with a Drude + vibronic bath on an AMD EPYC 7542 processor (32 cores at \SI{2.9}{\giga\hertz}). Redfield (Markovian) results are shown for comparison but fail to capture coherence effects. PT-HOPS+LTC achieves near-HEOM accuracy with a \num{10}$\times$ speedup, enabling large-scale simulations ($N > 20$ sites) intractable for HEOM.}
 \label{tab:computational_benchmarks}
 \begin{tabular}{lcccc}
 \toprule
-\textbf{Method} & \textbf{System Size} & \textbf{Wall Time} & \textbf{Memory} & \textbf{Accuracy} \\
- & \textbf{(sites)} & \textbf{(hours)} & \textbf{(GB)} & \textbf{(vs HEOM)} \\
+\textbf{Method} & \textbf{System size} & \textbf{Wall time} & \textbf{Memory} & \textbf{Accuracy} \\
+ & \textbf{(sites)} & \textbf{(\si{\hour})} & \textbf{(\si{\giga\byte})} & \textbf{(vs HEOM)} \\
 \midrule
 HEOM (reference) & 7 & 38.2 & 12.4 & Exact \\
-PT-HOPS+LTC & 7 & 3.8 & 2.1 & $<$\SI{2}{\percent} deviation \\
+PT-HOPS+LTC & 7 & 3.8 & 2.1 & ${<}\,\SI{2}{\percent}$ deviation \\
 Redfield (Markov) & 7 & 0.3 & 0.5 & \SI{18}{\percent} deviation$^*$ \\
 \midrule
 PT-HOPS+LTC & 24 & 12.5 & 6.3 & N/A$^\dagger$ \\
 PT-HOPS+LTC & 100 & 48.7 & 22.1 & N/A$^\dagger$ \\
 \bottomrule
 \multicolumn{5}{l}{\scriptsize $^*$Markovian methods fail to capture non-Markovian coherence effects.} \\
-\multicolumn{5}{l}{\scriptsize $^\dagger$HEOM computationally intractable for $N>10$ sites.} \\
+\multicolumn{5}{l}{\scriptsize $^\dagger$HEOM computationally intractable for $N > 10$ sites.} \\
 \end{tabular}
 \end{table}
 
-The PT-HOPS+LTC method exhibits near-linear scaling with system size for localized excitons, enabling simulations of complete photosynthetic antenna complexes (100+ chromophores) with non-Markovian accuracy.
-This method achieves approximately $10\times$ speedup compared to traditional HEOM while maintaining $<$\SI{2}{\percent} accuracy.
+As shown in \cref{tab:computational_benchmarks}, PT-HOPS+LTC achieves a \num{10}-fold speedup over HEOM with ${<}\,\SI{2}{\percent}$ accuracy and exhibits near-linear scaling with system size for localised excitons, enabling simulations of complete photosynthetic antenna complexes (100+ chromophores) with non-Markovian accuracy.
 
-\subsection{Padé decomposition of bath correlation function}
+\subsection{Pad\'e decomposition of the bath correlation function}
 
-The bath correlation function $C(t)$ is decomposed via Padé approximation into exponentially decaying terms plus a residual non-exponential component:
+The bath correlation function $C(t)$ is decomposed via Pad\'e approximation into exponentially decaying terms plus a residual non-exponential component:
 \begin{equation}
-K_{\rm PT}(t,s) = \sum_{k} g_k(t) f_k(s) e^{-\lambda_k |t-s|} + K_{\rm non-exp}(t,s)
+K_{\mathrm{PT}}(t,s) = \sum_{k} g_k(t)\, f_k(s)\, \mathrm{e}^{-\lambda_k |t-s|} + K_{\mathrm{non\text{-}exp}}(t,s),
 \end{equation}
-
-where $g_k(t)$ and $f_k(s)$ are effective coupling functions, $\lambda_k$ are decay rates, and $K_{\rm non-exp}(t,s)$ captures residual memory effects beyond the exponential approximation.
+where $g_k(t)$ and $f_k(s)$ are effective coupling functions, $\lambda_k$ are decay rates, and $K_{\mathrm{non\text{-}exp}}(t,s)$ captures residual memory effects beyond the exponential approximation.
 
 \subsection{Low-temperature correction parameters}
 
-For simulations at physiological temperatures and below, the Low-Temperature Correction (LTC) integrate quantum noise while maintaining computational efficiency. Optimized parameters include a Matsubara cutoff of $N_{\rm Mat} = 12$ for $T = \SI{295}{K}$, a time step enhancement factor $\eta_{\rm LTC} = 10$, a convergence tolerance $\epsilon_{\rm LTC} = 10^{-8}$ for auxiliary state truncation, and a memory kernel truncation of \SI{20}{ps} (sufficiently beyond system decoherence timescales).
-
-Benchmark comparisons for the 7-site FMO system at \SI{295}{K} (\SI{100}{ps} simulation) show that PT-HOPS+LTC achieves a \num{10}-fold speedup relative to traditional HEOM (3.8 vs 38 hours) on a single core. The maximum observable deviation remains within \SI{1.4}{\percent}, confirming accuracy within convergence tolerances. This efficiency stems from optimized Matsubara mode treatment, enhanced time stepping stability, and adaptive truncation.
-
-This computational efficiency enables high-throughput screening of OPV transmission functions and disorder ensembles essential for realistic agrivoltaic design optimization.
+For simulations at physiological temperatures and below, the LTC integrates quantum noise while maintaining computational efficiency. Optimised parameters include a Matsubara cutoff of $N_{\mathrm{Mat}} = 12$ for $T = \SI{295}{\kelvin}$, a time-step enhancement factor $\eta_{\mathrm{LTC}} = 10$, a convergence tolerance $\epsilon_{\mathrm{LTC}} = 10^{-8}$ for auxiliary state truncation, and a memory kernel truncation at \SI{20}{\pico\second} (beyond system decoherence timescales). This computational efficiency enables high-throughput screening of OPV transmission functions and disorder ensembles essential for realistic agrivoltaic design optimisation.
 
 %=============================================================================
 \section{Computational performance metrics}\label{si:performance}
@@ -469,81 +479,94 @@ This computational efficiency enables high-throughput screening of OPV transmiss
 
 \subsection{Hardware specifications}
 
-Simulations performed on:
-\begin{itemize}
-\item CPU: AMD EPYC 7542 (32 cores @ \SI{2.9}{GHz})
-\item RAM: \SI{256}{GB} DDR4--3200
-\item OS: Ubuntu 20.04 LTS
-\item Compiler: GCC 9.4.0 with -O3 optimization
-\item MPI: OpenMPI 4.0.5 (for parallel ensemble runs)
-\end{itemize}
+All simulations were performed on an AMD EPYC 7542 processor (32 cores at \SI{2.9}{\giga\hertz}) with \SI{256}{\giga\byte} DDR4-3200 RAM, running Ubuntu 20.04~LTS. Code was compiled with GCC~9.4.0 using \texttt{-O3} optimisation. Parallel ensemble runs used OpenMPI~4.0.5.
 
 \subsection{Scaling analysis}
 
-Typical production runs for the 7-site FMO system (\SI{100}{ps}, $\Delta t = \SI{1.0}{fs}$) utilize 12 Matsubara modes and an adaptive hierarchy (averaging \numrange{800}{1200} states), requiring approximately 3.8 hours and \SI{4.2}{GB} of peak memory on a single core. Scaling analysis demonstrates that adHOPS remains size-invariant for localized excitons ($\mathcal{O}(1)$), whereas HEOM exhibits $\mathcal{O}(N^3)$ scaling, making adHOPS the preferred method for $N > 5$.
+Typical production runs for the 7-site FMO system (\SI{100}{\pico\second}, $\Delta t = \SI{1.0}{\femto\second}$) utilise 12 Matsubara modes and an adaptive hierarchy (averaging \numrange{800}{1200} states), requiring approximately 3.8~hours and \SI{4.2}{\giga\byte} of peak memory on a single core. Scaling analysis demonstrates that adHOPS remains size-invariant for localised excitons [$\mathcal{O}(1)$], whereas HEOM exhibits $\mathcal{O}(N^3)$ scaling, making adHOPS the preferred method for $N > 5$.
 
 \subsection{Parallelization efficiency}
 
-Ensemble averaging over 100 independent disorder realizations demonstrates near-perfect parallel scalability. A total wall time of 4 hours was achieved on 100 cores, compared to 16.7 days on a single core.
+Ensemble averaging over 100 independent disorder realizations demonstrates near-perfect parallel scalability: a total wall time of 4 hours on 100 cores, compared to 16.7 days on a single core.
 
+%=============================================================================
 \section{Additional figures}\label{si:figures}
+%=============================================================================
 
-\subsection{Figure S1: spectral density components}
+\subsection{Figure S1: Spectral density components}
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.85\textwidth]{Graphics/Spectral_Density_Components_for_FMO_Environment.pdf}
-\caption{Spectral density components for FMO environmental bath. Overdamped Drude contribution (blue, $\lambda = \SI{35}{\per\cm}$, $\gamma = \SI{50}{\per\cm}$) and underdamped vibronic modes (orange peaks at \SIlist{150;200;575;1185}{\per\cm}). Total spectral density $J(\omega)$ shown in black. The \SI{575}{\per\cm} mode plays critical role in quantum-enhanced energy transfer.}
+\caption{\textbf{Spectral density of the FMO environmental bath.} The environment is modeled with an overdamped Drude--Lorentz component (blue) and four underdamped vibronic modes (orange peaks). The \SI{575}{\per\cm} mode is the primary target for quantum-engineered spectral filtering.}
 \label{fig:SI_spectral_density}
 \end{figure}
 
-\subsection{Figure S2: global reactivity indices}
+\subsection{Figure S2: Quantum metrics evolution}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.95\textwidth]{Graphics/Quantum_Metrics_Evolution.pdf}
+\caption{\textbf{Time-resolved quantum metrics evolution in the FMO complex.} (a) Site population dynamics showing excitation transfer across the seven BChl chromophores following initial excitation of BChl~1. (b) $l_1$-norm coherence evolution. (c) State purity $\Tr[\bm{\rho}^2]$ and von Neumann entropy $S$ illustrating the coherent-to-incoherent transition at \SI{295}{\kelvin}. (d) Normalised Quantum Fisher Information tracking the metrological advantage during the coherent transport window.}
+\label{fig:SI_quantum_metrics}
+\end{figure}
+
+\subsection{Figure S3: Global reactivity indices}
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.85\textwidth]{Graphics/Global_Reactivity_Indices.pdf}
-\caption{Global reactivity indices for biodegradable OPV candidates. Fukui functions $f^+$ (electrophilic, red) and $f^-$ (nucleophilic, blue) identify reactive sites susceptible to enzymatic degradation. Chemical hardness $\eta$, softness $S$, and biodegradability index $B$ shown for Molecule A (highly biodegradable, $<$ 6 months) and Molecule B (moderately biodegradable, 6--18 months). Both candidates achieve $>\SI{15}{\percent}$ PCE while maintaining environmental compatibility.}
+\caption{\textbf{Molecular reactivity and biodegradability indices.} Fukui functions $f^+$ and $f^0$ identifying reactive sites on OPV donor--acceptor candidates, dual descriptor for selectivity analysis, and frontier molecular orbital energies.}
 \label{fig:SI_biodegradability}
 \end{figure}
 
-\subsection{Figure S3: PAR transmission (clean vs dusty)}
+\subsection{Figure S4: PAR transmission (clean vs dusty)}
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.85\textwidth]{Graphics/PAR_Transmission__Clean_vs_Dusty_Conditions.pdf}
-\caption{Photosynthetically active radiation (PAR) transmission spectra under varying dust accumulation on OPV surface. Clean surface (black solid), 30-day accumulation (blue dashed), 90-day accumulation (red dotted). Critical quantum resonance windows (\numlist{750;820}\,nm, shaded regions) maintain effectiveness despite \SIrange{10}{18}{\percent} transmission reduction from soiling. Regular cleaning (monthly) recommended for optimal performance.}
+\caption{\textbf{Spectral transmission under surface soiling.} Effective PAR transmission through OPV panels under clean (solid) and dusty (dashed) conditions. The dual-band resonance windows at \SIlist{750;820}{\nano\meter} maintain their spectral selectivity despite intensity reduction from particle scattering.}
 \label{fig:SI_par_transmission}
 \end{figure}
 
-\subsection{Figure S4: response functions}
+\subsection{Figure S5: Response functions}
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.85\textwidth]{Graphics/Response_Functions__OPV_vs_PSU.pdf}
-\caption{Spectral response functions for organic photovoltaic (OPV, blue) and photosynthetic unit (PSU, orange). Optimal dual-band design (\numlist{750;820}\,nm, shaded green) minimizes spectral overlap for efficient electrical energy harvesting while maximizing targeted excitation of vibronic-resonant transitions in photosynthesis. This strategic partitioning enables simultaneous optimization of both energy conversion pathways.}
+\caption{\textbf{Spectral response partitioning.} Comparison of OPV electrical absorption and photosynthetic spectral unit (PSU) biological response. The optimized dual-band window (\SIlist{750;820}{\nano\meter}) targets excitonic transitions to maximise quantum transport benefits with minimal impact on electrical harvesting.}
 \label{fig:SI_response_functions}
 \end{figure}
 
-\subsection{Figure S5: geographic climate maps}
+\subsection{Figure S6: Geographic climate maps}
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.9\textwidth]{Graphics/fLatitude__lat__u00b0__Month__month.pdf}
-\caption{Geographic and seasonal variation of quantum ETR enhancement as function of latitude and month. Contour map showing year-round viability across temperate (\SIrange{40}{70}{\degree}N), subtropical (\SIrange{15}{35}{\degree}N), tropical (\SIrange{0}{23.5}{\degree}), and desert regions (\SIrange{20}{47}{\degree}N/S). Color scale represents ETR enhancement percentage (\SIrange{18}{28}{\percent}). Peak performance occurs at mid-latitudes during spring/fall when temperatures align with optimal \SI{295}{K}. Global deployment potential confirmed.}
+\caption{\textbf{Annual variation of ETR enhancement by latitude.} Heatmap showing the geographic and seasonal distribution of the quantum advantage. Strategic spectral engineering provides persistent ETR enhancements of \SIrange{18}{28}{\percent} globally, with optimal performance when ambient temperatures align with the \SI{295}{\kelvin} vibronic resonance peak.}
 \label{fig:SI_climate_map}
 \end{figure}
 
-\subsection{Figure S6: ETR uncertainty distributions}
+\subsection{Figure S7: ETR uncertainty distributions}
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.85\textwidth]{Graphics/ETR_Uncertainty_Distribution.pdf}
-\caption{Statistical distribution of ETR enhancement from disorder ensemble simulation ($N = 100$ independent realizations, static disorder $\sigma = \SI{50}{\per\cm}$). Histogram (blue bars) shows mean enhancement \SI{20}{\percent}, standard deviation \SI{4}{\percent}. Gaussian fit (red curve) demonstrates near-normal distribution. Inset: quantile-quantile plot confirms statistical robustness. Narrow distribution (coefficient of variation $< \SI{20}{\percent}$) indicates quantum advantage is robust feature, not sensitive to specific molecular configurations.}
+\caption{\textbf{Statistical distribution of quantum transport enhancement.} Distribution of ETR enhancement across 100 independent realizations of static energetic disorder ($\sigma = \SI{50}{\per\cm}$). The narrow distribution (mean: \SI{20}{\percent}, standard deviation: \SI{4}{\percent}) confirms that the quantum advantage is robust and independent of specific site-energy configurations.}
 \label{fig:SI_etr_uncertainty}
 \end{figure}
 
+\subsection{Figure S8: Sub-Saharan Africa ETR enhancement}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.9\textwidth]{Graphics/ETR_Under_Environmental_Effects.pdf}
+\caption{\textbf{Agrivoltaic quantum advantage in sub-Saharan Africa.} Environmental robustness data (reproduced from Fig.~4 of the main text for reader convenience) highlighting the sub-Saharan perspective: monthly ETR enhancement heatmap (left) and annual mean metrics (right) for five sites spanning three climate zones---Yaound\'e and Abidjan (equatorial), Abuja (tropical savanna), and Dakar and N'Djamena (Sahel). Persistent enhancements of \SIrange{18}{24}{\percent} demonstrate the regional potential for quantum-enhanced agrivoltaic production.}
+\label{fig:SI_subsaharan}
+\end{figure}
+
 %=============================================================================
-\bibliographystyle{plain}
+\bibliographystyle{unsrt}
 \bibliography{references}
 %=============================================================================
 

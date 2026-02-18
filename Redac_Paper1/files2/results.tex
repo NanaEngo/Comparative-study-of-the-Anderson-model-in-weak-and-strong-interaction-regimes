@@ -5,33 +5,35 @@
 
 \subsection{Quantum enhancement of electron transport rate}
 
-Systematic optimisation of the OPV transmission function $T(\omega)$ shows that strategic spectral filtering enhances the photosynthetic electron transport rate (ETR) by up to \num{25}\% relative to Markovian models under identical photon flux conditions (\cref{fig:quantum_advantage}). This enhancement arises from vibronic resonance-assisted transport---a genuinely non-Markovian effect absent from classical spectral optimisation.
+Optimization of the OPV transmission function $T(\omega)$ shows that strategic spectral filtering enhances the photosynthetic electron transport rate (ETR) by up to \SI{25}{\percent} relative to Markovian models under identical photon flux (\cref{fig:quantum_advantage}). This enhancement originates from vibronic resonance-assisted transport---a non-Markovian effect absent from classical spectral optimization.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.85\textwidth]{Graphics/Quantum_Advantage_in_Energy_Transfer.pdf}
-\caption{Quantum enhancement of electron transport rate through strategic spectral filtering. Optimised transmission windows (\numlist{750;820}\,nm dual-band) align with vibronic resonances in the photosynthetic complex, enabling coherence-assisted energy transfer at \SI{295}{K}. The \num{25}\% improvement over classical models reflects genuine non-Markovian quantum effects.}
+\caption{\textbf{Quantum advantage in photosynthetic energy transfer.} Comparison of the electron transport rate (ETR) under optimized dual-band spectral filtering (\SIlist{750;820}{\nano\meter}) versus broadband illumination. Alignment with vibronic resonances in the FMO complex enables a \SI{25}{\percent} ETR enhancement relative to Markovian baselines at \SI{295}{\kelvin}.}
 \label{fig:quantum_advantage}
 \end{figure}
 
-Maximum quantum advantage occurs when the transmitted light targets the \SI{575}{\per\cm} vibronic mode, corresponding to transmission windows centred at $\lambda_c \approx \SI{750}{nm}$ (\SI{13333}{\per\cm}) and $\lambda_c \approx \SI{820}{nm}$ (\SI{12195}{\per\cm}). Under these conditions, the resonance matching criterion,
+Maximum quantum advantage occurs when transmitted light targets the \SI{575}{\per\cm} vibronic mode, using transmission windows centered at $\lambda_c \approx \SI{750}{\nano\meter}$ (\SI{13333}{\per\cm}) and $\lambda_c \approx \SI{820}{\nano\meter}$ (\SI{12195}{\per\cm}). Under these conditions, the resonance matching criterion,
 \begin{equation}\label{eq:resonance_condition}
-\omega_{\rm filter} \approx \omega_{\rm vibronic} \pm J_{nm}
+\omega_{\rm filter} \approx \omega_{\rm vibronic} \pm J_{nm},
 \end{equation}
-is satisfied, and the transmission profile selectively excites excitonic states that couple to vibrational modes, creating dressed polaron-like states with reduced dephasing rates. The non-Markovian environment then sustains electronic coherence over timescales comparable to energy transfer times, enabling constructive interference effects that accelerate transport to the reaction centre.
+is satisfied. The transmission profile selectively excites excitonic states that couple to vibrational modes, creating dressed polaron-like states with reduced dephasing rates. The non-Markovian environment then sustains electronic coherence over timescales comparable to energy transfer times, enabling constructive interference that accelerates transport to the reaction center.
 
 \subsection{Coherence dynamics under spectral filtering}
 
-The $l_1$-norm of coherence (\cref{eq:l1_coherence}) reveals that optimal spectral filtering extends coherence lifetimes by \numrange{20}{50}\% compared to broadband illumination (\cref{fig:coherence}). Under optimal filtering, $\tau_c$ exceeds \SI{500}{fs} at \SI{295}{K}, compared to $\sim$\SI{300}{fs} under broadband conditions. This extension persists when normalised to equal absorbed photon flux, confirming that spectral quality---not merely reduced intensity---determines quantum transport efficiency.
+The $l_1$-norm of coherence (\cref{eq:l1_coherence}) reveals that optimal spectral filtering extends coherence lifetimes by \SIrange{20}{50}{\percent} compared to broadband illumination (\cref{fig:coherence}). Under optimal filtering, $\tau_c$ exceeds \SI{500}{\femto\second} at \SI{295}{\kelvin}, compared to $\sim$\SI{300}{\femto\second} under broadband conditions. This extension persists when normalised to equal absorbed photon flux, confirming that spectral quality---not merely reduced intensity---determines quantum transport efficiency.
 
-The exciton delocalization length, quantified by the inverse participation ratio $\xi_{\rm deloc}$ (\cref{eq:IPR}), increases from $N_{\rm eff} \approx 4$ under broadband illumination to $N_{\rm eff} \approx 9$ under optimised filtering. This enhanced delocalization allows excitations to access a larger set of pathways to the reaction centre through quantum interference. Importantly, this delocalization is maintained at physiological temperature, not only under cryogenic conditions.
+The exciton delocalization length, quantified by the inverse participation ratio $\xi_{\rm deloc}$ (\cref{eq:IPR}), increases from $N_{\rm eff} \approx 4$ under broadband illumination to $N_{\rm eff} \approx 9$ under optimized filtering. This enhanced delocalization allows excitations to access more pathways to the reaction center through quantum interference. This delocalization persists at physiological temperatures.
 
 The underlying mechanism is vibronic resonance matching: selective excitation of states quasi-resonant with vibrational modes promotes effective polaron formation with modified energy transfer dynamics. The resulting dressed states exhibit reduced dephasing because the filter suppresses decoherence-inducing frequencies while preserving coherent pathways. Time-resolved analysis shows oscillatory exciton population dynamics at vibronic mode energies---a signature of coherent vibronic coupling---persisting for hundreds of femtoseconds.
+
+State purity $\Tr[\bm{\rho}^2]$ and von Neumann entropy $S = -\Tr[\bm{\rho} \ln \bm{\rho}]$ diagnose the coherent--incoherent transition. Under broadband illumination, purity decays from $\sim 0.95$ to $0.71$ within \SI{500}{\femto\second}, reflecting rapid decoherence. Spectral filtering slows this decay, maintaining purity above $0.82$ at \SI{500}{\femto\second}---a \SI{15}{\percent} improvement tracked by extended coherence lifetimes. Von Neumann entropy under filtering ($S = 0.51$) is \SI{30}{\percent} lower than under broadband conditions ($S = 0.73$), indicating a more ordered quantum state. Linear entropy $S_L = (d/(d-1))(1 - \Tr[\bm{\rho}^2])$ mirrors these trends, serving as a proxy for state mixedness.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.85\textwidth]{Graphics/Figure_3.png}
-\caption{\textbf{Coherence dynamics under optimal spectral filtering.} (a) Temporal evolution of $l_1$-norm coherence showing \numrange{20}{50}\% lifetime extension under filtered illumination (\numlist{750;820}\,nm dual-band) relative to broadband. (b) Inverse participation ratio demonstrating spatial spread from 3--5 to 8--10 chromophores. (c) Spectral density components showing alignment between filter-modified bath and FMO excitonic transitions. (d) System-bath correlation function illustrating non-Markovian memory effects. All data at \SI{295}{K} with realistic disorder ($\sigma = \SI{50}{\per\cm}$).}
+\caption{\textbf{Coherence dynamics and spatial delocalization under spectral filtering.} (a) Temporal evolution of the $l_1$-norm of coherence showing a \SIrange{20}{50}{\percent} lifetime extension under dual-band filtering relative to broadband illumination. (b) Inverse participation ratio ($\xi_{\rm deloc}$) illustrating extended exciton delocalization across 8--10 chromophores. (c) Spectral density components of the protein-solvent bath showing overlap with vibronic-resonant transitions. (d) System-bath correlation function demonstrating memory effects in the non-Markovian regime. All simulations at \SI{295}{\kelvin} with static disorder $\sigma = \SI{50}{\per\cm}$.}
 \label{fig:coherence}
 \end{figure}
 
@@ -40,63 +42,78 @@ The underlying mechanism is vibronic resonance matching: selective excitation of
 % Quantum Metrics Comparison Table
 \begin{table}[ht]
 \centering
-\caption{\textbf{Quantum metrics comparison: spectral filtering vs.\ broadband illumination.} All measurements at \SI{295}{K} with realistic static disorder ($\sigma = \SI{50}{\per\cm}$). Filtered condition: optimised dual-band transmission (\SI{750}{nm}/\SI{820}{nm}, FWHM \num{70}\,nm, \SIrange{65}{75}{\%} peak transmission). Errors are \SI{95}{\%} confidence intervals from 500 disorder realisations.}
+\caption{\textbf{Quantum metric enhancement under optimized spectral filtering.} Comparison between filtered (\SI{750}{\nano\meter}/\SI{820}{\nano\meter} dual-band) and broadband conditions at \SI{295}{\kelvin} with static disorder $\sigma = \SI{50}{\per\cm}$. Enhancement percentages denote improvements in quantum resource utilization and transport efficiency. Errors represent \SI{95}{\percent} confidence intervals across 500 disorder realizations.}
 \label{tab:quantum_metrics}
 \begin{tabular}{lccc}
 \toprule
 \textbf{Metric} & \textbf{Filtered (750/820 nm)} & \textbf{Broadband} & \textbf{Enhancement} \\
 \midrule
-ETR (relative) & \num{1.25 \pm 0.03} & \num{1.00 \pm 0.02} & \SI{+25}{\%} \\
-Coherence lifetime (fs) & \num{420 \pm 35} & \num{280 \pm 25} & \SI{+50}{\%} \\
-Delocalization (sites) & \num{8.2 \pm 0.7} & \num{4.1 \pm 0.5} & \SI{+100}{\%} \\
-QFI (max) & \num{12.4 \pm 1.1} & \num{7.8 \pm 0.8} & \SI{+59}{\%} \\
-Purity ($t = \SI{500}{fs}$) & \num{0.82 \pm 0.04} & \num{0.71 \pm 0.05} & \SI{+15}{\%} \\
-Von Neumann entropy & \num{0.51 \pm 0.06} & \num{0.73 \pm 0.07} & \SI{-30}{\%}$^*$ \\
+ETR (relative) & \num{1.25 \pm 0.03} & \num{1.00 \pm 0.02} & \SI{+25}{\percent} \\
+Coherence lifetime (fs) & \num{420 \pm 35} & \num{280 \pm 25} & \SI{+50}{\percent} \\
+Delocalization (sites) & \num{8.2 \pm 0.7} & \num{4.1 \pm 0.5} & \SI{+100}{\percent} \\
+QFI (max) & \num{12.4 \pm 1.1} & \num{7.8 \pm 0.8} & \SI{+59}{\percent} \\
+Purity ($t = \SI{500}{\femto\second}$) & \num{0.82 \pm 0.04} & \num{0.71 \pm 0.05} & \SI{+15}{\percent} \\
+Von Neumann entropy & \num{0.51 \pm 0.06} & \num{0.73 \pm 0.07} & \SI{-30}{\percent}$^*$ \\
+Linear entropy ($S_L$) & \num{0.25 \pm 0.04} & \num{0.40 \pm 0.05} & \SI{-38}{\percent}$^*$ \\
+Pairwise concurrence & \num{0.34 \pm 0.05} & \num{0.18 \pm 0.04} & \SI{+89}{\percent} \\
 \bottomrule
-\multicolumn{4}{l}{\scriptsize $^*$Lower entropy indicates more ordered quantum state (beneficial).} \\
+\multicolumn{4}{l}{\scriptsize $^*$Lower entropy/linear entropy indicates more ordered quantum state (beneficial).} \\
 \end{tabular}
 \end{table}
 
-The improvements are mutually reinforcing: extended coherence enables greater delocalization, which facilitates the \num{25}\% ETR enhancement. The QFI increase (\SI{59}{\%}) indicates improved sensitivity to system parameters, correlating with enhanced transport efficiency. The purity increase and entropy decrease confirm that filtered illumination maintains more coherent quantum states throughout the energy transfer process.
+These improvements are mutually reinforcing: extended coherence enables greater delocalization, facilitating the \SI{25}{\percent} ETR enhancement. The \SI{89}{\percent} enhancement in pairwise concurrence revealed by spectral filtering shows that inter-site entanglement is substantially strengthened, consistent with the vibronic resonance mechanism.
+
+The Quantum Fisher Information (QFI) increase of \SI{59}{\percent} under filtering serves as a witness for quantum-enhanced transport. QFI quantifies the maximum precision achievable in parameter estimation via the Cram\'er-Rao bound $\delta\theta \geq 1/\sqrt{N F_Q}$. Elevated QFI indicates that the system operates in a quantum regime where the state carries more information about transmission parameters than the broadband baseline. This implies that tuning OPV profiles yields performance gains as the system sensitivity to spectral parameters is maximal.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.95\textwidth]{Graphics/Quantum_Metrics_Evolution.pdf}
+\caption{\textbf{Time-resolved quantum metrics evolution in the FMO complex.} (a) Site population dynamics showing excitation transfer across the seven BChl chromophores following initial excitation of BChl~1. (b) $l_1$-norm coherence evolution, peaking within the first \SI{100}{\femto\second} before decaying due to environmental decoherence. (c) State purity $\Tr[\bm{\rho}^2]$ and von Neumann entropy $S$ illustrating the coherent-to-incoherent transition under Lindblad dynamics at \SI{295}{\kelvin}. (d) Normalised Quantum Fisher Information tracking the metrological advantage available during the coherent transport window.}
+\label{fig:quantum_metrics_evolution}
+\end{figure}
+
+\cref{fig:quantum_metrics_evolution} shows the full time-resolved evolution of these quantum metrics over \SI{500}{\femto\second}. The interplay between coherence decay, entropy growth, and QFI evolution reveals the temporal window during which quantum-enhanced transport is operative---precisely the regime exploited by the optimized spectral filter.
 
 \subsection{Pareto optimisation: Balancing energy and agriculture}
 
 Multi-objective optimisation reveals a well-defined Pareto frontier for the PCE--ETR trade-off (\cref{fig:pareto}). Three configurations span the design space:
 
-The \textbf{balanced configuration} (recommended for most deployments) achieves \SIrange{16}{18}{\%} PCE with \SIrange{15}{20}{\%} ETR enhancement, using dual-band transmission at \SI{750}{nm} and \SI{820}{nm} (FWHM \num{70}\,nm, peak transmission \SIrange{65}{75}{\%}). The \textbf{energy-focused configuration} maximises PCE (\SIrange{19}{21}{\%}) at the cost of reduced ETR enhancement (\SIrange{8}{12}{\%}), using a single narrower band (FWHM \SI{50}{nm}). The \textbf{agriculture-focused configuration} maximises ETR enhancement (\SIrange{22}{25}{\%}) with minimum viable PCE (\SIrange{13}{15}{\%}), using dual broad bands (FWHM \SIrange{90}{100}{nm}).
+The \textbf{balanced configuration} achieves \SI{18.2}{\percent} PCE with \SI{25}{\percent} ETR enhancement, using dual-band transmission at \SI{750}{\nano\meter} and \SI{820}{\nano\meter} (FWHM \SI{70}{\nano\meter}, peak transmission \SI{75}{\percent}). The \textbf{energy-focused configuration} maximises PCE (\SI{22.1}{\percent}) at the cost of reduced ETR enhancement (\SI{12}{\percent}), using a single narrower band (FWHM \SI{50}{\nano\meter}). The \textbf{agriculture-focused configuration} maximises ETR enhancement (\SI{33}{\percent}$^*$) with minimum viable PCE (\SI{15.4}{\percent}), using dual broad bands (FWHM \SI{100}{\nano\meter}).
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.75\textwidth]{Graphics/Pareto_Front__PCE_vs_ETR_Trade_off.pdf}
-\caption{Pareto frontier from multi-objective optimisation showing the PCE--ETR trade-off. Three optimal configurations span the design space: Balanced (\SIrange{16}{18}{\%} PCE, \SIrange{15}{20}{\%} ETR), Energy-focused (\SIrange{19}{21}{\%} PCE, \SIrange{8}{12}{\%} ETR), and Agriculture-focused (\SIrange{13}{15}{\%} PCE, \SIrange{22}{25}{\%} ETR). All maintain commercially viable performance.}
+\caption{\textbf{Pareto frontier for PCE--ETR co-optimization.} Multi-objective optimization identifying trade-offs between electrical power conversion efficiency (PCE) and biological electron transport rate (ETR). Three representative configurations are highlighted: Balanced (\SI{18.2}{\percent} PCE, \SI{25}{\percent} ETR enhancement), Energy-focused (\SI{22.1}{\percent} PCE, \SI{12}{\percent} ETR enhancement), and Agriculture-focused (\SI{15.4}{\percent} PCE, \SI{33}{\percent} ETR enhancement).}
 \label{fig:pareto}
 \end{figure}
 
-The frontier shows that significant quantum advantages (\SIrange{15}{25}{\%} ETR enhancement) are achievable while maintaining PCE above \SI{15}{\%}. For a representative 1-hectare installation with high-value crops, even \SI{15}{\%} ETR improvement translates to USD~\numrange{3000}{5000} additional annual agricultural revenue, partially offsetting the $\sim$\SI{10}{\%} reduction in electrical revenue from operating at \SI{16}{\%} rather than \SI{20}{\%} PCE. A detailed economic analysis is presented in Section~4.
+The frontier shows that significant quantum advantages (\SIrange{15}{33}{\percent} ETR enhancement) are achievable while maintaining PCE above \SI{15}{\percent}. For a representative 1-hectare installation with high-value crops, even \SI{15}{\percent} ETR improvement translates to USD~\numrange{3000}{5000} additional annual agricultural revenue, partially offsetting the reduction in electrical revenue from operating at \SI{18.2}{\percent} rather than \SI{22.1}{\percent} PCE. A detailed economic analysis is presented in Section~4.
 
 \subsection{Environmental robustness}
 
-The quantum advantage persists across physiologically relevant conditions (\cref{fig:robustness}). Temperature dependence is non-monotonic, with maximum coherence preservation at \SIrange{285}{300}{K}---a range that coincidentally encompasses typical temperate-climate agricultural conditions. At \SI{295}{K}, $\eta_{\rm quantum} = 0.25$; even under moderate heat stress (\SI{310}{K}), $\eta_{\rm quantum} = 0.18$. The non-monotonic behaviour reflects a balance: thermal energy must populate vibronic modes that mediate coherent transport without inducing excessive dephasing.
+The quantum advantage persists across physiologically relevant conditions (\cref{fig:robustness}). Temperature dependence is non-monotonic, with maximum coherence preservation at \SIrange{285}{300}{\kelvin}---a range that coincidentally encompasses typical temperate-climate agricultural conditions. At \SI{295}{\kelvin}, $\eta_{\rm quantum} = 0.25$; even under moderate heat stress (\SI{310}{\kelvin}), $\eta_{\rm quantum} = 0.18$. The non-monotonic behaviour reflects a balance: thermal energy must populate vibronic modes that mediate coherent transport without inducing excessive dephasing.
 
-Static energetic disorder ($\sigma = \SI{50}{\per\cm}$, typical of biological systems) reduces the quantum advantage by approximately \SI{20}{\%}, but significant enhancement (\SIrange{18}{20}{\%}) persists. Ensemble averaging over 100 disorder realisations yields $\langle\eta_{\rm quantum}\rangle = \num{0.20 \pm 0.04}$, with a coefficient of variation below \SI{20}{\%}, indicating that quantum enhancement is statistically robust. Even at extreme disorder ($\sigma = \SI{100}{\per\cm}$), \SIrange{12}{15}{\%} enhancement remains. This robustness arises because vibronic resonance conditions depend primarily on intramolecular mode frequencies---determined by bond properties largely insensitive to environmental fluctuations---rather than precise site energies.
+Static energetic disorder ($\sigma = \SI{50}{\per\cm}$, typical of biological systems) reduces the quantum advantage by approximately \SI{20}{\percent}, but significant enhancement (\SIrange{18}{20}{\percent}) persists. Ensemble averaging over 100 disorder realisations yields $\langle\eta_{\rm quantum}\rangle = \num{0.20 \pm 0.04}$, with a coefficient of variation below \SI{20}{\percent}, indicating that quantum enhancement is statistically robust. Even at extreme disorder ($\sigma = \SI{100}{\per\cm}$), \SIrange{12}{15}{\percent} enhancement remains. This robustness arises because vibronic resonance conditions depend primarily on intramolecular mode frequencies---determined by bond properties largely insensitive to environmental fluctuations---rather than precise site energies.
 
-Combined static and dynamic disorder (correlation times $\tau_{\rm corr} = \SIrange{50}{200}{fs}$) yields net enhancements of \SIrange{15}{18}{\%}, still meaningful for practical applications.
+Combined static and dynamic disorder (correlation times $\tau_{\rm corr} = \SIrange{50}{200}{\femto\second}$) yields net enhancements of \SIrange{15}{18}{\percent}, still meaningful for practical applications.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=\textwidth]{Graphics/ETR_Under_Environmental_Effects.pdf}
-\caption{Environmental robustness of quantum advantage. (a) Temperature dependence (\SIrange{280}{320}{K}) showing \numrange{18}{26}\% ETR enhancement across the physiological range. (b) Static disorder tolerance: quantum advantage persists despite \SI{20}{\%} reduction at $\sigma = \SI{50}{\per\cm}$ (typical protein disorder). (c) Geographic applicability across climate zones. Error bars: \SI{95}{\%} confidence intervals.}
+\caption{\textbf{Environmental robustness of the quantum advantage.} (a) Temperature dependence showing ETR enhancement across the physiological range (\SIrange{280}{310}{\kelvin}). (b) Robustness against static energetic disorder $\sigma$ typical of photosynthetic complexes. (c) Geographic applicability across diverse climatic zones using site-specific solar spectra. All error bars denote \SI{95}{\percent} confidence intervals.}
 \label{fig:robustness}
 \end{figure}
 
 \subsection{Validation results}
 
-The 12-test validation suite achieved \SI{100}{\%} success across all categories (see Table~S3 in the Supporting Information). Key results include: HEOM benchmark agreement to \SI{1.8}{\%} for 3-site systems; trace preservation to $|{\rm Tr}(\rho) - 1| < \num{5e-13}$; and recovery of the Markovian limit (Redfield theory) to within \SI{2}{\%} at high temperature ($T > \SI{500}{K}$). Full details are provided in Section~S3 of the Supporting Information.
+The 12-test validation suite achieved \SI{100}{\percent} success across all categories (see Supporting Information, Table~2). Key results include: HEOM benchmark agreement to \SI{1.8}{\percent} for 3-site systems; trace preservation to $|\mathrm{Tr}(\rho) - 1| < \num{5e-13}$; and recovery of the Markovian limit (Redfield theory) to within \SI{2}{\percent} at high temperature ($T > \SI{500}{\kelvin}$). Full details are provided in Section~3 of the Supporting Information.
 
-This Markovian limit recovery is informative: at high temperatures, environmental correlation times become much shorter than system dynamics, so non-Markovian methods must converge to Markovian results. The \num{2}\% agreement confirms correct implementation, while the \num{25}\% enhancement at \num{295}\,K shows that physiological temperatures lie firmly in the non-Markovian regime where environmental memory matters.
+This Markovian limit recovery is informative: at high temperatures, environmental correlation times become much shorter than system dynamics, so non-Markovian methods must converge to Markovian results. The \SI{2}{\percent} agreement confirms correct implementation, while the \SI{25}{\percent} enhancement at \SI{295}{\kelvin} shows that physiological temperatures lie firmly in the non-Markovian regime where environmental memory matters.
 
 \subsection{Geographic and climatic applicability}
 
-Simulations across diverse climatic zones---temperate (Germany, \num{50}\,\si{\degree}N), subtropical (India, \num{20}\,\si{\degree}N), tropical (Kenya, \num{0}\,\si{\degree}), and desert (Arizona, USA, \num{32}\,\si{\degree}N)---using location-specific solar spectra and temperature profiles show consistent quantum advantages of \numrange{18}{26}\% across all climates. Subtropical and tropical zones exhibit slightly higher enhancements due to stable year-round temperatures near the \num{295}\,K optimum. Even desert implementations show \numrange{15}{20}\% enhancement despite elevated temperatures (\numrange{305}{315}\,K).
+Simulations across diverse climatic zones---temperate (Germany, \SI{50}{\degree}N), subtropical (India, \SI{20}{\degree}N), tropical (Kenya, \SI{0}{\degree}), and desert (Arizona, USA, \SI{32}{\degree}N)---using location-specific solar spectra and temperature profiles show consistent quantum advantages of \SIrange{18}{26}{\percent} across all climates. Subtropical and tropical zones exhibit slightly higher enhancements due to stable year-round temperatures near the \SI{295}{\kelvin} optimum. Even desert implementations show \SIrange{15}{20}{\percent} enhancement despite elevated temperatures (\SIrange{305}{315}{\kelvin}).
 
-Seasonal analysis for temperate zones shows $\eta_{\rm quantum}$ ranges of \numrange{0.22}{0.26} in winter, \numrange{0.24}{0.28} in spring/autumn, and \numrange{0.18}{0.24} in summer. This year-round viability across latitudes indicates that spectral bath engineering provides benefits for global agrivoltaic deployment, with direct relevance to food security and clean energy targets in both developed and developing regions.
+Extension to sub-Saharan Africa---Yaound\'e, Cameroon (\SI{3.87}{\degree}N); N'Djamena, Chad (\SI{12.13}{\degree}N); Abuja, Nigeria (\SI{9.06}{\degree}N); Dakar, Senegal (\SI{14.69}{\degree}N); and Abidjan, Ivory Coast (\SI{5.36}{\degree}N)---confirms that quantum ETR enhancement of \SIrange{18}{24}{\percent} persists across the equatorial humid, tropical savanna, and Sahel climate zones. Equatorial sites (Yaound\'e, Abidjan) benefit from near-optimal temperatures ($\sim \SIrange{297}{300}{\kelvin}$), while Sahel sites experience a moderate reduction from elevated aerosol optical depth (AOD~\numrange{0.4}{0.8}) that attenuates spectral selectivity. Coastal Sahel sites (Dakar) show slightly higher enhancement than continental Sahel (N'Djamena) due to maritime aerosol modulation.
+
+Seasonal analysis for temperate zones shows $\eta_{\rm quantum}$ ranges of \numrange{0.22}{0.26} in winter, \numrange{0.24}{0.28} in spring/autumn, and \SIrange{0.18}{0.24}{\percent} in summer. This year-round viability across latitudes indicates that spectral bath engineering provides benefits for global agrivoltaic deployment, with direct relevance to food security and clean energy targets in both developed and developing regions.

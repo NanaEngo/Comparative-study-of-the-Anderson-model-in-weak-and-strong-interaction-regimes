@@ -55,3 +55,6 @@ QWEN.md
 
 # Sensitive development files
 Next/
+
+# FUSE filesystem artifacts
+.fuse*

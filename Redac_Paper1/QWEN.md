@@ -8,8 +8,8 @@ The project specifically focuses on the comparative study of the Anderson model 
 
 ## Manuscript Status
 
-**Current Version**: `Goumai_Paper1V260213.tex` (February 13, 2026)  
-**Target Journal**: Journal of Chemical Theory and Computation (JCTC)  
+**Current Version**: `Q_Agrivoltaics_EES_Main.tex` (February 18, 2026)  
+**Target Journal**: Energy & Environmental Science (EES)  
 **Submission Status**: In preparation  
 
 **Key Numerical Results Integrated**:
@@ -17,8 +17,12 @@ The project specifically focuses on the comparative study of the Anderson model 
 - Validation success: 12/12 tests passed (100%)
 - Biodegradability score: 0.133 (normalized)
 - Maximum Fukui f+: 0.311 at site 4
+- PM6 derivative (Molecule A): $B_{\rm index} = 72$, >15% PCE
+- Y6-BO derivative (Molecule B): $B_{\rm index} = 58$, >15% PCE
 
-**Figures Prepared**: 10 high-quality PDF figures exported to `Graphics/` directory, with 4 integrated into main manuscript.
+**Geographic Coverage**: Solar spectrum simulations for temperate (Germany), subtropical (India), tropical (Kenya), desert (Arizona), and sub-Saharan Africa (Yaoundé/Cameroon, N'Djamena/Chad, Abuja/Nigeria, Dakar/Senegal, Abidjan/Ivory Coast).
+
+**Figures Prepared**: 10+ high-quality PDF figures exported to `Graphics/` directory, including sub-Saharan ETR enhancement analysis.
 
 ## Theoretical foundation
 
@@ -89,8 +93,8 @@ The framework calculates comprehensive quantum metrics:
 - Purity: P = Tr[ρ²]
 - Linear entropy: S_L = (d/(d-1)) * (1 - Tr[ρ²])
 - Quantum Fisher Information (QFI): F_Q = 2 Σᵢⱼ |⟨ψᵢ|H|ψⱼ⟩|² (pᵢ-pⱼ)² / (pᵢ+pⱼ)
+- Pairwise concurrence: C(ρ) = max(0, λ₁ - λ₂ - λ₃ - λ₄) — quantifies inter-site entanglement
 - Bipartite and multipartite entanglement measures
-- Pairwise concurrence
 
 ### Spectral optimization framework
 
@@ -146,7 +150,8 @@ The framework provides explicit, experimentally testable design guidelines linki
 
 The research establishes a physics-informed design pipeline for next-generation OPV materials that target power conversion efficiencies exceeding 20% while simultaneously optimizing transmitted light quality for sustained crop productivity. Key applications include:
 
-- **Molecular Design**: Identification of molecular structures with features correlated with both high PCE and beneficial transmission characteristics, prioritizing enhanced π-conjugation, optimal molecular packing, and controlled energy level alignment
+- **Molecular Design**: Identification of molecular structures with features correlated with both high PCE and beneficial transmission characteristics, prioritising enhanced π-conjugation, optimal molecular packing, and controlled energy level alignment
+- **Candidate Molecules**: Two representative donor-acceptor systems have been evaluated — a PM6 derivative (Molecule A, $B_{\rm index} = 72$, four hydrolyzable ester linkages, BDE = 285 kJ/mol) and a Y6-BO derivative (Molecule B, $B_{\rm index} = 58$, two ester linkages, BDE = 310 kJ/mol). Both achieve >15% PCE in semi-transparent configurations
 - **Spectral Engineering**: Design of transmission profiles T(ω) that maximize symbiotic ETR by targeting specific vibronic resonances in photosynthetic systems
 - **Biodegradable Materials**: Development of eco-friendly OPV materials with >80% biodegradability within 180 days while maintaining structural integrity during operation
 - **Toxicity Reduction**: Design of non-toxic materials with LC50 > 400 mg/L, eliminating hazardous functional groups
@@ -227,6 +232,9 @@ The framework includes comprehensive robustness analysis across multiple paramet
 
 Several important caveats and challenges must be acknowledged:
 
+- The FMO complex constitutes only the initial energy funnel of the photosynthetic apparatus; quantum coherence effects observed at FMO level may be amplified, attenuated, or qualitatively altered when embedded in the full multi-component network (PSI, PSII, cytochrome b₆f, ATP synthase). Quantitative crop-level yield predictions require modelling the complete photosynthetic electron transport chain
+- Full chloroplast modelling (~100+ chromophores) demands hierarchical coarse-graining strategies to bridge molecular-scale coherence and organism-scale productivity
+- Integration with Calvin cycle kinetics and crop-specific photosystem compositions (C₃, C₄, CAM species) is necessary for biomass-level predictions
 - The practical relevance of coherence-assisted ETR enhancement depends on realistic transmission functions T(ω) that are compatible with manufacturable, stable OPV materials while maintaining acceptable PAR for crops
 - Environmental heterogeneity, static disorder in pigment energies, and high irradiance effects such as exciton-exciton annihilation can reduce or mask quantum effects
 - The computational complexity of simulating full mesoscale systems remains challenging despite the efficiency gains from PT-HOPS+LTC
@@ -277,9 +285,9 @@ Understanding and properly integrating solar spectrum data is critical for accur
 
 For accurate modeling, the framework must account for:
 
-- Geographic variations in solar irradiance and spectral composition
-- Seasonal and daily fluctuations in solar spectrum
-- Atmospheric effects including aerosols, water vapor, and pollutants
+- Geographic variations in solar irradiance and spectral composition, including sub-Saharan Africa (Yaoundé 3.87°N, N'Djamena 12.13°N, Abuja 9.06°N)
+- Seasonal and daily fluctuations in solar spectrum with latitude-dependent air mass modelling
+- Atmospheric effects including aerosols (AOD 0.3–0.8 for sub-Saharan sites), water vapor, and pollutants
 - Real-time spectral variations due to weather conditions
 - Integration of measured solar spectrum data from field installations
 - Spectral filtering effects of atmospheric constituents on photosynthetically active radiation

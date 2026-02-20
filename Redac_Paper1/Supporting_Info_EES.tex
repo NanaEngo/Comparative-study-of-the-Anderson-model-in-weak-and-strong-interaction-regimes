@@ -311,7 +311,7 @@ Density matrix normalization is maintained with a maximum deviation of \num{5e-1
 
 \subsubsection{Test 6: Positivity}
 
-The density matrix remains positive semidefinite within numerical precision. The minimum eigenvalue observed is $-2.1 \times 10^{-11}$, consistent with floating-point noise.
+The density matrix remains positive semidefinite within numerical precision. The minimum eigenvalue observed is $\num{-2.1e-11}$, consistent with floating-point noise.
 
 \subsubsection{Test 7: Energy conservation}
 
@@ -346,29 +346,21 @@ At high temperature ($T = \SI{500}{\kelvin}$), adHOPS converges to the Redfield 
 \caption{\textbf{Summary of validation results.} The 12-test suite covers convergence, physical consistency, and environmental robustness. All tests pass established acceptance thresholds.}
 \label{tab:validation}
 \begin{tabular}{llcc}
-\toprule
-\textbf{Category} & \textbf{Test} & \textbf{Criterion} & \textbf{Result} \\
-\midrule
-\multirow{4}{*}{Convergence}
-& HEOM benchmark & ${<}\,\SI{2}{\percent}$ deviation & \SI{1.8}{\percent} \checkmark \\
-& Matsubara cutoff & ${<}\,\SI{0.5}{\percent}$ change & \SI{0.3}{\percent} \checkmark \\
-& Time step & Invariance & ${<}\,\SI{0.1}{\percent}$ \checkmark \\
-& Hierarchy truncation & ${<}\,\SI{1}{\percent}$ variation & \SI{0.8}{\percent} \checkmark \\
-\midrule
-\multirow{4}{*}{Physical}
-& Trace preservation & ${<}\,10^{-12}$ & $5 \times 10^{-13}$ \checkmark \\
-& Positivity & $\lambda_i > -10^{-10}$ & $-2 \times 10^{-11}$ \checkmark \\
-& Energy conservation & ${<}\,\SI{0.1}{\percent}$ drift & \SI{0.08}{\percent} \checkmark \\
-& Detailed balance & Match Boltzmann & \SI{0.6}{\percent} dev.\ \checkmark \\
-\midrule
-\multirow{4}{*}{Robustness}
-& Temperature ($\pm \SI{10}{\kelvin}$) & Within \SI{15}{\percent} & \SIrange{12}{16}{\percent} \checkmark \\
-& Static disorder & Persists & \SI{20}{\percent} reduction \checkmark \\
-& Bath parameters & Qualitative & Features preserved \checkmark \\
-& Markovian limit & Redfield agreement & \SI{1.8}{\percent} dev.\ \checkmark \\
-\midrule
-\multicolumn{3}{l}{\textbf{Overall success rate}} & \textbf{12/12 (100\%)} \\
-\bottomrule
+	\toprule
+	\textbf{Category}            & \textbf{Test}                        &        \textbf{Criterion}         &            \textbf{Result}             \\ \midrule
+	\multirow{4}{*}{Convergence} & HEOM benchmark                       & ${<}\,\SI{2}{\percent}$ deviation &     \SI{1.8}{\percent} \checkmark      \\
+	                             & Matsubara cutoff                     & ${<}\,\SI{0.5}{\percent}$ change  &     \SI{0.3}{\percent} \checkmark      \\
+	                             & Time step                            &            Invariance             &  ${<}\,\SI{0.1}{\percent}$ \checkmark  \\
+	                             & Hierarchy truncation                 & ${<}\,\SI{1}{\percent}$ variation &     \SI{0.8}{\percent} \checkmark      \\ \midrule
+	\multirow{4}{*}{Physical}    & Trace preservation                   &          ${<}\,\num{e-12}$          &        $\num{5e-13}$ \checkmark        \\
+	                             & Positivity                           &      $\lambda_i > -\num{e-10}$      &       $\num{-2e-11}$ \checkmark        \\
+	                             & Energy conservation                  &  ${<}\,\SI{0.1}{\percent}$ drift  &     \SI{0.08}{\percent} \checkmark     \\
+	                             & Detailed balance                     &          Match Boltzmann          &  \SI{0.6}{\percent} dev.\ \checkmark   \\ \midrule
+	\multirow{4}{*}{Robustness}  & Temperature ($\pm \SI{10}{\kelvin}$) &     Within \SI{15}{\percent}      & \SIrange{12}{16}{\percent} \checkmark  \\
+	                             & Static disorder                      &             Persists              & \SI{20}{\percent} reduction \checkmark \\
+	                             & Bath parameters                      &            Qualitative            &     Features preserved \checkmark      \\
+	                             & Markovian limit                      &        Redfield agreement         &  \SI{1.8}{\percent} dev.\ \checkmark   \\ \midrule
+	\multicolumn{3}{l}{\textbf{Overall success rate}}                                                       &         \textbf{12/12 (100\%)}         \\ \bottomrule
 \end{tabular}
 \end{table}
 

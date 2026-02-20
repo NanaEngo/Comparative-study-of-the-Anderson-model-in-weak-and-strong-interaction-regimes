@@ -27,7 +27,7 @@ class AgrivoltaicCouplingModel:
     """
     
     def __init__(self, fmo_hamiltonian, temperature=295, solar_spectrum=None, 
-                 opv_bandgap=1.4, opv_absorption_coeff=1.0):
+                 opv_bandgap=1.4, opv_absorption_coeff=1.0, n_opv_sites=4):
         """
         Initialize the agrivoltaic coupling model.
         
@@ -58,9 +58,43 @@ class AgrivoltaicCouplingModel:
             OPV bandgap in eV, default is 1.4
         opv_absorption_coeff : float, optional
             OPV absorption coefficient, default is 1.0
+        n_opv_sites : int, optional
+            Number of OPV sites for Hamiltonian model (default: 4)
         """
         self.fmo_hamiltonian = fmo_hamiltonian
         self.temperature = temperature
+        
+        # Hamiltonian Model Parameters
+        self.n_opv_sites = n_opv_sites
+        self.n_psu_sites = len(fmo_hamiltonian)
+        self.n_total = self.n_opv_sites * self.n_psu_sites
+        
+        # Default parameters for OPV Hamiltonian (from refined model)
+        self.opv_params = {
+            'site_energies': np.array([1.8, 1.75, 1.85, 1.7]),  # eV
+            'coupling_matrix': np.array([
+                [0.0,  0.1,  0.05, 0.02],
+                [0.1,  0.0,  0.08, 0.03],
+                [0.05, 0.08, 0.0,  0.1],
+                [0.02, 0.03, 0.1,  0.0]
+            ]),
+            'temperature': temperature
+        }
+        
+        # Convert FMO Hamiltonian from cm^-1 to eV for Dynamics
+        fmo_ham_eV = fmo_hamiltonian / 8065.54
+        fmo_energies_eV = np.diag(fmo_ham_eV)
+        
+        self.psu_params = {
+            'site_energies': fmo_energies_eV,  # Use FMO energies in eV
+            'coupling_matrix': fmo_ham_eV - np.diag(fmo_energies_eV),  # Use FMO couplings (off-diagonal)
+            'temperature': temperature
+        }
+        
+        # Create Hamiltonians
+        self.H_opv = self._create_opv_hamiltonian()
+        self.H_psu = self._create_psu_hamiltonian()
+        self.H_total = self._construct_agrivoltaic_hamiltonian()
         
         # Solar spectrum (default: AM1.5G)
         if solar_spectrum is None:
@@ -429,9 +463,136 @@ class AgrivoltaicCouplingModel:
                 T = np.ones_like(wavelengths, dtype=float)
                 mask = (wavelengths >= center_wavelength - fwhm/2) & (wavelengths <= center_wavelength + fwhm/2)
                 T[mask] = 1 - amplitude
-                return np.clip(T, 0.0, 1.0)
-        
-        else:
-            raise ValueError(f"Unknown filter shape: {shape}")
-            
         return transmission_func
+
+    # -------------------------------------------------------------------------
+    # Hamiltonian Dynamics Methods (Ported from Refined Framework)
+    # -------------------------------------------------------------------------
+
+    def _create_opv_hamiltonian(self):
+        """Create OPV subsystem Hamiltonian."""
+        H = np.diag(self.opv_params['site_energies']) + self.opv_params['coupling_matrix']
+        return H
+    
+    def _create_psu_hamiltonian(self):
+        """Create PSU subsystem Hamiltonian based on FMO complex."""
+        H = np.diag(self.psu_params['site_energies']) + self.psu_params['coupling_matrix']
+        return H
+    
+    def _construct_agrivoltaic_hamiltonian(self, spectral_coupling_strength=0.05):
+        """
+        Construct the full agrivoltaic Hamiltonian using tensor products.
+        
+        Returns
+        -------
+        H_agri : 2D array
+            Full agrivoltaic Hamiltonian
+        """
+        n_opv = self.n_opv_sites
+        n_psu = self.n_psu_sites
+        
+        # Identity matrices
+        I_opv = np.eye(n_opv)
+        I_psu = np.eye(n_psu)
+        
+        # Tensor products for uncoupled terms
+        H_opv_full = np.kron(self.H_opv, I_psu)
+        H_psu_full = np.kron(I_opv, self.H_psu)
+        
+        # Spectral coupling term (simplified)
+        coupling_matrix = np.zeros((n_opv * n_psu, n_opv * n_psu))
+        # Connect ground states of each system
+        opv_gs = 0  # OPV ground state index
+        psu_gs = 0  # PSU ground state index
+        overall_gs_idx = opv_gs * n_psu + psu_gs
+        # Connect to first excited states
+        overall_exc_idx = 1 * n_psu + 1  # Example excited state
+        
+        if overall_exc_idx < n_opv * n_psu:
+            coupling_matrix[overall_gs_idx, overall_exc_idx] = spectral_coupling_strength
+            coupling_matrix[overall_exc_idx, overall_gs_idx] = spectral_coupling_strength
+        
+        # Combine all terms
+        H_agri = H_opv_full + H_psu_full + coupling_matrix
+        
+        return H_agri
+    
+    def calculate_opv_transmission(self, omega, peak_pos=1.8, peak_width=0.2, max_trans=0.7):
+        """
+        Calculate OPV transmission as function of frequency.
+        """
+        lorentzian = 1.0 / (1 + ((omega - peak_pos) / peak_width)**2)
+        transmission = max_trans * (1 - lorentzian)  # High transmission outside absorption band
+        return np.clip(transmission, 0, 1)
+    
+    def calculate_psu_absorption_from_hamiltonian(self, omega):
+        """
+        Calculate PSU absorption cross-section based on FMO complex Hamiltonian.
+        """
+        eigenvals = np.sort(np.real(np.linalg.eigvalsh(self.H_psu)))
+        
+        sigma = np.zeros_like(omega)
+        broadening = 0.05  # eV, homogeneous broadening
+        
+        for eig in eigenvals:
+            lorentzian = broadening / (np.pi * ((omega - eig)**2 + broadening**2))
+            sigma += 0.5 * lorentzian  # oscillator strength
+        
+        # Normalize
+        if np.max(sigma) > 0:
+            sigma = sigma / np.max(sigma)
+        
+        return sigma
+    
+    def calculate_quantum_transmission_operator(self, omega, T_opv_values, PSU_cross_section):
+        """
+        Calculate quantum transmission operator T_quant(ω).
+        """
+        T_quant = T_opv_values * PSU_cross_section  # Element-wise multiplication
+        return T_quant
+    
+    def simulate_energy_transfer(self, time_points, initial_state=None):
+        """
+        Simulate energy transfer dynamics in the coupled system.
+        """
+        hbar_eV_fs = 0.6582  # hbar in eV*fs
+        
+        # Initialize
+        if initial_state is None:
+            initial_state = np.zeros(self.n_total, dtype=complex)
+            initial_state[0] = 1.0  # Excitation on OPV site 0, PSU site 0 (tensor product)
+        
+        states = [initial_state.astype(complex)]
+        current_state = initial_state.astype(complex)
+        
+        # Time evolution
+        for i in range(1, len(time_points)):
+            dt = time_points[i] - time_points[i-1]
+            # Time evolution operator: U(t) = exp(-iHt/hbar)
+            U_t = expm(-1j * self.H_total * dt / hbar_eV_fs)
+            evolved_state = U_t @ current_state
+            states.append(evolved_state.copy())
+            current_state = evolved_state
+        
+        # Calculate population dynamics
+        opv_populations = np.zeros((len(states), self.n_opv_sites))
+        psu_populations = np.zeros((len(states), self.n_psu_sites))
+        
+        for i, state in enumerate(states):
+            state_matrix = state.reshape((self.n_opv_sites, self.n_psu_sites))
+            
+            # Trace over PSU to get OPV populations
+            for opv_idx in range(self.n_opv_sites):
+                opv_pop = 0.0
+                for psu_idx in range(self.n_psu_sites):
+                    opv_pop += np.abs(state_matrix[opv_idx, psu_idx])**2
+                opv_populations[i, opv_idx] = opv_pop
+            
+            # Trace over OPV to get PSU populations
+            for psu_idx in range(self.n_psu_sites):
+                psu_pop = 0.0
+                for opv_idx in range(self.n_opv_sites):
+                    psu_pop += np.abs(state_matrix[opv_idx, psu_idx])**2
+                psu_populations[i, psu_idx] = psu_pop
+        
+        return states, opv_populations, psu_populations

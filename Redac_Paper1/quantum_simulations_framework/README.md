@@ -1,6 +1,6 @@
 # Quantum Agrivoltaics Simulation Framework
 
-This framework implements a complete simulation system for quantum-enhanced agrivoltaic systems based on the Process Tensor-HOPS with Low-Temperature Correction (PT-HOPS+LTC) approach.
+This framework implements a complete simulation system for quantum-enhanced agrivoltaic systems based on the Process Tensor-HOPS (PT-HOPS) approach.
 
 ## Structure
 
@@ -8,7 +8,7 @@ The codebase has been refactored into separate, focused modules:
 
 ### Core Modules
 
-1. **quantum_dynamics_simulator.py** - Core quantum dynamics simulation using Process Tensor-HOPS+LTC approach with Stochastically Bundled Dissipators (SBD)
+1. **quantum_dynamics_simulator.py** - Core quantum dynamics simulation using Process Tensor-HOPS approach with Stochastically Bundled Dissipators (SBD)
 2. **agrivoltaic_coupling_model.py** - Agrivoltaic coupling model combining OPV and photosynthetic systems
 3. **spectral_optimizer.py** - Multi-objective optimization for spectral splitting with SPCE objective
 4. **eco_design_analyzer.py** - Eco-design analysis using quantum reactivity descriptors (Fukui functions)
@@ -16,7 +16,7 @@ The codebase has been refactored into separate, focused modules:
 6. **figure_generator.py** - Visualization tools for simulation results
 7. **unified_figures.py** - Comprehensive unified figure generation class
 8. **quantum_agrivoltaics_simulations.py** - Main module with complete analysis workflow
-9. **quantum_agrivoltaics_simulations_refined.py** - Enhanced implementation with PT-HOPS+LTC
+9. **quantum_agrivoltaics_simulations_refined.py** - Enhanced implementation with PT-HOPS
 
 ### Parameter Configuration
 
@@ -29,7 +29,7 @@ The codebase has been refactored into separate, focused modules:
 
 ## Key Features
 
-- **Process Tensor-HOPS with Low-Temperature Correction (PT-HOPS+LTC)**: 10× computational speedup through efficient Matsubara mode treatment for systems at T<150K
+- **Process Tensor-HOPS (PT-HOPS)**: 10× computational speedup through efficient Matsubara mode treatment
 - **Stochastically Bundled Dissipators (SBD)**: Enables >1000 chromophore mesoscale simulations while preserving non-Markovian effects
 - **Quantum Dynamics Simulation**: Complete Lindblad master equation solver with dephasing and thermal effects
 - **Comprehensive Quantum Metrics**: QFI, von Neumann entropy, purity, linear entropy, concurrence, entanglement measures
@@ -44,14 +44,14 @@ The codebase has been refactored into separate, focused modules:
 
 The framework implements:
 
-### Process Tensor-HOPS+LTC:
+### Process Tensor-HOPS:
 The bath correlation function C(t) is decomposed via Padé approximation:
 K_PT(t,s) = Σₖ gₖ(t) fₖ(s) e^(-λₖ|t-s|) + K_non-exp(t,s)
 
-For low-temperature performance (T < 150K), Low-Temperature Correction (LTC) is incorporated:
-- N_Mat = 10 (Matsubara cutoff for LTC)
-- eta_LTC = 10 (Time step enhancement factor)
-- epsilon_LTC = 1e-8 (Convergence tolerance)
+### Thermal Regime Validity:
+For T = 295K, high-temperature approximation holds (kB T >> hbar gamma).
+- N_Mat = 10 (Matsubara cutoff)
+
 
 ### Stochastically Bundled Dissipators (SBD):
 L_SBD[ρ] = Σ_α p_α(t) D_α[ρ]
@@ -82,7 +82,7 @@ from quantum_agrivoltaics_simulations import create_fmo_hamiltonian
 # Create FMO Hamiltonian
 fmo_hamiltonian, site_energies = create_fmo_hamiltonian()
 
-# Initialize quantum simulator with PT-HOPS+LTC approach
+# Initialize quantum simulator with PT-HOPS approach
 quantum_sim = QuantumDynamicsSimulator(fmo_hamiltonian, temperature=295, dephasing_rate=20)
 
 # Run quantum dynamics simulation

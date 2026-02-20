@@ -1,7 +1,7 @@
 ,0
-chemical_potential,0.0
-chemical_hardness,0.0
-chemical_softness,0.0
-electronegativity,0.0
-e_homo,12425.108871985638
-e_lumo,inf
+chemical_potential,-12235.843641039173
+chemical_hardness,55.85250682256083
+chemical_softness,0.008952149660685098
+electronegativity,12235.843641039173
+e_homo,12179.991134216612
+e_lumo,12291.696147861734

@@ -1,15 +1,15 @@
 """
-Quantum Agrivoltaics Simulations: Refined Framework with Process Tensor-HOPS+LTC
+Quantum Agrivoltaics Simulations: Refined Framework with Process Tensor-HOPS
 
 This module implements a complete simulation framework for quantum-enhanced agrivoltaic systems
-based on the paper "Process Tensor-HOPS with Low-Temperature Correction: A non-recursive 
+based on the paper "Process Tensor-HOPS: A non-recursive 
 framework for quantum-enhanced agrivoltaic design". The implementation incorporates the 
-Fenna-Matthews-Olsen (FMO) complex model, Process Tensor-HOPS with Low-Temperature Correction,
+Fenna-Matthews-Olsen (FMO) complex model, Process Tensor-HOPS,
 and advanced spectral optimization for enhanced photosynthetic efficiency.
 
 Key Features:
 - FMO complex Hamiltonian with 7-site model
-- Process Tensor-HOPS+LTC quantum dynamics simulation
+- Process Tensor-HOPS quantum dynamics simulation
 - Stochastically Bundled Dissipators (SBD) for mesoscale systems
 - E(n)-Equivariant Graph Neural Networks for physical symmetry preservation
 - Quantum Reactivity Descriptors (Fukui functions) for eco-design
@@ -90,15 +90,16 @@ def create_fmo_hamiltonian(include_reaction_center=False):
     H (2D array): Hamiltonian matrix in units of cm^-1
     site_energies (1D array): Site energies in cm^-1
     """
-    # Standard FMO site energies (cm^-1) - from Adolphs & Renger 2006
+    # FMO site energies (cm^-1) - Adolphs & Renger 2006, Biophys. J. 91:2778-2797
+    # DOI: 10.1529/biophysj.105.079483
     if include_reaction_center:
         # Include 8 sites with reaction center
-        site_energies = np.array([12200, 12070, 11980, 12050, 12140, 12130, 12260, 11700])  # Last is RC
+        site_energies = np.array([12410, 12530, 12210, 12320, 12480, 12630, 12440, 11700])  # Last is RC
     else:
         # Standard 7-site FMO complex
-        site_energies = np.array([12200, 12070, 11980, 12050, 12140, 12130, 12260])
+        site_energies = np.array([12410, 12530, 12210, 12320, 12480, 12630, 12440])
     
-    # Standard FMO coupling parameters (cm^-1) - from Adolphs & Renger 2006
+    # FMO coupling parameters (cm^-1) - Adolphs & Renger 2006
     n_sites = len(site_energies)
     H = np.zeros((n_sites, n_sites))
     
@@ -106,14 +107,14 @@ def create_fmo_hamiltonian(include_reaction_center=False):
     np.fill_diagonal(H, site_energies)
     
     # Off-diagonal elements (couplings) - symmetric matrix
-    # Standard FMO couplings (cm^-1)
+    # Excitonic couplings from Adolphs & Renger 2006 (cm^-1)
     couplings = {
-        (0, 1): 63, (0, 2): 12, (0, 3): 10, (0, 4): -18, (0, 5): -40, (0, 6): -30,
-        (1, 2): 104, (1, 3): 20, (1, 4): -10, (1, 5): -40, (1, 6): -30,
-        (2, 3): 180, (2, 4): 120, (2, 5): -10, (2, 6): -30,
-        (3, 4): 60, (3, 5): 120, (3, 6): -10,
-        (4, 5): 120, (4, 6): 100,
-        (5, 6): 80
+        (0, 1): -87.7, (0, 2): 5.5, (0, 3): -5.9, (0, 4): 6.7, (0, 5): -13.7, (0, 6): -9.9,
+        (1, 2): 30.8, (1, 3): 8.2, (1, 4): 0.7, (1, 5): 11.8, (1, 6): 4.3,
+        (2, 3): -53.5, (2, 4): -2.2, (2, 5): -9.6, (2, 6): 6.0,
+        (3, 4): -70.7, (3, 5): -17.0, (3, 6): -63.3,
+        (4, 5): 81.1, (4, 6): -1.3,
+        (5, 6): 39.7
     }
     
     # Fill in the coupling values
@@ -250,9 +251,7 @@ def load_simulation_params(param_file_path='./data_input/quantum_agrivoltaics_pa
                 "Gamma_vib": [10, 10, 20, 20]
             },
             "process_tensor_params": {
-                "N_Mat": 10,
-                "eta_LTC": 10,
-                "epsilon_LTC": 1e-8
+                "N_Mat": 0
             },
             "sbd_params": {
                 "bundle_count": 50,

@@ -419,6 +419,90 @@ class FigureGenerator:
         
         return fig
     
+    def plot_environmental_effects(self, time_days, temperatures, humidity_values, wind_speeds,
+                                 pce_env, etr_env, dust_profile, base_pce, base_etr,
+                                 title="Environmental Effects on Agrivoltaic Performance"):
+        """
+        Plot environmental effects on system performance.
+        
+        Parameters:
+        time_days (array): Time points in days
+        temperatures (array): Temperature values in K
+        humidity_values (array): Humidity values (0-1)
+        wind_speeds (array): Wind speeds in m/s
+        pce_env (array): PCE with environmental effects
+        etr_env (array): ETR with environmental effects
+        dust_profile (array): Dust thickness over time
+        base_pce (float): Base PCE value
+        base_etr (float): Base ETR value
+        title (str): Title for the figure
+        """
+        fig = plt.figure(figsize=(16, 12))
+        
+        # Plot 1: Temperature
+        ax1 = plt.subplot(2, 3, 1)
+        ax1.plot(time_days, temperatures, label='Temperature (K)', color='red')
+        ax1.set_title('Temperature Variation Over Time')
+        ax1.set_xlabel('Time (days)')
+        ax1.set_ylabel('Temperature (K)')
+        ax1.grid(True, alpha=0.3)
+        ax1.legend()
+        
+        # Plot 2: Humidity
+        ax2 = plt.subplot(2, 3, 2)
+        ax2.plot(time_days, humidity_values, label='Humidity', color='blue')
+        ax2.set_title('Humidity Variation Over Time')
+        ax2.set_xlabel('Time (days)')
+        ax2.set_ylabel('Relative Humidity')
+        ax2.grid(True, alpha=0.3)
+        ax2.legend()
+        
+        # Plot 3: Wind Speed
+        ax3 = plt.subplot(2, 3, 3)
+        ax3.plot(time_days, wind_speeds, label='Wind Speed', color='green')
+        ax3.set_title('Wind Speed Variation Over Time')
+        ax3.set_xlabel('Time (days)')
+        ax3.set_ylabel('Wind Speed (m/s)')
+        ax3.grid(True, alpha=0.3)
+        ax3.legend()
+        
+        # Plot 4: Dust Accumulation
+        ax4 = plt.subplot(2, 3, 4)
+        ax4.plot(time_days, dust_profile, label='Dust Thickness', color='orange')
+        ax4.set_title('Dust Accumulation Over Time')
+        ax4.set_xlabel('Time (days)')
+        ax4.set_ylabel('Dust Thickness')
+        ax4.grid(True, alpha=0.3)
+        ax4.legend()
+        
+        # Plot 5: PCE
+        ax5 = plt.subplot(2, 3, 5)
+        ax5.plot(time_days, pce_env, label='PCE with Env. Effects', color='purple')
+        ax5.axhline(y=base_pce, color='gray', linestyle='--', label='Base PCE', alpha=0.7)
+        ax5.set_title('PCE Under Environmental Effects')
+        ax5.set_xlabel('Time (days)')
+        ax5.set_ylabel('PCE')
+        ax5.grid(True, alpha=0.3)
+        ax5.legend()
+        
+        # Plot 6: ETR
+        ax6 = plt.subplot(2, 3, 6)
+        ax6.plot(time_days, etr_env, label='ETR with Env. Effects', color='brown')
+        ax6.axhline(y=base_etr, color='gray', linestyle='--', label='Base ETR', alpha=0.7)
+        ax6.set_title('ETR Under Environmental Effects')
+        ax6.set_xlabel('Time (days)')
+        ax6.set_ylabel('ETR')
+        ax6.grid(True, alpha=0.3)
+        ax6.legend()
+        
+        plt.suptitle(title, fontsize=16)
+        plt.tight_layout()
+        plt.subplots_adjust(top=0.92)
+        
+        self.save_figure(fig, "environmental_effects.pdf")
+        
+        return fig
+    
     def save_figure(self, fig, filename, dpi=300, bbox_inches='tight'):
         """
         Save a figure to file.

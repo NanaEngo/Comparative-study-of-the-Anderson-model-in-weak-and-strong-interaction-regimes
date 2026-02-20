@@ -42,9 +42,7 @@
     "Gamma_vib": [10, 10, 20, 20]
   },
   "process_tensor_params": {
-    "N_Mat": 10,
-    "eta_LTC": 10,
-    "epsilon_LTC": 1e-8
+    "N_Mat": 10
   },
   "sbd_params": {
     "bundle_count": 50,

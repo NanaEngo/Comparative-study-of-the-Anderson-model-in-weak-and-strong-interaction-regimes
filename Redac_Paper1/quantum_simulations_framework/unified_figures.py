@@ -24,7 +24,7 @@ class UnifiedFigures:
     quantum dynamics, spectral analysis, optimization results, and eco-design.
     """
     
-    def __init__(self, style='science', figsize_base=(12, 8), data_dir='data_output', figures_dir='figures'):
+    def __init__(self, style='science', figsize_base=(7, 5), data_dir='data_output', figures_dir='figures'):
         """
         Initialize the unified figures class.
         

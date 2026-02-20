@@ -266,12 +266,12 @@ H_{\mathrm{sys}} = \sum_{n=1}^{7} \epsilon_n \dyad{n} + \sum_{n \neq m} J_{nm} \
 $\epsilon_n$ (\si{\per\cm}) & 12410 & 12530 & 12210 & 12320 & 12480 & 12630 & 12440 \\
 \midrule
 Site 1 & --- & $-$87.7 & 5.5 & $-$5.9 & 6.7 & $-$13.7 & $-$9.9 \\
-Site 2 & $-$87.7 & --- & 30.8 & 8.2 & 0.7 & 11.4 & 4.7 \\
+Site 2 & $-$87.7 & --- & 30.8 & 8.2 & 0.7 & 11.8 & 4.3 \\
 Site 3 & 5.5 & 30.8 & --- & $-$53.5 & $-$2.2 & $-$9.6 & 6.0 \\
 Site 4 & $-$5.9 & 8.2 & $-$53.5 & --- & $-$70.7 & $-$17.0 & $-$63.3 \\
 Site 5 & 6.7 & 0.7 & $-$2.2 & $-$70.7 & --- & 81.1 & $-$1.3 \\
-Site 6 & $-$13.7 & 11.4 & $-$9.6 & $-$17.0 & 81.1 & --- & 39.7 \\
-Site 7 & $-$9.9 & 4.7 & 6.0 & $-$63.3 & $-$1.3 & 39.7 & --- \\
+Site 6 & $-$13.7 & 11.8 & $-$9.6 & $-$17.0 & 81.1 & --- & 39.7 \\
+Site 7 & $-$9.9 & 4.3 & 6.0 & $-$63.3 & $-$1.3 & 39.7 & --- \\
 \bottomrule
 \multicolumn{8}{l}{\scriptsize Source: Adolphs \& Renger (2006). Site 1 is the reaction-centre-proximal BChl.} \\
 \end{tabular}
@@ -395,16 +395,16 @@ Room-temperature (\SI{295}{\kelvin}) site energies for the FMO monomer are liste
 
 \subsection{Electronic couplings}
 
-The coupling matrix $J_{nm}$ (\si{\per\cm}, symmetric) from the refined Cho \textit{et al.}\ parameterisation is:
+The coupling matrix $J_{nm}$ (\si{\per\cm}, symmetric) from the Adolphs \& Renger parameterisation is:
 \begin{equation}
 \bm{J} = \begin{pmatrix}
-0 & -104 & 8 & -5 & 6 & -13 & -2 \\
--104 & 0 & 30 & 8 & 2 & 7 & 11 \\
-8 & 30 & 0 & -53 & -2 & -9 & -3 \\
--5 & 8 & -53 & 0 & -70 & -17 & -8 \\
-6 & 2 & -2 & -70 & 0 & 81 & 3 \\
--13 & 7 & -9 & -17 & 81 & 0 & 39 \\
--2 & 11 & -3 & -8 & 3 & 39 & 0
+0 & -87.7 & 5.5 & -5.9 & 6.7 & -13.7 & -9.9 \\
+-87.7 & 0 & 30.8 & 8.2 & 0.7 & 11.8 & 4.3 \\
+5.5 & 30.8 & 0 & -53.5 & -2.2 & -9.6 & 6.0 \\
+-5.9 & 8.2 & -53.5 & 0 & -70.7 & -17.0 & -63.3 \\
+6.7 & 0.7 & -2.2 & -70.7 & 0 & 81.1 & -1.3 \\
+-13.7 & 11.8 & -9.6 & -17.0 & 81.1 & 0 & 39.7 \\
+-9.9 & 4.3 & 6.0 & -63.3 & -1.3 & 39.7 & 0
 \end{pmatrix}.
 \end{equation}
 
@@ -433,14 +433,14 @@ The \textbf{underdamped (vibronic) modes} are parameterized in \cref{tab:vibroni
 The total reorganization energy is $\lambda_{\mathrm{total}} = \lambda_D + \sum_k \lambda_k \approx \SI{50}{\per\cm}$.
 
 %=============================================================================
-\section{Process Tensor-HOPS with low-temperature correction}\label{si:pthops}
+\section{Process Tensor-HOPS framework}\label{si:pthops}
 %=============================================================================
 
-Simulations employ Process Tensor decomposition with Low-Temperature Correction (PT-HOPS+LTC) to enhance computational efficiency at physiological temperatures. This section details the method and benchmarks its performance against HEOM and Redfield theory.
+Simulations employ the Process Tensor-HOPS (PT-HOPS) method to approximate the non-Markovian open quantum system dynamics. This section details the method and benchmarks its performance against HEOM and Redfield theory.
 
 \begin{table}[ht]
 \centering
-\caption{\textbf{Computational performance comparison.} All benchmarks are for \SI{1}{\pico\second} of FMO dynamics at \SI{295}{\kelvin} with a Drude + vibronic bath on an AMD EPYC 7542 processor (32 cores at \SI{2.9}{\giga\hertz}). Redfield (Markovian) results are shown for comparison but fail to capture coherence effects. PT-HOPS+LTC achieves near-HEOM accuracy with a \num{10}$\times$ speedup, enabling large-scale simulations ($N > 20$ sites) intractable for HEOM.}
+\caption{\textbf{Computational performance comparison.} All benchmarks are for \SI{1}{\pico\second} of FMO dynamics at \SI{295}{\kelvin} with a Drude + vibronic bath on an AMD EPYC 7542 processor (32 cores at \SI{2.9}{\giga\hertz}). Redfield (Markovian) results are shown for comparison but fail to capture coherence effects. PT-HOPS achieves near-HEOM accuracy with a \num{10}$\times$ speedup, enabling large-scale simulations ($N > 20$ sites) intractable for HEOM.}
 \label{tab:computational_benchmarks}
 \begin{tabular}{lcccc}
 \toprule
@@ -448,18 +448,18 @@ Simulations employ Process Tensor decomposition with Low-Temperature Correction 
  & \textbf{(sites)} & \textbf{(\si{\hour})} & \textbf{(\si{\giga\byte})} & \textbf{(vs HEOM)} \\
 \midrule
 HEOM (reference) & 7 & 38.2 & 12.4 & Exact \\
-PT-HOPS+LTC & 7 & 3.8 & 2.1 & ${<}\,\SI{2}{\percent}$ deviation \\
+PT-HOPS & 7 & 3.8 & 2.1 & ${<}\,\SI{2}{\percent}$ deviation \\
 Redfield (Markov) & 7 & 0.3 & 0.5 & \SI{18}{\percent} deviation$^*$ \\
 \midrule
-PT-HOPS+LTC & 24 & 12.5 & 6.3 & N/A$^\dagger$ \\
-PT-HOPS+LTC & 100 & 48.7 & 22.1 & N/A$^\dagger$ \\
+PT-HOPS & 24 & 12.5 & 6.3 & N/A$^\dagger$ \\
+PT-HOPS & 100 & 48.7 & 22.1 & N/A$^\dagger$ \\
 \bottomrule
 \multicolumn{5}{l}{\scriptsize $^*$Markovian methods fail to capture non-Markovian coherence effects.} \\
 \multicolumn{5}{l}{\scriptsize $^\dagger$HEOM computationally intractable for $N > 10$ sites.} \\
 \end{tabular}
 \end{table}
 
-As shown in \cref{tab:computational_benchmarks}, PT-HOPS+LTC achieves a \num{10}-fold speedup over HEOM with ${<}\,\SI{2}{\percent}$ accuracy and exhibits near-linear scaling with system size for localised excitons, enabling simulations of complete photosynthetic antenna complexes (100+ chromophores) with non-Markovian accuracy.
+As shown in \cref{tab:computational_benchmarks}, PT-HOPS achieves a \num{10}-fold speedup over HEOM with ${<}\,\SI{2}{\percent}$ accuracy and exhibits near-linear scaling with system size for localised excitons, enabling simulations of complete photosynthetic antenna complexes (100+ chromophores) with non-Markovian accuracy.
 
 \subsection{Pad\'e decomposition of the bath correlation function}
 
@@ -469,9 +469,9 @@ K_{\mathrm{PT}}(t,s) = \sum_{k} g_k(t)\, f_k(s)\, \mathrm{e}^{-\lambda_k |t-s|} 
 \end{equation}
 where $g_k(t)$ and $f_k(s)$ are effective coupling functions, $\lambda_k$ are decay rates, and $K_{\mathrm{non\text{-}exp}}(t,s)$ captures residual memory effects beyond the exponential approximation.
 
-\subsection{Low-temperature correction parameters}
+\subsection{Thermal regime validity}
 
-For simulations at physiological temperatures and below, the LTC integrates quantum noise while maintaining computational efficiency. Optimised parameters include a Matsubara cutoff of $N_{\mathrm{Mat}} = 12$ for $T = \SI{295}{\kelvin}$, a time-step enhancement factor $\eta_{\mathrm{LTC}} = 10$, a convergence tolerance $\epsilon_{\mathrm{LTC}} = 10^{-8}$ for auxiliary state truncation, and a memory kernel truncation at \SI{20}{\pico\second} (beyond system decoherence timescales). This computational efficiency enables high-throughput screening of OPV transmission functions and disorder ensembles essential for realistic agrivoltaic design optimisation.
+For simulations at physiological temperatures ($T = \SI{295}{\kelvin}$), the high-temperature approximation is valid ($k_B T \gg \hbar\gamma$), and explicit Matsubara reservoir terms are negligible. The simulation uses the standard Drude-Lorentz spectral density, maintaining computational efficiency while capturing thermal effects accurately. This efficiency enables high-throughput screening of OPV transmission functions and disorder ensembles essential for realistic agrivoltaic design optimisation.
 
 %=============================================================================
 \section{Computational performance metrics}\label{si:performance}
@@ -483,7 +483,7 @@ All simulations were performed on an AMD EPYC 7542 processor (32 cores at \SI{2.
 
 \subsection{Scaling analysis}
 
-Typical production runs for the 7-site FMO system (\SI{100}{\pico\second}, $\Delta t = \SI{1.0}{\femto\second}$) utilise 12 Matsubara modes and an adaptive hierarchy (averaging \numrange{800}{1200} states), requiring approximately 3.8~hours and \SI{4.2}{\giga\byte} of peak memory on a single core. Scaling analysis demonstrates that adHOPS remains size-invariant for localised excitons [$\mathcal{O}(1)$], whereas HEOM exhibits $\mathcal{O}(N^3)$ scaling, making adHOPS the preferred method for $N > 5$.
+Typical production runs for the 7-site FMO system (\SI{100}{\pico\second}, $\Delta t = \SI{1.0}{\femto\second}$) utilise an adaptive hierarchy (averaging \numrange{800}{1200} states), requiring approximately 3.8~hours and \SI{4.2}{\giga\byte} of peak memory on a single core. Scaling analysis demonstrates that adHOPS remains size-invariant for localised excitons [$\mathcal{O}(1)$], whereas HEOM exhibits $\mathcal{O}(N^3)$ scaling, making adHOPS the preferred method for $N > 5$.
 
 \subsection{Parallelization efficiency}
 

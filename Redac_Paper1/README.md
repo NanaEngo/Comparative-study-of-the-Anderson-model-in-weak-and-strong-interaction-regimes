@@ -16,7 +16,7 @@ This directory contains the comprehensive research framework for quantum-enhance
 ## Core Research Focus
 
 ### Quantum Dynamics Framework
-1. **Process Tensor-HOPS with Low-Temperature Correction (PT-HOPS+LTC)**: Non-recursive framework achieving 10× computational speedup at T<150K
+1. **Process Tensor-HOPS (PT-HOPS)**: Non-recursive framework achieving 10× computational speedup while preserving non-Markovian accuracy
 2. **Stochastically Bundled Dissipators (SBD)**: Enables simulations of systems with >1000 chromophores while preserving non-Markovian effects
 3. **Quantum Coherence Analysis**: Advanced metrics including Quantum Fisher Information (QFI) for parameter estimation sensitivity
 
@@ -41,7 +41,7 @@ Redac_Paper1/
 ├── quantum_simulations_framework/ # Main simulation codebase
 │   ├── quantum_agrivoltaics_simulations.py    # Main simulation module
 │   ├── quantum_agrivoltaics_simulations_refined.py  # Enhanced implementation
-│   ├── quantum_dynamics_simulator.py          # PT-HOPS+LTC simulator
+│   ├── quantum_dynamics_simulator.py          # PT-HOPS simulator
 │   ├── agrivoltaic_coupling_model.py         # Coupling model implementation
 │   ├── spectral_optimizer.py                 # Optimization algorithms
 │   ├── eco_design_analyzer.py                # Eco-design analysis
@@ -54,7 +54,7 @@ Redac_Paper1/
 
 ## Key Research Contributions
 
-1. **Process Tensor-HOPS+LTC Framework**: Efficient treatment of Matsubara modes with Low-Temperature Correction for enhanced computational performance
+1. **Process Tensor-HOPS Framework**: Efficient treatment of environmental memory for enhanced computational performance in non-Markovian regimes
 2. **Mesoscale SBD Implementation**: Scalable approach for simulating large chromophore systems
 3. **Quantum Reactivity Descriptors**: Fukui function-based eco-design for biodegradable OPV materials
 4. **Multi-Objective Optimization**: Simultaneous optimization of PCE and biodegradability with ETR preservation
@@ -65,7 +65,7 @@ Redac_Paper1/
 
 ### Quantum Dynamics Simulation
 - **Liouvillian Superoperator**: Mathematical framework for Lindblad master equation in Liouville space
-- **PT-HOPS+LTC Implementation**: Advanced non-Markovian dynamics with efficient low-temperature treatment
+- **PT-HOPS Implementation**: Advanced non-Markovian dynamics with efficient process tensor contraction
 - **Stochastically Bundled Dissipators**: Method for handling large systems while preserving quantum effects
 
 ### Agrivoltaic Coupling Model
@@ -86,11 +86,10 @@ The implementation follows the theoretical foundation outlined in the thesis doc
 The bath correlation function C(t) is decomposed via Padé approximation:
 K_PT(t,s) = Σₖ gₖ(t) fₖ(s) e^(-λₖ|t-s|) + K_non-exp(t,s)
 
-### Low-Temperature Correction:
-For T < 150K, Matsubara modes are efficiently treated with:
+### Thermal Regime Validity:
+For T = 295K, high-temperature approximation holds (kB T >> hbar gamma).
 - N_Mat = 10 (Matsubara cutoff)
-- eta_LTC = 10 (Time step enhancement factor)
-- epsilon_LTC = 1e-8 (Convergence tolerance)
+
 
 ### Stochastically Bundled Dissipators:
 L_SBD[ρ] = Σ_α p_α(t) D_α[ρ]

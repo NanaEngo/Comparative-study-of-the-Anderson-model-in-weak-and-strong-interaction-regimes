@@ -240,17 +240,26 @@ class EcoDesignAnalyzer:
         Returns:
         efficiency (float): Resource efficiency (0-1)
         """
-        if material_mass <= 0:
-            return 0.0
-            
-        # Calculate raw efficiency
-        raw_efficiency = (power_output * lifetime) / material_mass
-        
-        # Normalize to 0-1 scale (with empirical scaling)
-        # Assuming a maximum practical efficiency of 10 W*yr/g
         efficiency = min(1.0, raw_efficiency / 10.0)
         
         return efficiency
+
+    def calculate_green_chemistry_metrics(self, mass_waste, mass_product, m_reactants, m_product_theory):
+        """
+        Calculate Green Chemistry metrics: E-factor and Atom Economy.
+        E-factor = mass_waste / mass_product
+        Atom Economy = (m_product_theory / m_reactants) * 100
+        """
+        e_factor = mass_waste / mass_product if mass_product > 0 else 0
+        atom_economy = (m_product_theory / m_reactants) * 100 if m_reactants > 0 else 0
+        return e_factor, atom_economy
+
+    def calculate_lca_impact(self, energy_usage, carbon_intensity, material_toxicity_score):
+        """
+        Simplified Life Cycle Assessment (LCA) impact score.
+        Score = energy * carbon + toxicity_weight * toxicity
+        """
+        return (energy_usage * carbon_intensity) + (2.0 * material_toxicity_score)
     
     def evaluate_material_sustainability(self, material_name, molecular_hamiltonian, n_electrons,
                                        material_mass, power_output, lifetime):
@@ -442,3 +451,22 @@ class EcoDesignAnalyzer:
             report += f"  Average Resource Efficiency: {avg_efficiency:.3f}\n"
         
         return report
+
+    # ── Machine Learning Hooks (EGNN & Surrogates) ──────────────────
+    
+    def predict_properties_egnn(self, molecular_graph):
+        """
+        Placeholder for E(n)-Equivariant Graph Neural Network (EGNN) prediction.
+        Predicts reorganization energy and coupling from molecular symmetry.
+        """
+        # In a full implementation, this would load a pre-trained Torch/Jax model
+        print("EGNN property prediction hook called.")
+        return {'lambda_reorg': 35.0, 'couplings': []}
+
+    def simulate_dynamics_surrogate(self, parameters):
+        """
+        Placeholder for Machine Learning Surrogate model of HOPS dynamics.
+        Enables rapid screening without expensive trajectories.
+        """
+        print("Surrogate dynamics simulation hook called.")
+        return {'populations': [], 'metrics': {}}

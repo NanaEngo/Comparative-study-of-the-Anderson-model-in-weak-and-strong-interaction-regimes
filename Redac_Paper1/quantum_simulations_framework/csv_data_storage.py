@@ -69,7 +69,7 @@ class CSVDataStorage:
         pop_df.insert(0, 'Time_fs', time_points)
         
         pop_filename = os.path.join(self.output_dir, f'{filename_prefix}_populations_{timestamp}.csv')
-        pop_df.to_csv(pop_filename, index=False)
+        pop_df.to_csv(pop_filename, index=False, float_format='%.8e')
         
         # Save coherences (real and imaginary parts)
         n_sites = coherences.shape[1]
@@ -85,7 +85,7 @@ class CSVDataStorage:
                     real_df[f'Coherence_Re_{i}_{j}'] = real_coherences[:, i, j]
         
         real_filename = os.path.join(self.output_dir, f'{filename_prefix}_coherences_real_{timestamp}.csv')
-        real_df.to_csv(real_filename, index=False)
+        real_df.to_csv(real_filename, index=False, float_format='%.8e')
         
         # Create a DataFrame for imaginary parts of coherences
         imag_coherences = np.imag(coherences)
@@ -98,7 +98,7 @@ class CSVDataStorage:
                     imag_df[f'Coherence_Im_{i}_{j}'] = imag_coherences[:, i, j]
         
         imag_filename = os.path.join(self.output_dir, f'{filename_prefix}_coherences_imag_{timestamp}.csv')
-        imag_df.to_csv(imag_filename, index=False)
+        imag_df.to_csv(imag_filename, index=False, float_format='%.8e')
         
         # Save QFI and ETR data
         metrics_df = pd.DataFrame({
@@ -108,7 +108,7 @@ class CSVDataStorage:
         })
         
         metrics_filename = os.path.join(self.output_dir, f'{filename_prefix}_quantum_metrics_{timestamp}.csv')
-        metrics_df.to_csv(metrics_filename, index=False)
+        metrics_df.to_csv(metrics_filename, index=False, float_format='%.8e')
         
         print(f"  Saved simulation data to:")
         print(f"    - Populations: {pop_filename}")
@@ -162,7 +162,7 @@ class CSVDataStorage:
         df = pd.DataFrame(data)
         
         filename_full = os.path.join(self.output_dir, f'{filename}_{timestamp}.csv')
-        df.to_csv(filename_full, index=False)
+        df.to_csv(filename_full, index=False, float_format='%.8e')
         
         print(f"  Saved optimization results to: {filename_full}")
     
@@ -200,7 +200,7 @@ class CSVDataStorage:
             df[f'Response_{i}'] = response
         
         filename_full = os.path.join(self.output_dir, f'{filename}_{timestamp}.csv')
-        df.to_csv(filename_full, index=False)
+        df.to_csv(filename_full, index=False, float_format='%.8e')
         
         print(f"  Saved spectral data to: {filename_full}")
     
@@ -239,7 +239,7 @@ class CSVDataStorage:
         df['timestamp'] = timestamp
         
         filename_full = os.path.join(self.output_dir, f'{filename}_{timestamp}.csv')
-        df.to_csv(filename_full, index=False)
+        df.to_csv(filename_full, index=False, float_format='%.8e')
         
         print(f"  Saved eco-analysis results to: {filename_full}")
     
@@ -268,7 +268,7 @@ class CSVDataStorage:
                 'Sensitivity': robustness_data['temperature_sensitivity']
             })
             temp_filename = os.path.join(self.output_dir, f'{filename}_temperature_{timestamp}.csv')
-            temp_df.to_csv(temp_filename, index=False)
+            temp_df.to_csv(temp_filename, index=False, float_format='%.8e')
             print(f"  Saved temperature robustness data to: {temp_filename}")
         
         if 'disorder_sensitivity' in robustness_data and 'disorder_strengths' in robustness_data:
@@ -277,7 +277,7 @@ class CSVDataStorage:
                 'Sensitivity': robustness_data['disorder_sensitivity']
             })
             disorder_filename = os.path.join(self.output_dir, f'{filename}_disorder_{timestamp}.csv')
-            disorder_df.to_csv(disorder_filename, index=False)
+            disorder_df.to_csv(disorder_filename, index=False, float_format='%.8e')
             print(f"  Saved disorder robustness data to: {disorder_filename}")
     
     def save_quantum_metrics_to_csv(self, time_points, entropy_values, purity_values,
@@ -320,7 +320,7 @@ class CSVDataStorage:
         })
         
         filename_full = os.path.join(self.output_dir, f'{filename}_{timestamp}.csv')
-        df.to_csv(filename_full, index=False)
+        df.to_csv(filename_full, index=False, float_format='%.8e')
         
         print(f"  Saved extended quantum metrics to: {filename_full}")
     
@@ -363,3 +363,34 @@ class CSVDataStorage:
                 f.write(f"  {key}: {value}\n")
         
         print(f"  Created metadata file: {metadata_filepath}")
+    def save_environmental_data_to_csv(self, time_days, temperatures, humidity_values, 
+                                     wind_speeds, pce_env, etr_env, dust_profile, 
+                                     filename_prefix='environmental_effects'):
+        """
+        Save environmental effects data to CSV.
+        
+        Parameters:
+        time_days (array): Time points in days
+        temperatures (array): Temperature values in K
+        humidity_values (array): Humidity values (0-1)
+        wind_speeds (array): Wind speeds in m/s
+        pce_env (array): PCE with environmental effects
+        etr_env (array): ETR with environmental effects
+        dust_profile (array): Dust thickness over time
+        filename_prefix (str): Prefix for output filename
+        """
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        
+        env_df = pd.DataFrame({
+            'Time_days': time_days,
+            'Temperature_K': temperatures,
+            'Humidity': humidity_values,
+            'Wind_Speed_ms': wind_speeds,
+            'Dust_Thickness': dust_profile,
+            'PCE_Combined': pce_env,
+            'ETR_Combined': etr_env
+        })
+        
+        filename = os.path.join(self.output_dir, f'{filename_prefix}_{timestamp}.csv')
+        env_df.to_csv(filename, index=False, float_format='%.6f')
+        print(f"  Saved environmental data to: {filename}")

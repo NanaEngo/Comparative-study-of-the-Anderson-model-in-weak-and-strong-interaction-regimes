@@ -4,7 +4,7 @@
 
 The quantum agrivoltaics research framework addresses the critical global challenge of sustainable land use and food-energy nexus by combining quantum physics with agronomy. Traditional agrivoltaic designs rely on classical models that optimize for Photosynthetically Active Radiation (PAR) flux, treating light as a purely radiative input and crops as simple photon counters. This approach fundamentally neglects the quantum physical nature of photosynthetic energy transfer that operates with near-unity efficiency in natural systems.
 
-The project specifically focuses on the comparative study of the Anderson model in weak and strong interaction regimes, implementing Process Tensor-HOPS with Low-Temperature Correction (PT-HOPS+LTC) as a breakthrough in non-Markovian quantum dynamics simulation. This enables realistic simulation of mesoscale photosynthetic systems (>1000 chromophores) essential for agrivoltaic applications.
+The project specifically focuses on the comparative study of the Anderson model in weak and strong interaction regimes, implementing Process Tensor-HOPS (PT-HOPS) as a breakthrough in non-Markovian quantum dynamics simulation. This enables realistic simulation of mesoscale photosynthetic systems (>1000 chromophores) essential for agrivoltaic applications.
 
 ## Manuscript Status
 
@@ -50,13 +50,13 @@ where Ĥ_S is the system Hamiltonian and D[ρ(t)] represents the dissipative ter
 
 The simulations are performed using the adaptive Hierarchy of Pure States (adHOPS) method, implemented in the open-source MesoHOPS library. This numerically exact technique bypasses the exponential scaling limitations of traditional Hierarchical Equations of Motion (HEOM) by exploiting the dynamic localization of excitons, achieving a remarkable size-invariant scaling O(1) for large molecular aggregates (N>100). This computational efficiency enables modeling of systems of biologically and technologically relevant scales with high precision.
 
-### Process Tensor-HOPS with Low-Temperature Correction (PT-HOPS+LTC)
+### Process Tensor-HOPS (PT-HOPS)
 
-The PT-HOPS+LTC method represents a paradigm shift in non-Markovian quantum dynamics simulation. The bath correlation function C(t) is decomposed via Padé approximation:
+The PT-HOPS method represents a paradigm shift in non-Markovian quantum dynamics simulation. The bath correlation function C(t) is decomposed via Padé approximation:
 
 K_PT(t,s) = Σₖ gₖ(t) fₖ(s) e^(-λₖ|t-s|) + K_non-exp(t,s)
 
-For low-temperature performance (T < 150K), Low-Temperature Correction (LTC) is incorporated to effectively integrate low-temperature noise while reducing computational cost without sacrificing accuracy. The method uses optimized parameters: Matsubara cutoff N_Mat = 10 for T<150K, time step enhancement factor η_LTC = 10, and convergence tolerance ε_LTC = 10⁻⁸ for auxiliary state truncation.
+The method uses optimized parameters for efficient simulation of mesoscale systems.
 
 ### Stochastically Bundled Dissipators (SBD)
 
@@ -128,7 +128,7 @@ The eco-design framework optimizes multiple objectives:
 
 The methodology ensures reproducible results with convergence criteria including:
 
-- Varying Matsubara cutoff N_Mat and LTC tolerance ε_LTC until observables change by less than 2%
+- Varying Matsubara cutoff N_Mat until observables change by less than 2%
 - Comparison against traditional HEOM for small reference systems
 - Validation against Process Tensor benchmarks and Markovian limits
 - Cross-validation with SBD for mesoscale systems exceeding 1000 chromophores
@@ -215,7 +215,7 @@ The key insight is that by matching the spectral transmission properties of OPV 
 
 ### Technical innovations
 
-The PT-HOPS+LTC framework enables simulation of realistic mesoscale photosynthetic systems while preserving essential non-Markovian dynamics. The 10× computational speedup achieved through efficient Matsubara mode treatment allows for high-throughput screening of materials and device configurations, making the approach practically viable for materials development.
+The PT-HOPS framework enables simulation of realistic mesoscale photosynthetic systems while preserving essential non-Markovian dynamics. The computational efficiency achieved through efficient Matsubara mode treatment allows for high-throughput screening of materials and device configurations, making the approach practically viable for materials development.
 
 The integration of quantum dynamics simulations with materials design and agricultural testing represents a new paradigm for sustainable technology development. The framework connects molecular-scale quantum dynamics to macroscopic agronomic performance, establishing design principles for next-generation OPV materials that co-optimize energy yield and agricultural productivity.
 
@@ -237,7 +237,7 @@ Several important caveats and challenges must be acknowledged:
 - Integration with Calvin cycle kinetics and crop-specific photosystem compositions (C₃, C₄, CAM species) is necessary for biomass-level predictions
 - The practical relevance of coherence-assisted ETR enhancement depends on realistic transmission functions T(ω) that are compatible with manufacturable, stable OPV materials while maintaining acceptable PAR for crops
 - Environmental heterogeneity, static disorder in pigment energies, and high irradiance effects such as exciton-exciton annihilation can reduce or mask quantum effects
-- The computational complexity of simulating full mesoscale systems remains challenging despite the efficiency gains from PT-HOPS+LTC
+- The computational complexity of simulating full mesoscale systems remains challenging despite the efficiency gains from PT-HOPS
 - Experimental validation of predicted quantum effects requires sophisticated measurement techniques and controlled conditions
 
 ### Future directions

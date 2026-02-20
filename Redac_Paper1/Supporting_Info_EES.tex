@@ -5,9 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,amsfonts,graphicx,booktabs,bm,multirow,siunitx,physics}
-\usepackage{xcolor}
-\usepackage{hyperref}
-\usepackage{cleveref}
+\usepackage{xcolor,hyperref,cleveref}
 \usepackage{natbib}
 \usepackage[margin=2cm]{geometry}
 
@@ -450,7 +448,7 @@ The \textbf{underdamped (vibronic) modes} are parameterized in \cref{tab:vibroni
 The total reorganization energy is $\lambda_{\mathrm{total}} = \lambda_D + \sum_k \lambda_k \approx \SI{50}{\per\cm}$.
 
 %=============================================================================
-\section{Process Tensor-HOPS and Spectrally Bundled Dissipators Framework}\label{si:pthops}
+\section{Process Tensor-HOPS and spectrally bundled dissipators framework}\label{si:pthops}
 %=============================================================================
 
 Simulations employ the Process Tensor HOPS (PT-HOPS) and Spectrally Bundled Dissipators (SBD) methods to approximate the non-Markovian open quantum system dynamics. This section details the methods and benchmarks their performance against HEOM and Redfield theory.
@@ -482,7 +480,7 @@ SBD & 1000 & 320.1 & 185.7 & N/A$^\dagger$ \\
 
 As shown in \cref{tab:computational_benchmarks}, PT-HOPS achieves a \num{10}-fold speedup over HEOM with ${<}\,\SI{2}{\percent}$ accuracy and exhibits near-linear scaling with system size for localised excitons, enabling simulations of complete photosynthetic antenna complexes (100+ chromophores) with non-Markovian accuracy. The SBD approach provides additional computational advantages for very large systems ($N > 500$ chromophores), maintaining ${<}\,\SI{5}{\percent}$ accuracy relative to PT-HOPS while enabling simulation of systems approaching the size of complete chloroplasts.
 
-\subsection{Pad\'e decomposition of the bath correlation function}
+\subsection{Padé decomposition of the bath correlation function}
 
 The bath correlation function $C(t)$ is decomposed via Pad\'e approximation into exponentially decaying terms plus a residual non-exponential component:
 \begin{equation}
@@ -490,7 +488,7 @@ K_{\mathrm{PT}}(t,s) = \sum_{k} g_k(t)\, f_k(s)\, \mathrm{e}^{-\lambda_k |t-s|} 
 \end{equation}
 where $g_k(t)$ and $f_k(s)$ are effective coupling functions, $\lambda_k$ are decay rates, and $K_{\mathrm{non\text{-}exp}}(t,s)$ captures residual memory effects beyond the exponential approximation.
 
-\subsection{Spectrally Bundled Dissipators (SBD) formalism}
+\subsection{Spectrally bundled dissipators (SBD) formalism}
 
 For large chromophore systems, the SBD approach provides additional computational efficiency by bundling dissipative processes according to their spectral characteristics:
 \begin{equation}
@@ -503,20 +501,31 @@ where $\mathcal{D}_{\alpha}[\rho] = L_{\alpha} \rho L_{\alpha}^{\dagger} - \frac
 For simulations at physiological temperatures ($T = \SI{295}{\kelvin}$), the high-temperature approximation is valid ($k_B T \gg \hbar\gamma$), and explicit Matsubara reservoir terms are negligible. The simulation uses the standard Drude-Lorentz spectral density, maintaining computational efficiency while capturing thermal effects accurately. This efficiency enables high-throughput screening of OPV transmission functions and disorder ensembles essential for realistic agrivoltaic design optimisation.
 
 %=============================================================================
-\section{Computational performance metrics}\label{si:performance}
+\section{Full chloroplast modeling and hierarchical coarse-graining}\label{si:chloroplast_modeling}
 %=============================================================================
 
-\subsection{Hardware specifications}
+The ultimate goal of quantum-enhanced agrivoltaics research is to understand and optimize quantum effects in complete biological systems. This section outlines the hierarchical coarse-graining approach necessary to model complete chloroplasts while preserving essential quantum dynamics.
 
-All simulations were performed on an AMD EPYC 7542 processor (32 cores at \SI{2.9}{\giga\hertz}) with \SI{256}{\giga\byte} DDR4-3200 RAM, running Ubuntu 20.04~LTS. Code was compiled with GCC~9.4.0 using \texttt{-O3} optimisation. Parallel ensemble runs used OpenMPI~4.0.5.
+\subsection{Multi-scale modeling roadmap}
 
-\subsection{Scaling analysis}
+Complete chloroplast modeling requires bridging multiple scales of biological organization:
+\begin{enumerate}
+    \item \textbf{Molecular scale} (\SI{1}{\nano\metre}): Individual chromophore dynamics with full quantum mechanical treatment (10-100 chromophores)
+    \item \textbf{Supramolecular scale} (\SIrange{1}{10}{\nano\metre}): Antenna complexes with reduced quantum models (100-1000 chromophores)
+    \item \textbf{Organelle scale} (\SIrange{1}{10}{\micro\metre}): Complete chloroplast with coarse-grained models (1000+ chromophores)
+    \item \textbf{Cellular scale} (\SIrange{10}{100}{\micro\metre}): Integration with cellular metabolism and physiology
+\end{enumerate}
+Each scale requires different modeling approaches and computational methods, with the quantum description becoming increasingly approximate as system size increases.
 
-Typical production runs for the 7-site FMO system (\SI{100}{\pico\second}, $\Delta t = \SI{1.0}{\femto\second}$) utilise an adaptive hierarchy (averaging \numrange{800}{1200} states), requiring approximately 3.8~hours and \SI{4.2}{\giga\byte} of peak memory on a single core. Scaling analysis demonstrates that adHOPS remains size-invariant for localised excitons [$\mathcal{O}(1)$], whereas HEOM exhibits $\mathcal{O}(N^3)$ scaling, making adHOPS the preferred method for $N > 5$.
+\subsection{Hierarchical coarse-graining methodology}
 
-\subsection{Parallelization efficiency}
+The hierarchical approach preserves quantum effects of interest while maintaining computational tractability:
+\begin{equation}
+\mathcal{H}_{\mathrm{eff}}^{(n)} = \mathcal{P}_n \mathcal{H}_{\mathrm{full}} \mathcal{P}_n^{\dagger},
+\end{equation}
+where $\mathcal{P}_n$ is the projection operator from the full Hilbert space to the effective space at scale $n$, and $\mathcal{H}_{\mathrm{eff}}^{(n)}$ is the effective Hamiltonian at that scale.
 
-Ensemble averaging over 100 independent disorder realizations demonstrates near-perfect parallel scalability: a total wall time of 4 hours on 100 cores, compared to 16.7 days on a single core.
+This approach enables investigation of how quantum coherence effects observed at the molecular scale propagate to larger biological structures, potentially persisting in modified form at the supramolecular and organelle levels.
 
 %=============================================================================
 \section{Additional figures}\label{si:figures}
@@ -593,37 +602,6 @@ Ensemble averaging over 100 independent disorder realizations demonstrates near-
 \caption{\textbf{Agrivoltaic quantum advantage in sub-Saharan Africa.} Environmental robustness data (reproduced from Fig.~4 of the main text for reader convenience) highlighting the sub-Saharan perspective: monthly ETR enhancement heatmap (left) and annual mean metrics (right) for five sites spanning three climate zones---Yaound\'e and Abidjan (equatorial), Abuja (tropical savanna), and Dakar and N'Djamena (Sahel). Persistent enhancements of \SIrange{18}{24}{\percent} demonstrate the regional potential for quantum-enhanced agrivoltaic production.}
 \label{fig:SI_subsaharan}
 \end{figure}
-
-%=============================================================================
-\section{Full Chloroplast Modeling and Hierarchical Coarse-Graining}\label{si:chloroplast_modeling}
-%=============================================================================
-
-The ultimate goal of quantum-enhanced agrivoltaics research is to understand and optimize quantum effects in complete biological systems. This section outlines the hierarchical coarse-graining approach necessary to model complete chloroplasts while preserving essential quantum dynamics.
-
-\subsection{Multi-scale modeling roadmap}
-
-Complete chloroplast modeling requires bridging multiple scales of biological organization:
-
-\begin{enumerate}
-    \item \textbf{Molecular Scale} (\SI{1}{\nano\metre}): Individual chromophore dynamics with full quantum mechanical treatment (10-100 chromophores)
-    \item \textbf{Supramolecular Scale} (\SIrange{1}{10}{\nano\metre}): Antenna complexes with reduced quantum models (100-1000 chromophores)
-    \item \textbf{Organelle Scale} (\SIrange{1}{10}{\micro\metre}): Complete chloroplast with coarse-grained models (1000+ chromophores)
-    \item \textbf{Cellular Scale} (\SIrange{10}{100}{\micro\metre}): Integration with cellular metabolism and physiology
-\end{enumerate}
-
-Each scale requires different modeling approaches and computational methods, with the quantum description becoming increasingly approximate as system size increases.
-
-\subsection{Hierarchical coarse-graining methodology}
-
-The hierarchical approach preserves quantum effects of interest while maintaining computational tractability:
-
-\begin{equation}
-\mathcal{H}_{\mathrm{eff}}^{(n)} = \mathcal{P}_n \mathcal{H}_{\mathrm{full}} \mathcal{P}_n^{\dagger},
-\end{equation}
-
-where $\mathcal{P}_n$ is the projection operator from the full Hilbert space to the effective space at scale $n$, and $\mathcal{H}_{\mathrm{eff}}^{(n)}$ is the effective Hamiltonian at that scale.
-
-This approach enables investigation of how quantum coherence effects observed at the molecular scale propagate to larger biological structures, potentially persisting in modified form at the supramolecular and organelle levels.
 
 %=============================================================================
 \bibliographystyle{unsrt}

@@ -7,7 +7,7 @@
 
 We treat the photosynthetic unit as an open quantum system coupled to a structured vibrational environment (protein-solvent and intramolecular modes) and a spectrally filtered photon bath. The reduced density matrix $\bm{\rho}(t)$ of the excitonic system evolves according to:
 \begin{equation}\label{eq:master_eq}
-\frac{d\bm{\rho}(t)}{dt} = \mathcal{L}(t)\bm{\rho}(t) = -\frac{i}{\hbar}[\hat{H}_S, \bm{\rho}(t)] + \mathcal{D}[\bm{\rho}(t)],
+\pdv{\bm{\rho}(t)}{t} = \mathcal{L}(t)\bm{\rho}(t) = -\frac{i}{\hbar}[\hat{H}_S, \bm{\rho}(t)] + \mathcal{D}[\bm{\rho}(t)],
 \end{equation}
 where $\hat{H}_S$ is the system Hamiltonian and $\mathcal{D}[\bm{\rho}(t)]$ represents system-bath dissipative interactions. For agrivoltaic applications, $\mathcal{D}[\bm{\rho}(t)]$ is engineered through control of the incident spectral density via $T(\omega)$.
 
@@ -54,7 +54,7 @@ Agrivoltaic design requires simultaneous optimisation of two competing objective
 \begin{enumerate}
 \item \textbf{Electrical energy harvesting,}
 \begin{equation}\label{eq:PCE}
-\mathrm{PCE} = \frac{\int_0^\infty [1-T(\omega)] J_{\rm solar}(\omega) \eta_{\rm PV}(\omega) d\omega}{\int_0^\infty J_{\rm solar}(\omega) d\omega},
+\mathrm{PCE} = \frac{\int_0^\infty [1-T(\omega)] J_{\rm solar}(\omega) \eta_{\rm PV}(\omega) \dd{\omega}}{\int_0^\infty J_{\rm solar}(\omega) \dd{\omega}},
 \end{equation}
 where $\eta_{\rm PV}(\omega)$ is the wavelength-dependent photovoltaic conversion efficiency.
 
@@ -67,7 +67,7 @@ where $\bm{\rho}_{\rm RC}(t)$ is the reduced density matrix projected onto the r
 
 These objectives are inherently conflicting: increasing $T(\omega)$ enhances ETR but reduces PCE. We formulate a constrained multi-objective optimisation:
 \begin{equation}\label{eq:pareto_optimization}
-\max_{\{T(\omega)\}} \left\{ \mathrm{PCE}[T(\omega)], \mathrm{ETR}[T(\omega)] \right\},
+\max_{\{T(\omega)\}} \qty{ \mathrm{PCE}[T(\omega)], \mathrm{ETR}[T(\omega)] },
 \end{equation}
 subject to:
 \begin{align}
@@ -86,11 +86,11 @@ where $T_{\rm peak}$ is peak transmission, $\omega_{c,i}$ are centre frequencies
 
 We quantify coherence and transport with standard measures. The $l_1$-norm of coherence,
 \begin{equation}\label{eq:l1_coherence}
-C_{l_1}(\rho) = \sum_{i \neq j} |\rho_{ij}|,
+C_{l_1}(\rho) = \sum_{i \neq j} \abs{\rho_{ij}},
 \end{equation}
-quantifies total coherence across excitonic pairs. The coherence lifetime $\tau_c$ is the $1/e$ decay time of off-diagonal density matrix elements, extracted via $|\rho_{ij}(t)| \approx |\rho_{ij}(0)| \exp(-t/\tau_c)$. The inverse participation ratio,
+quantifies total coherence across excitonic pairs. The coherence lifetime $\tau_c$ is the $1/e$ decay time of off-diagonal density matrix elements, extracted via $\abs{\rho_{ij}(t)} \approx \abs{\rho_{ij}(0)} \exp(-t/\tau_c)$. The inverse participation ratio,
 \begin{equation}\label{eq:IPR}
-\xi_{\rm deloc} = \left( \sum_n |\psi_n|^4 \right)^{-1},
+\xi_{\rm deloc} = \qty( \sum_n \abs{\psi_n}^4 )^{-1},
 \end{equation}
 quantifies spatial exciton delocalization, with values approaching the number of chromophores indicating strong delocalization. The quantum advantage metric,
 \begin{equation}\label{eq:quantum_advantage}

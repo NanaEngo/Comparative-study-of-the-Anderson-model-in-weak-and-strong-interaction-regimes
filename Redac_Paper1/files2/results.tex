@@ -78,19 +78,17 @@ State purity $\Tr[\bm{\rho}^2]$ and von Neumann entropy $S = -\Tr[\bm{\rho} \ln 
 \caption{\textbf{Quantum metric enhancement under optimized spectral filtering.} Comparison between filtered (\SI{750}{\nano\meter}/\SI{820}{\nano\meter} dual-band) and broadband conditions at \SI{295}{\kelvin} with static disorder $\sigma = \SI{50}{\per\cm}$. Enhancement percentages denote improvements in quantum resource utilization and transport efficiency. Errors represent \SI{95}{\percent} confidence intervals across 500 disorder realizations.}
 \label{tab:quantum_metrics}
 \begin{tabular}{lccc}
-\toprule
-\textbf{Metric} & \textbf{Filtered (750/820 nm)} & \textbf{Broadband} & \textbf{Enhancement} \\
-\midrule
-ETR (relative) & \num{1.25 \pm 0.03} & \num{1.00 \pm 0.02} & \SI{+25}{\percent} \\
-Coherence lifetime (fs) & \num{420 \pm 35} & \num{280 \pm 25} & \SI{+50}{\percent} \\
-Delocalization (sites) & \num{8.2 \pm 0.7} & \num{4.1 \pm 0.5} & \SI{+100}{\percent} \\
-QFI (max) & \num{12.4 \pm 1.1} & \num{7.8 \pm 0.8} & \SI{+59}{\percent} \\
-Purity ($t = \SI{500}{\femto\second}$) & \num{0.82 \pm 0.04} & \num{0.71 \pm 0.05} & \SI{+15}{\percent} \\
-Von Neumann entropy & \num{0.51 \pm 0.06} & \num{0.73 \pm 0.07} & \SI{-30}{\percent}$^*$ \\
-Linear entropy ($S_L$) & \num{0.25 \pm 0.04} & \num{0.40 \pm 0.05} & \SI{-38}{\percent}$^*$ \\
-Pairwise concurrence & \num{0.34 \pm 0.05} & \num{0.18 \pm 0.04} & \SI{+89}{\percent} \\
-\bottomrule
-\multicolumn{4}{l}{\scriptsize $^*$Lower entropy/linear entropy indicates more ordered quantum state (beneficial).} \\
+	\toprule
+	\textbf{Metric}                        & \textbf{Filtered (750/820 nm)} & \textbf{Broadband}  &  \textbf{Enhancement}  \\ \midrule
+	ETR (relative)                         &      \num{1.25 \pm 0.03}       & \num{1.00 \pm 0.02} &   \SI{+25}{\percent}   \\
+	Coherence lifetime (fs)                &        \num{420 \pm 35}        &  \num{280 \pm 25}   &   \SI{+50}{\percent}   \\
+	Delocalization (sites)                 &       \num{8.2 \pm 0.7}        &  \num{4.1 \pm 0.5}  &  \SI{+100}{\percent}   \\
+	QFI (max)                              &       \num{12.4 \pm 1.1}       &  \num{7.8 \pm 0.8}  &   \SI{+59}{\percent}   \\
+	Purity ($t = \SI{500}{\femto\second}$) &      \num{0.82 \pm 0.04}       & \num{0.71 \pm 0.05} &   \SI{+15}{\percent}   \\
+	Von Neumann entropy                    &      \num{0.51 \pm 0.06}       & \num{0.73 \pm 0.07} & \SI{-30}{\percent}$^*$ \\
+	Linear entropy ($S_L$)                 &      \num{0.25 \pm 0.04}       & \num{0.40 \pm 0.05} & \SI{-38}{\percent}$^*$ \\
+	Pairwise concurrence                   &      \num{0.34 \pm 0.05}       & \num{0.18 \pm 0.04} &   \SI{+89}{\percent}   \\ \bottomrule
+	\multicolumn{4}{l}{\scriptsize $^*$Lower entropy/linear entropy indicates more ordered quantum state (beneficial).}
 \end{tabular}
 \end{table}
 
@@ -124,7 +122,7 @@ The frontier shows that significant quantum advantages (\SIrange{15}{33}{\percen
 
 \subsection{Environmental robustness}
 
-The quantum advantage persists across physiologically relevant conditions (\Cref{fig:robustness}). Temperature dependence is non-monotonic, with maximum coherence preservation at \SIrange{285}{300}{\kelvin}---a range that coincidentally encompasses typical temperate-climate agricultural conditions. At \SI{295}{\kelvin}, $\eta_{\rm quantum} = 0.25$; even under moderate heat stress (\SI{310}{\kelvin}), $\eta_{\rm quantum} = 0.18$. The non-monotonic behaviour reflects a balance: thermal energy must populate vibronic modes that mediate coherent transport without inducing excessive dephasing.
+The quantum advantage persists across physiologically relevant conditions (\Cref{fig:robustness}). Temperature dependence is non-monotonic, with maximum coherence preservation at \SIrange{285}{300}{\kelvin}---a range that coincidentally encompasses typical temperate-climate agricultural conditions. At \SI{295}{\kelvin}, $\eta_{\rm quantum} = 0.25$; even under moderate heat stress (\SI{310}{\kelvin}), $\eta_{\rm quantum} = \num{0.18}$. The non-monotonic behaviour reflects a balance: thermal energy must populate vibronic modes that mediate coherent transport without inducing excessive dephasing.
 
 Static energetic disorder ($\sigma = \SI{50}{\per\cm}$, typical of biological systems) reduces the quantum advantage by approximately \SI{20}{\percent}, but significant enhancement (\SIrange{18}{20}{\percent}) persists. Ensemble averaging over 100 disorder realisations yields $\langle\eta_{\rm quantum}\rangle = \num{0.20 \pm 0.04}$, with a coefficient of variation below \SI{20}{\percent}, indicating that quantum enhancement is statistically robust. Even at extreme disorder ($\sigma = \SI{100}{\per\cm}$), \SIrange{12}{15}{\percent} enhancement remains. This robustness arises because vibronic resonance conditions depend primarily on intramolecular mode frequencies---determined by bond properties largely insensitive to environmental fluctuations---rather than precise site energies.
 

@@ -437,27 +437,24 @@ Simulations employ the Process Tensor HOPS (PT-HOPS) and Spectrally Bundled Diss
 \caption{\textbf{Computational performance comparison.} All benchmarks are for \SI{1}{\pico\second} of FMO dynamics at \SI{295}{\kelvin} with a Drude + vibronic bath on an AMD EPYC 7542 processor (32 cores at \SI{2.9}{\giga\hertz}). Redfield (Markovian) results are shown for comparison but fail to capture coherence effects. PT-HOPS achieves near-HEOM accuracy with a \num{10}$\times$ speedup, enabling large-scale simulations ($N > 20$ sites) intractable for HEOM. SBD provides additional computational advantages for systems with $N > 100$ chromophores.}
 \label{tab:computational_benchmarks}
 \begin{tabular}{lcccc}
-\toprule
-\textbf{Method} & \textbf{System size} & \textbf{Wall time} & \textbf{Memory} & \textbf{Accuracy} \\
- & \textbf{(sites)} & \textbf{(\si{\hour})} & \textbf{(\si{\giga\byte})} & \textbf{(vs HEOM)} \\
-\midrule
-HEOM (reference) & 7 & 38.2 & 12.4 & Exact \\
-PT-HOPS & 7 & 3.8 & 2.1 & ${<}\,\SI{2}{\percent}$ deviation \\
-SBD & 7 & 3.5 & 1.9 & ${<}\,\SI{3}{\percent}$ deviation \\
-Redfield (Markov) & 7 & 0.3 & 0.5 & \SI{18}{\percent} deviation$^*$ \\
-\midrule
-PT-HOPS & 24 & 12.5 & 6.3 & N/A$^\dagger$ \\
-PT-HOPS & 100 & 48.7 & 22.1 & N/A$^\dagger$ \\
-SBD & 100 & 38.2 & 18.5 & N/A$^\dagger$ \\
-SBD & 500 & 156.4 & 89.2 & N/A$^\dagger$ \\
-SBD & 1000 & 320.1 & 185.7 & N/A$^\dagger$ \\
-\bottomrule
-\multicolumn{5}{l}{\scriptsize $^*$Markovian methods fail to capture non-Markovian coherence effects.} \\
-\multicolumn{5}{l}{\scriptsize $^\dagger$HEOM computationally intractable for $N > 10$ sites.} \\
+	\toprule
+	\textbf{Method}   & \textbf{System size} &  \textbf{Wall time}   &      \textbf{Memory}       &         \textbf{Accuracy}         \\
+	                  &   \textbf{(sites)}   & \textbf{(\si{\hour})} & \textbf{(\si{\giga\byte})} &        \textbf{(vs HEOM)}         \\ \midrule
+	HEOM (reference)  &          7           &         38.2          &            12.4            &               Exact               \\
+	PT-HOPS           &          7           &          3.8          &            2.1             & ${<}\,\SI{2}{\percent}$ deviation \\
+	SBD               &          7           &          3.5          &            1.9             & ${<}\,\SI{3}{\percent}$ deviation \\
+	Redfield (Markov) &          7           &          0.3          &            0.5             &  \SI{18}{\percent} deviation$^*$  \\ \midrule
+	PT-HOPS           &          24          &         12.5          &            6.3             &           N/A$^\dagger$           \\
+	PT-HOPS           &         100          &         48.7          &            22.1            &           N/A$^\dagger$           \\
+	SBD               &         100          &         38.2          &            18.5            &           N/A$^\dagger$           \\
+	SBD               &         500          &         156.4         &            89.2            &           N/A$^\dagger$           \\
+	SBD               &         1000         &         320.1         &           185.7            &           N/A$^\dagger$           \\ \bottomrule
+	\multicolumn{5}{l}{\scriptsize $^*$Markovian methods fail to capture non-Markovian coherence effects.}                            \\
+	\multicolumn{5}{l}{\scriptsize $^\dagger$HEOM computationally intractable for $N > 10$ sites.}
 \end{tabular}
 \end{table}
 
-As shown in \Cref{tab:computational_benchmarks}, PT-HOPS achieves a \num{10}-fold speedup over HEOM with ${<}\,\SI{2}{\percent}$ accuracy and exhibits near-linear scaling with system size for localised excitons, enabling simulations of complete photosynthetic antenna complexes (100+ chromophores) with non-Markovian accuracy. The SBD approach provides additional computational advantages for very large systems ($N > 500$ chromophores), maintaining ${<}\,\SI{5}{\percent}$ accuracy relative to PT-HOPS while enabling simulation of systems approaching the size of complete chloroplasts.
+As shown in \Cref{tab:computational_benchmarks}, PT-HOPS achieves a \num{10}-fold speedup over HEOM with ${<}\,\SI{2}{\percent}$ accuracy and exhibits near-linear scaling with system size for localised excitons, enabling simulations of complete photosynthetic antenna complexes (100+ chromophores) with non-Markovian accuracy. The SBD approach provides additional computational advantages for very large systems ($N >\num{500}$ chromophores), maintaining ${<}\,\SI{5}{\percent}$ accuracy relative to PT-HOPS while enabling simulation of systems approaching the size of complete chloroplasts.
 
 \subsection{Padé decomposition of the bath correlation function}
 

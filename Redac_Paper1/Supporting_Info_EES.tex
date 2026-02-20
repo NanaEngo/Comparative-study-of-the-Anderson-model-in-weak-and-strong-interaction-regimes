@@ -441,8 +441,8 @@ Simulations employ the Process Tensor HOPS (PT-HOPS) and Spectrally Bundled Diss
 	\textbf{Method}   & \textbf{System size} &  \textbf{Wall time}   &      \textbf{Memory}       &         \textbf{Accuracy}         \\
 	                  &   \textbf{(sites)}   & \textbf{(\si{\hour})} & \textbf{(\si{\giga\byte})} &        \textbf{(vs HEOM)}         \\ \midrule
 	HEOM (reference)  &          7           &         38.2          &            12.4            &               Exact               \\
-	PT-HOPS           &          7           &          3.8          &            2.1             & ${<}\,\SI{2}{\percent}$ deviation \\
-	SBD               &          7           &          3.5          &            1.9             & ${<}\,\SI{3}{\percent}$ deviation \\
+	PT-HOPS           &          7           &          3.8          &            2.1             & $\SI{<2}{\percent}$ deviation \\
+	SBD               &          7           &          3.5          &            1.9             & $\SI{<3}{\percent}$ deviation \\
 	Redfield (Markov) &          7           &          0.3          &            0.5             &  \SI{18}{\percent} deviation$^*$  \\ \midrule
 	PT-HOPS           &          24          &         12.5          &            6.3             &           N/A$^\dagger$           \\
 	PT-HOPS           &         100          &         48.7          &            22.1            &           N/A$^\dagger$           \\
@@ -454,7 +454,7 @@ Simulations employ the Process Tensor HOPS (PT-HOPS) and Spectrally Bundled Diss
 \end{tabular}
 \end{table}
 
-As shown in \Cref{tab:computational_benchmarks}, PT-HOPS achieves a \num{10}-fold speedup over HEOM with ${<}\,\SI{2}{\percent}$ accuracy and exhibits near-linear scaling with system size for localised excitons, enabling simulations of complete photosynthetic antenna complexes (100+ chromophores) with non-Markovian accuracy. The SBD approach provides additional computational advantages for very large systems ($N >\num{500}$ chromophores), maintaining ${<}\,\SI{5}{\percent}$ accuracy relative to PT-HOPS while enabling simulation of systems approaching the size of complete chloroplasts.
+As shown in \Cref{tab:computational_benchmarks}, PT-HOPS achieves a \num{10}-fold speedup over HEOM with $\SI{<2}{\percent}$ accuracy and exhibits near-linear scaling with system size for localised excitons, enabling simulations of complete photosynthetic antenna complexes (100+ chromophores) with non-Markovian accuracy. The SBD approach provides additional computational advantages for very large systems ($N >\num{500}$ chromophores), maintaining $\SI{< 5}{\percent}$ accuracy relative to PT-HOPS while enabling simulation ofems < approaching the size of complete chloroplasts.
 
 \subsection{Padé decomposition of the bath correlation function}
 
@@ -480,7 +480,7 @@ For simulations at physiological temperatures ($T = \SI{295}{\kelvin}$), the hig
 \section{Full chloroplast modeling and hierarchical coarse-graining}\label{si:chloroplast_modeling}
 %=============================================================================
 
-The ultimate goal of quantum-enhanced agrivoltaics research is to understand and optimize quantum effects in complete biological systems. This section outlines the hierarchical coarse-graining approach necessary to model complete chloroplasts while preserving essential quantum dynamics.
+The ultimate goal of this quantum-enhanced agrivoltaics study is to understand and optimize quantum effects in complete biological systems. This section outlines the hierarchical coarse-graining approach necessary to model complete chloroplasts while preserving essential quantum dynamics.
 
 \subsection{Multi-scale modeling roadmap}
 

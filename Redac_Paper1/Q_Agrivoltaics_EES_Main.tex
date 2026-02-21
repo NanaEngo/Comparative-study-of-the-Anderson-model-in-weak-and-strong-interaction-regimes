@@ -1,5 +1,5 @@
 % Main Manuscript File - EES Submission
-% Quantum Spectral Engineering for Enhanced Agrivoltaic Efficiency
+% Spectral Bath Engineering for Quantum-Enhanced Agrivoltaics
 
 \documentclass[11pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
@@ -13,7 +13,7 @@
 
 % Hyperref setup
 \hypersetup{
-    pdftitle={Quantum spectral engineering for enhanced agrivoltaic efficiency - Main Manuscript},
+    pdftitle={Spectral Bath Engineering for Quantum-Enhanced Agrivoltaics - Main Manuscript},
     pdfauthor={Teguia et al.},
     pdfsubject={Quantum Photosynthesis, Agrivoltaics, Non-Markovian Dynamics},
     pdfkeywords={agrivoltaics, quantum photosynthesis, spectral engineering, non-Markovian dynamics, renewable energy},
@@ -32,7 +32,7 @@
 % TITLE AND AUTHORS
 %=============================================================================
 
-\title{\textbf{Quantum Spectral Engineering for Enhanced Agrivoltaic Efficiency: Non-Markovian Dynamics in Photosynthetic Energy Transfer}}
+\title{\textbf{Spectral Bath Engineering for Quantum-Enhanced Agrivoltaics: Advancing Efficiency and Environmental Sustainability via Non-Markovian Dynamics}}
 
 \author{
     Steve Cabrel Teguia Kouam$^{2,*}$,
@@ -62,7 +62,7 @@
 %=============================================================================
 
 \begin{abstract}
-Agrivoltaic systems integrate crop production with solar energy generation, addressing the critical energy-environment nexus of food security and clean energy. Current designs treat light as a classical photon flux, overlooking the quantum mechanical aspects of photosynthetic energy transfer that could enhance both energy efficiency and agricultural productivity. We introduce \textit{spectral bath engineering}---strategic spectral filtering through semi-transparent organic photovoltaic (OPV) panels to exploit non-Markovian quantum coherence in photosynthesis. Using adaptive Hierarchy of Pure States (adHOPS) simulations of the Fenna-Matthews-Olsen complex, we demonstrate that selective filtering at vibronic resonance wavelengths (\SIlist{750;820}{\nano\meter} dual-band) enhances the electron transport rate (ETR) by \SI{25}{\percent} relative to Markovian models under matched photon flux. This quantum advantage stems from vibronic resonance-assisted transport that extends coherence lifetimes by \SIrange{20}{50}{\percent}, nearly doubles pairwise concurrence (\SI{+89}{\percent}), and extends exciton delocalization from \numrange{3}{5} to \numrange{8}{10} chromophores. A comprehensive 12-test validation suite confirms robustness at \SI{295}{\kelvin} and under static disorder ($\sigma = \SI{50}{\per\cm}$). Geographic simulations across nine climate zones---including five sub-Saharan African sites---demonstrate persistent quantum advantages of \SIrange{18}{26}{\percent}, with particular relevance to regions where energy and food security challenges converge. Pareto optimization identifies configurations achieving \SIrange{16}{18}{\percent} power conversion efficiency with \SIrange{15}{20}{\percent} ETR enhancement, yielding an estimated additional revenue of USD~\numrange{470}{3000}\,\si{ha^{-1}\,yr^{-1}}. Integration with eco-design analysis using quantum reactivity descriptors ensures environmental sustainability with biodegradable OPV materials (biodegradability scores of \num{0.72} for PM6 derivative and 0.58 for Y6-BO derivative, confirming $B_{\rm index} = \num{72}$ and $B_{\rm index} = \num{58}$ respectively), addressing the critical environmental sustainability requirements of next-generation energy technologies.
+Agrivoltaic systems integrate crop production with solar energy generation, addressing the critical energy-environment nexus of food security and clean energy. Current designs treat light as a classical photon flux, overlooking the quantum mechanical aspects of photosynthetic energy transfer that could enhance both energy efficiency and agricultural productivity. We introduce \textit{spectral bath engineering}---strategic spectral filtering through semi-transparent organic photovoltaic (OPV) panels to exploit non-Markovian quantum coherence in photosynthesis. Using Process Tensor HOPS (PT-HOPS) and Spectrally Bundled Dissipators (SBD) simulations of the Fenna-Matthews-Olsen complex, we demonstrate that selective filtering at vibronic resonance wavelengths (\SIlist{750;820}{\nano\meter} dual-band) enhances the electron transport rate (ETR) by \SI{25}{\percent} relative to Markovian models under matched photon flux. This quantum advantage stems from vibronic resonance-assisted transport that extends coherence lifetimes by \SIrange{20}{50}{\percent}, nearly doubles pairwise concurrence (\SI{+89}{\percent}), and extends exciton delocalization from \numrange{3}{5} to \numrange{8}{10} chromophores. A comprehensive 12-test validation suite confirms robustness at \SI{295}{\kelvin} and under static disorder ($\sigma = \SI{50}{\per\cm}$). Geographic simulations across nine climate zones---including five sub-Saharan African sites---demonstrate persistent quantum advantages of \SIrange{18}{26}{\percent}, with particular relevance to regions where energy and food security challenges converge. Pareto optimization identifies configurations achieving \SIrange{16}{18}{\percent} power conversion efficiency with \SIrange{15}{20}{\percent} ETR enhancement, yielding an estimated additional revenue of USD~\numrange{470}{3000}\,\si{ha^{-1}\,yr^{-1}}. Integration with eco-design analysis using quantum reactivity descriptors ensures environmental sustainability with biodegradable OPV materials (biodegradability scores of \num{0.72} for PM6 derivative and 0.58 for Y6-BO derivative, confirming $B_{\rm index} = \num{72}$ and $B_{\rm index} = \num{58}$ respectively), addressing the critical environmental sustainability requirements of next-generation energy technologies.
 \end{abstract}
 
 %=============================================================================
@@ -100,7 +100,7 @@ Meeting rising global demand for food and clean energy requires innovative land-
 
 \section*{Acknowledgments}
 
-This work was supported by the University of Yaoundé I and the University of Douala. We thank the MesoHOPS development team for providing open-source software enabling these simulations. 
+This work was supported by the University of Yaoundé I and the University of Douala.
 
 %=============================================================================
 % DATA AVAILABILITY
@@ -108,7 +108,7 @@ This work was supported by the University of Yaoundé I and the University of Do
 
 \section*{Data availability statement}
 
-All data supporting the findings of this study are available within the article and its Supporting Information. Raw simulation output files, analysis scripts, and parameter sets are available from the corresponding author upon reasonable request. The MesoHOPS simulation package used in this work is freely available at \url{https://github.com/MesoscienceLab/mesohops}. All computational notebooks, source code, and datasets generated during this study are available in the GitHub repository at [REPOSITORY_URL]. Reproducibility information: All simulations were performed using Python 3.12.12, NumPy 1.24+, SciPy 1.11+, and the MesoHOPS v1.2.0 library. Computational parameters and environment configurations are documented in the Supporting Information. All reported values include standard errors calculated from ensemble averaging, with 95\% confidence intervals explicitly stated for all quantitative results.
+All data supporting the findings of this study are available within the article and its Supporting Information. Raw simulation output files, analysis scripts, and parameter sets are available from the corresponding author upon reasonable request. Our custom PT-HOPS/SBD simulation framework, computational notebooks, source code, and datasets generated during this study are available in the GitHub repository at [REPOSITORY_URL]. Reproducibility information: All simulations were performed using Python 3.12+, NumPy 1.24+, and SciPy 1.11+. Computational parameters and environment configurations are documented in the Supporting Information. All reported values include standard errors calculated from ensemble averaging, with 95\% confidence intervals explicitly stated for all quantitative results.
 
 %=============================================================================
 % CONFLICTS OF INTEREST

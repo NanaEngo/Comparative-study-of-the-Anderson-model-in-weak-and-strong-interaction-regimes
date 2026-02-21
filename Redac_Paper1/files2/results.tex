@@ -1,5 +1,5 @@
 % Results Section - EES Version
-% Quantum Spectral Engineering for Enhanced Agrivoltaic Efficiency
+% Spectral Bath Engineering for Quantum-Enhanced Agrivoltaics
 
 \section{Results}\label{sec:Results}
 
@@ -139,9 +139,7 @@ Combined static and dynamic disorder (correlation times $\tau_{\rm corr} = \SIra
 
 The 12-test validation suite achieved \SI{100}{\percent} success across all categories (see Supporting Information, Table~2). Key results include: HEOM benchmark agreement to \SI{1.8}{\percent} for 3-site systems; trace preservation to $|\mathrm{Tr}(\rho) - 1| < \num{5e-13}$; and recovery of the Markovian limit (Redfield theory) to within \SI{2}{\percent} at high temperature ($T > \SI{500}{\kelvin}$). Full details are provided in Section~3 of the Supporting Information.
 
-Statistical validation includes Monte Carlo error propagation analysis to quantify uncertainty in quantum advantage estimates. Each test in the validation suite includes specific statistical criteria: (1) Convergence tests require \
-um{1e4} independent calculations to establish statistical significance; (2) Physical consistency tests include 1000 bootstrap resampling iterations to establish 95\% confidence intervals; (3) Robustness tests employ Latin hypercube sampling with \
-um{1e3} parameter combinations to ensure comprehensive coverage of the parameter space. Reproducibility is confirmed by independent re-runs of 10\% of all calculations, showing coefficient of variation $< 0.5\%$ for all reported metrics.
+Statistical validation includes Monte Carlo error propagation analysis to quantify uncertainty in quantum advantage estimates. Each test in the validation suite includes specific statistical criteria: (1) Convergence tests require \num{1e4} independent calculations to establish statistical significance; (2) Physical consistency tests include 1000 bootstrap resampling iterations to establish 95\% confidence intervals; (3) Robustness tests employ Latin hypercube sampling with \num{1e3} parameter combinations to ensure comprehensive coverage of the parameter space. Reproducibility is confirmed by independent re-runs of 10\% of all calculations, showing coefficient of variation $< 0.5\%$ for all reported metrics.
 
 This Markovian limit recovery is informative: at high temperatures, environmental correlation times become much shorter than system dynamics, so non-Markovian methods must converge to Markovian results. The \SI{2}{\percent} agreement confirms correct implementation, while the \SI{25}{\percent} enhancement at \SI{295}{\kelvin} shows that physiological temperatures lie firmly in the non-Markovian regime where environmental memory matters.
 

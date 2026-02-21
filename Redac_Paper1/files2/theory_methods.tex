@@ -1,5 +1,5 @@
 % Theory and Methods Section - EES Version
-% Quantum Spectral Engineering for Enhanced Agrivoltaic Efficiency
+% Spectral Bath Engineering for Quantum-Enhanced Agrivoltaics
 
 \section{Theory and methods}\label{sec:Theory}
 
@@ -36,11 +36,11 @@ J_{\rm plant}(\omega) = T(\omega) \times J_{\rm solar}(\omega),
 \end{equation}
 where $T(\omega)$ is the OPV transmission function and $J_{\rm solar}(\omega)$ is the solar spectral irradiance (AM1.5G standard, \SI{1000}{\watt\per\metre\squared} integrated). Engineering $T(\omega)$ to align with vibronic resonances extends quantum coherence and opens energy transfer pathways that remain suppressed under broadband illumination.
 
-\subsection{Adaptive Hierarchy of Pure States (adHOPS)}
+\subsection{Process Tensor HOPS and Spectrally Bundled Dissipators (PT-HOPS/SBD)}
 
-Simulations use the adaptive Hierarchy of Pure States method, implemented in the open-source MesoHOPS library \cite{Citty2024, Varvelo2021}. This numerically exact technique exploits the dynamic localisation of excitons to achieve size-invariant $\mathcal{O}(1)$ scaling for large molecular aggregates ($N>100$), bypassing the exponential cost of traditional HEOM \cite{Varvelo2021, Suess2014}. It captures full non-Markovian environmental memory without weak-coupling approximations.
+Simulations use the Process Tensor Hierarchy of Pure States (PT-HOPS) method combined with Spectrally Bundled Dissipators (SBD). This numerically exact framework extends traditional HOPS by incorporating a process tensor formalism that efficiently captures non-Markovian environmental memory without weak-coupling approximations. The SBD approach groups environmental modes by spectral frequency, enabling scalable simulations of complex multisite systems.
 
-Unlike Markovian approximations (Lindblad, Redfield) that assume instantaneous environmental relaxation, non-Markovian treatment preserves structured bath fluctuations that enhance energy transfer efficiency under engineered spectral conditions \cite{Scholes2017, Cianci2017, Sabin2021}.
+Unlike Markovian approximations (Lindblad, Redfield) that assume instantaneous environmental relaxation, non-Markovian treatment using PT-HOPS preserves structured bath fluctuations that enhance energy transfer efficiency under engineered spectral conditions \cite{Scholes2011, Cianci2017, Sabin2021}.
 
 \subsection{FMO complex model system}
 
@@ -106,7 +106,7 @@ where $L_{\hat{O}}$ is the symmetric logarithmic derivative, measures parameter 
 
 We implement a 12-test validation suite organised in three categories---convergence (4 tests), physical consistency (4 tests), and environmental robustness (4 tests)---to ensure observed quantum advantages are genuine physical effects rather than numerical artefacts. Details of each test, including acceptance thresholds, are provided in Section~S3 of the Supporting Information. The convergence tests include benchmarking against numerically exact HEOM results (\SI{< 2}{\percent} deviation for 3-site systems); physical consistency tests verify trace preservation ($|{\rm Tr}(\rho) - 1| < \num{1e-12}$) and detailed balance; robustness tests confirm that quantum advantages persist under temperature variations (\SI{\pm 10}{\kelvin}), static disorder ($\sigma = \SI{50}{\per\cm}$), and bath parameter fluctuations (\SI{\pm 20}{\percent}).
 
-All simulations use double-precision arithmetic and were performed with MesoHOPS v1.2.0 on an AMD Ryzen 5 5500U processor with 8 cores and 4 threads, \SI{38}{\giga\byte} of RAM, and AMD Radeon Graphics GPU.
+All simulations use double-precision arithmetic and were performed with our custom Python PT-HOPS/SBD framework on an AMD Ryzen 5 5500U processor with 8 cores and 4 threads, \SI{38}{\giga\byte} of RAM, and AMD Radeon Graphics GPU.
 
 Statistical analysis includes error estimation using ensemble averaging over 500 disorder realisations for robustness tests, with 95\% confidence intervals reported. For geographic simulations, we employed a stratified sampling approach across nine climate zones with five representative sub-Saharan African sites, using \num{1000} bootstrap resampling iterations to estimate confidence intervals. The reproducibility of results has been verified through independent calculations using identical parameters on separate computational runs, showing deviation of \SI{< 0.5}{\percent} for all key metrics.
 

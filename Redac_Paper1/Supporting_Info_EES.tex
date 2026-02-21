@@ -1,5 +1,5 @@
 % Supporting Information - EES Version
-% Quantum Spectral Engineering for Enhanced Agrivoltaic Efficiency
+% Spectral Bath Engineering for Quantum-Enhanced Agrivoltaics
 
 \documentclass[11pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
@@ -11,7 +11,7 @@
 
 % Hyperref setup
 \hypersetup{
-    pdftitle={Quantum Spectral Engineering for Enhanced Agrivoltaic Efficiency - Supporting Information},
+    pdftitle={Spectral Bath Engineering for Quantum-Enhanced Agrivoltaics - Supporting Information},
     pdfauthor={Teguia et al.},
     pdfsubject={Quantum Photosynthesis, Agrivoltaics, Non-Markovian Dynamics},
     pdfkeywords={agrivoltaics, quantum photosynthesis, spectral engineering, non-Markovian dynamics, renewable energy},
@@ -29,8 +29,8 @@
 \DeclareSIUnit{\bohr}{a_0}
 
 \title{Supporting Information:\\
-Quantum Spectral Engineering for Enhanced Agrivoltaic Efficiency:\\
-Non-Markovian Dynamics in Photosynthetic Energy Transfer}
+Spectral Bath Engineering for Quantum-Enhanced Agrivoltaics:\\
+Advancing Efficiency and Environmental Sustainability via Non-Markovian Dynamics}
 
 \author{Steve Cabrel Teguia Kouam$^{2,*}$, Theodore Goumai Vedekoi$^{1}$, Jean-Pierre Tchapet Njafa$^{1}$,\\
 Jean-Pierre Nguenang$^{2}$, Serge Guy Nana Engo$^{1}$\\
@@ -289,7 +289,7 @@ Key features of the Hamiltonian include: site energies spanning \SI{420}{\per\cm
 
 \subsubsection{Test 1: HEOM benchmark}
 
-We validated adHOPS against numerically exact HEOM for a 3-site model system (site energies \SIlist{12000;12100;12200}{\per\cm}; Drude bath $\lambda = \SI{35}{\per\cm}$ at \SI{295}{\kelvin}). The maximum deviation is \SI{1.8}{\percent} at early times ($t < \SI{50}{\femto\second}$), with an average deviation of \SI{0.6}{\percent} over a \SI{1000}{\femto\second} window, passing the \SI{2}{\percent} acceptance threshold.
+We validated PT-HOPS against numerically exact HEOM for a 3-site model system (site energies \SIlist{12000;12100;12200}{\per\cm}; Drude bath $\lambda = \SI{35}{\per\cm}$ at \SI{295}{\kelvin}). The maximum deviation is \SI{1.8}{\percent} at early times ($t < \SI{50}{\femto\second}$), with an average deviation of \SI{0.6}{\percent} over a \SI{1000}{\femto\second} window, passing the \SI{2}{\percent} acceptance threshold.
 
 \subsubsection{Test 2: Matsubara cutoff convergence}
 
@@ -337,7 +337,7 @@ Varying spectral density parameters ($\lambda$, $\gamma$, $\omega_k$) by $\pm \S
 
 \subsubsection{Test 12: Markovian limit recovery}
 
-At high temperature ($T = \SI{500}{\kelvin}$), adHOPS converges to the Redfield theory result (within \SI{1.8}{\percent} deviation) as the quantum advantage nearly vanishes, confirming correct asymptotic behaviour in the Markovian regime.
+At high temperature ($T = \SI{500}{\kelvin}$), PT-HOPS converges to the Redfield theory result (within \SI{1.8}{\percent} deviation) as the quantum advantage nearly vanishes, confirming correct asymptotic behaviour in the Markovian regime.
 
 \subsection{Summary of validation results}
 
@@ -434,7 +434,7 @@ Simulations employ the Process Tensor HOPS (PT-HOPS) and Spectrally Bundled Diss
 
 \begin{table}[ht]
 \centering
-\caption{\textbf{Computational performance comparison.} All benchmarks are for \SI{1}{\pico\second} of FMO dynamics at \SI{295}{\kelvin} with a Drude + vibronic bath on an AMD EPYC 7542 processor (32 cores at \SI{2.9}{\giga\hertz}). Redfield (Markovian) results are shown for comparison but fail to capture coherence effects. PT-HOPS achieves near-HEOM accuracy with a \num{10}$\times$ speedup, enabling large-scale simulations ($N > 20$ sites) intractable for HEOM. SBD provides additional computational advantages for systems with $N > 100$ chromophores.}
+\caption{\textbf{Computational performance comparison.} All benchmarks are for \SI{1}{\pico\second} of FMO dynamics at \SI{295}{\kelvin} with a Drude + vibronic bath on an AMD Ryzen 5 5500U processor (8 cores at 4 threads with \SI{38}{\giga\byte} of RAM). Redfield (Markovian) results are shown for comparison but fail to capture coherence effects. PT-HOPS achieves near-HEOM accuracy with a \num{10}$\times$ speedup, enabling large-scale simulations ($N > 20$ sites) intractable for HEOM. SBD provides additional computational advantages for systems with $N > 100$ chromophores.}
 \label{tab:computational_benchmarks}
 \begin{tabular}{lcccc}
 	\toprule
@@ -497,9 +497,9 @@ Each scale requires different modeling approaches and computational methods, wit
 
 The hierarchical approach preserves quantum effects of interest while maintaining computational tractability:
 \begin{equation}
-\mathcal{H}_{\mathrm{eff}}^{(n)} = \mathcal{P}_n \mathcal{H}_{\mathrm{full}} \mathcal{P}_n^{\dagger},
+H_{\mathrm{eff}}^{(n)} = \mathcal{P}_n H_{\mathrm{full}} \mathcal{P}_n^{\dagger},
 \end{equation}
-where $\mathcal{P}_n$ is the projection operator from the full Hilbert space to the effective space at scale $n$, and $\mathcal{H}_{\mathrm{eff}}^{(n)}$ is the effective Hamiltonian at that scale.
+where $\mathcal{P}_n$ is the projection operator from the full Hilbert space to the effective space at scale $n$, and $H_{\mathrm{eff}}^{(n)}$ is the effective Hamiltonian at that scale.
 
 This approach enables investigation of how quantum coherence effects observed at the molecular scale propagate to larger biological structures, potentially persisting in modified form at the supramolecular and organelle levels.
 

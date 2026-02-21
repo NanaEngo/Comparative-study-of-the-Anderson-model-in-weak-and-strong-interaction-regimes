@@ -394,3 +394,44 @@ class CSVDataStorage:
         filename = os.path.join(self.output_dir, f'{filename_prefix}_{timestamp}.csv')
         env_df.to_csv(filename, index=False, float_format='%.6f')
         print(f"  Saved environmental data to: {filename}")
+
+    def save_biodegradability_analysis_to_csv(self, biodegrad_data, filename='biodegradability_analysis'):
+        """
+        Save biodegradability analysis results to CSV.
+        
+        Mathematical Framework:
+        Biodegradability analysis includes quantum reactivity descriptors:
+        
+        - Fukui functions: f^+(r), f^-(r), f^0(r) for electrophilic, nucleophilic, 
+          and radical attack reactivity
+        - Global reactivity indices: chemical potential, hardness, softness
+        - Biodegradability score: weighted combination of descriptors
+        - B-index: biodegradability index value (published scale)
+        
+        The biodegradability score provides a quantitative measure of how
+        susceptible a molecular structure is to enzymatic degradation.
+        
+        Parameters:
+        biodegrad_data (list or dict): Biodegradability analysis results
+        filename (str): Base filename for output
+        """
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        
+        if isinstance(biodegrad_data, list) and len(biodegrad_data) > 0:
+            # Convert list of dictionaries to DataFrame
+            df = pd.DataFrame(biodegrad_data)
+        elif isinstance(biodegrad_data, dict):
+            # Convert single dictionary to DataFrame
+            df = pd.DataFrame([biodegrad_data])
+        else:
+            print(f"  Warning: No biodegradability data to save for {filename}")
+            return
+        
+        # Add timestamp column if not already present
+        if 'timestamp' not in df.columns:
+            df['timestamp'] = timestamp
+        
+        filename_full = os.path.join(self.output_dir, f'{filename}_{timestamp}.csv')
+        df.to_csv(filename_full, index=False, float_format='%.8e')
+        
+        print(f"  Saved biodegradability analysis results to: {filename_full}")

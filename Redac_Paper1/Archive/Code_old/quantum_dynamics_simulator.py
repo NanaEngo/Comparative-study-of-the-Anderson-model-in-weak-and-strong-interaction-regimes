@@ -9,9 +9,11 @@ try:
     )
     import mesohops.eom.hops_eom as _eom_mod
     from mesohops.trajectory.hops_trajectory import HopsTrajectory
+    MESOHOPS_AVAILABLE = True
 except ImportError:
     # Fallback or warning if mesohops is not installed, though it is required.
-    pass
+    MESOHOPS_AVAILABLE = False
+    _eom_mod = None
 
 class QuantumDynamicsSimulator:
     """
@@ -66,12 +68,17 @@ class QuantumDynamicsSimulator:
                  gamma_dl=50.0, k_matsubara=0, max_hier=10, n_traj=50,
                  vibronic_modes=None):
 
+        if not MESOHOPS_AVAILABLE:
+            raise ImportError("MesoHOPS is required but not available. "
+                            "Please install it: pip install mesohops")
+
         # Patch EOM_DICT_TYPES for adHOPS support in MesoHOPS v1.6.0
-        if 'ADAPTIVE_H' not in _eom_mod.EOM_DICT_TYPES:
-            _eom_mod.EOM_DICT_TYPES['ADAPTIVE_H'] = [bool]
-            _eom_mod.EOM_DICT_TYPES['ADAPTIVE_S'] = [bool]
-            _eom_mod.EOM_DICT_TYPES['UPDATE_STEP'] = [float, bool, type(None)]
-            _eom_mod.EOM_DICT_TYPES['F_DISCARD'] = [float, int]
+        if MESOHOPS_AVAILABLE and _eom_mod is not None:
+            if 'ADAPTIVE_H' not in _eom_mod.EOM_DICT_TYPES:
+                _eom_mod.EOM_DICT_TYPES['ADAPTIVE_H'] = [bool]
+                _eom_mod.EOM_DICT_TYPES['ADAPTIVE_S'] = [bool]
+                _eom_mod.EOM_DICT_TYPES['UPDATE_STEP'] = [float, bool, type(None)]
+                _eom_mod.EOM_DICT_TYPES['F_DISCARD'] = [float, int]
 
         self.H_raw = np.array(hamiltonian, dtype=complex)
         self.n_sites = self.H_raw.shape[0]
@@ -137,7 +144,7 @@ class QuantumDynamicsSimulator:
                 self.l_noise1.append(self._L_ops[site_idx])
                 self.param_noise1.append([g_vib, w_vib])
 
-        print(f"  Bath decomposition: {self.n_modes_dl} DL+LTC modes "
+        print(f"  Bath decomposition: {self.n_modes_dl} DL modes "
               f"+ {self.n_modes_vib} vibronic modes per site "
               f"= {self.n_modes_per_site * self.n_sites} total hierarchy modes")
 
@@ -769,3 +776,101 @@ class QuantumDynamicsSimulator:
                 L_dag = L.conj().T
                 d_rho += p * (L @ rho @ L_dag - 0.5 * (L_dag @ L @ rho + rho @ L_dag @ L))
         return d_rho
+
+
+def spectral_density_drude_lorentz(omega, lambda_reorg, gamma):
+    """
+    Drude-Lorentz spectral density.
+    
+    J(omega) = (2 * lambda_reorg * gamma * omega) / (omega^2 + gamma^2)
+    
+    Parameters
+    ----------
+    omega : array-like
+        Angular frequency in cm^-1
+    lambda_reorg : float
+        Reorganization energy in cm^-1
+    gamma : float
+        Cutoff frequency in cm^-1
+        
+    Returns
+    -------
+    J : array-like
+        Spectral density values
+    """
+    omega = np.asarray(omega)
+    J = (2 * lambda_reorg * gamma * omega) / (omega**2 + gamma**2)
+    # Avoid division by zero at omega=0
+    J[omega == 0] = 0
+    return J
+
+
+def spectral_density_vibronic(omega, omega_mode, lambda_mode, gamma_mode):
+    """
+    Underdamped vibronic mode spectral density (Shifted Drude-Lorentz).
+    
+    J(omega) = (2 * lambda_mode * omega_mode * gamma_mode * omega) / 
+               ((omega^2 - omega_mode^2)^2 + omega^2 * gamma_mode^2)
+    
+    Parameters
+    ----------
+    omega : array-like
+        Angular frequency in cm^-1
+    omega_mode : float
+        Vibronic mode frequency in cm^-1
+    lambda_mode : float
+        Reorganization energy of the mode in cm^-1
+    gamma_mode : float
+        Damping rate in cm^-1
+        
+    Returns
+    -------
+    J : array-like
+        Spectral density values
+    """
+    omega = np.asarray(omega)
+    numerator = 2 * lambda_mode * omega_mode * gamma_mode * omega
+    denominator = (omega**2 - omega_mode**2)**2 + omega**2 * gamma_mode**2
+    J = numerator / denominator
+    # Avoid division by zero at omega=0
+    J[omega == 0] = 0
+    return J
+
+
+def spectral_density_total(omega, lambda_reorg, gamma, vibronic_modes=None):
+    """
+    Total spectral density combining Drude-Lorentz and vibronic modes.
+    
+    Parameters
+    ----------
+    omega : array-like
+        Angular frequency in cm^-1
+    lambda_reorg : float
+        Reorganization energy for Drude-Lorentz component in cm^-1
+    gamma : float
+        Cutoff frequency for Drude-Lorentz component in cm^-1
+    vibronic_modes : list of dict, optional
+        List of vibronic modes, each with keys 'omega', 'lambda', 'gamma'
+        
+    Returns
+    -------
+    J : array-like
+        Total spectral density values
+    """
+    omega = np.asarray(omega)
+    
+    # Drude-Lorentz component
+    J_total = spectral_density_drude_lorentz(omega, lambda_reorg, gamma)
+    
+    # Add vibronic modes if provided
+    if vibronic_modes:
+        for mode in vibronic_modes:
+            J_vib = spectral_density_vibronic(
+                omega, 
+                mode['omega'], 
+                mode['lambda'], 
+                mode['gamma']
+            )
+            J_total += J_vib
+    
+    return J_total

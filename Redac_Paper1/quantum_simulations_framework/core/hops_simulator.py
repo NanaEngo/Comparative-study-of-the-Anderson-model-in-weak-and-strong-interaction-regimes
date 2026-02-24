@@ -23,21 +23,9 @@ except ImportError:
     HopsBasis = None
     HopsTrajectory = None
 
-# Import MesoHOPS modules
-try:
-    from mesohops.basis.hops_system import HopsSystem
-    from mesohops.basis.hops_basis import HopsBasis
-    from mesohops.trajectory.hops_trajectory import HopsTrajectory
-    MESOHOPS_AVAILABLE = True
-except ImportError:
-    MESOHOPS_AVAILABLE = False
-    HopsSystem = None
-    HopsBasis = None
-    HopsTrajectory = None
-
 # Import fallback simulators - we'll check if they can be instantiated in the init method
 try:
-    from quantum_dynamics_simulator import QuantumDynamicsSimulator as QDS
+    from .quantum_dynamics_simulator import QuantumDynamicsSimulator as QDS
     # Check if it can be used by testing if MesoHOPS is available
     try:
         # Create a minimal test instance to see if it fails due to missing MesoHOPS
@@ -70,7 +58,7 @@ except ImportError:
 
 # Import simple fallback simulator
 try:
-    from simple_quantum_dynamics_simulator import SimpleQuantumDynamicsSimulator
+    from .simple_quantum_dynamics_simulator import SimpleQuantumDynamicsSimulator
 except ImportError:
     try:
         from models.simple_quantum_dynamics_simulator import SimpleQuantumDynamicsSimulator
@@ -197,6 +185,13 @@ class HopsSimulator:
                 L_hier.append(L_op)
                 L_noise.append(L_op)
 
+            # Shift Hamiltonian to center energies around 0.
+            # Large absolute energies (like ~12000 cm^-1 for FMO) cause rapid oscillations
+            # exp(-i H t / hbar) which numerical integrators struggle with, causing overflows.
+            # Physical observables (populations) are invariant to uniform energy shifts.
+            E_mean = np.mean(np.diag(self.hamiltonian))
+            H_shifted = self.hamiltonian - E_mean * np.eye(n_sites)
+
             # Bath correlation function parameters - Drude-Lorentz model
             # Using the bcf_convert_dl_to_exp function from MesoHOPS
             try:
@@ -219,7 +214,7 @@ class HopsSimulator:
             from mesohops.trajectory.exp_noise import bcf_exp
 
             self.system_param = {
-                'HAMILTONIAN': self.hamiltonian,
+                'HAMILTONIAN': H_shifted,
                 'GW_SYSBATH': gw_sysbath,
                 'L_HIER': L_hier,
                 'L_NOISE1': L_noise,
@@ -408,7 +403,17 @@ class HopsSimulator:
             # Since default integrator_step is 0.5, we pass tau = 2.0 * TAU
             integrator_step = 0.5  # Default RK integrator step
             tau = dt_save / integrator_step
-            trajectory.propagate(t_max, tau)
+            
+            import sys
+            import io
+            # Suppress normal stdout completely during trajectory propagation to avoid 
+            # the spamming warnings, e.g., 'WARNING: circulant embedding is NOT positive semidefinite.'
+            old_stdout = sys.stdout
+            sys.stdout = io.StringIO()
+            try:
+                trajectory.propagate(t_max, tau)
+            finally:
+                sys.stdout = old_stdout
             
             # Extract results from trajectory
             t_axis = np.array(trajectory.storage.data['t_axis'])

@@ -165,7 +165,7 @@ class TestingValidationProtocols:
         logger.debug("Validating quantum dynamics")
 
         # Run short simulation
-        time_points = np.linspace(0, 500, 100)
+        time_points = np.linspace(0, 500, 500)
 
         try:
             sim_result = self.quantum_simulator.simulate_dynamics(time_points)
@@ -226,7 +226,7 @@ class TestingValidationProtocols:
             Convergence analysis results
         """
         if max_time_steps is None:
-            max_time_steps = [50, 100, 200, 400]
+            max_time_steps = [125, 250, 500, 1000]
 
         logger.debug(f"Running convergence analysis with {len(max_time_steps)} refinement levels")
 
@@ -296,7 +296,7 @@ class TestingValidationProtocols:
         from core.hops_simulator import HopsSimulator
 
         # Quantum simulation (non-Markovian)
-        time_points = np.linspace(0, 500, 100)
+        time_points = np.linspace(0, 500, 500)
 
         try:
             sim_result = self.quantum_simulator.simulate_dynamics(time_points)

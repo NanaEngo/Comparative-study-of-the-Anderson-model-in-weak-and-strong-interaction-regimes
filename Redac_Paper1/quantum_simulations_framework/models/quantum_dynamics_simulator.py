@@ -551,7 +551,7 @@ class QuantumDynamicsSimulator:
                 k_matsubara=self.k_matsubara,
                 max_hier=self.max_hier, n_traj=max(5, self.n_traj // 10),
             )
-            res = sim.simulate_dynamics(time_points=np.linspace(0, 200, 50), dt_save=4.0)
+            res = sim.simulate_dynamics(time_points=np.linspace(0, 200, 200), dt_save=1.0)
             pops = res['populations']
             etr_proxy = np.sum(pops[-1, 1:])
             results['temperature_sensitivity'].append(etr_proxy)
@@ -568,7 +568,7 @@ class QuantumDynamicsSimulator:
                 k_matsubara=self.k_matsubara,
                 max_hier=self.max_hier, n_traj=max(5, self.n_traj // 10),
             )
-            res = sim.simulate_dynamics(time_points=np.linspace(0, 200, 50), dt_save=4.0)
+            res = sim.simulate_dynamics(time_points=np.linspace(0, 200, 200), dt_save=1.0)
             pops = res['populations']
             etr_proxy = np.sum(pops[-1, 1:])
             results['disorder_sensitivity'].append(etr_proxy)

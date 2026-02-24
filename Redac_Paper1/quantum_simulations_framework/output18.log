@@ -1,0 +1,421 @@
+2026-02-24 16:52:13,219 - quantum_simulations_framework.__main__ - INFO - MesoHOPS modules imported successfully
+Quantum Agrivoltaics Framework - MesoHOPS Implementation
+========================================================
+Date: 2026-02-24 16:52:13
+MesoHOPS Available: True
+
+✓ Configuration loaded successfully
+  - Temperature: 295 K
+  - Max Hierarchy: 10
+  - Target PCE: 18.0%
+
+✓ Output directories configured:
+  - Simulation Data: /media/taamangtchu/MYDATA/Github/Quantum_Agrivoltaic_HOPS/Redac_Paper1/quantum_simulations_framework/../simulation_data
+  - Graphics: /media/taamangtchu/MYDATA/Github/Quantum_Agrivoltaic_HOPS/Redac_Paper1/quantum_simulations_framework/../Graphics
+  - Figures: /media/taamangtchu/MYDATA/Github/Quantum_Agrivoltaic_HOPS/Redac_Paper1/quantum_simulations_framework/../figures
+
+=== Quantum Information Metrics Available ===
+
+ 1. Quantum Fisher Information (QFI)    - Parameter estimation sensitivity
+ 2. Von Neumann Entropy                 - System mixedness
+ 3. Purity                              - State coherence preservation
+ 4. Linear Entropy                      - Mixed state approximation
+ 5. Concurrence                         - Bipartite entanglement
+ 6. Bipartite Entanglement              - Subsystem correlations
+ 7. Multipartite Entanglement           - Multi-site quantum correlations
+ 8. Pairwise Concurrence                - Average pair entanglement
+ 9. Quantum Discord                     - Non-classical correlations
+10. Coherence (l₁-norm)                 - Quantum coherence measure
+11. Fidelity                            - State preservation
+
+All metrics computed during quantum dynamics simulation.
+2026-02-24 16:52:13,243 - quantum_simulations_framework.__main__ - INFO - Framework modules imported successfully
+✓ Core modules imported successfully
+  - FMO Site Energies: [12410 12530 12210 12320 12480 12630 12440]
+  - FMO Couplings: 21 connections
+  - Default Temperature: 295.0 K
+  - MesoHOPS Available: True
+
+2026-02-24 16:52:13,244 - quantum_simulations_framework.quantum_coherence_agrivoltaics_mesohops - INFO - MesoHOPS modules imported successfully
+2026-02-24 16:52:13,244 - quantum_simulations_framework.quantum_coherence_agrivoltaics_mesohops - INFO - Framework modules imported successfully
+2026-02-24 16:52:13,245 - quantum_simulations_framework.quantum_coherence_agrivoltaics_mesohops - WARNING - EnvironmentalFactors module not found, using full implementation
+2026-02-24 16:52:13,255 - quantum_simulations_framework.quantum_coherence_agrivoltaics_mesohops - INFO - FMO Hamiltonian created with 7 sites
+✓ FMO Hamiltonian created successfully
+  - Size: (7, 7)
+  - Site energies: [12410 12530 12210 12320 12480 12630 12440]
+
+Initializing HOPS Simulator with MesoHOPS integration...
+✓ HOPS Simulator initialized
+  - Simulator type: MesoHOPS
+  - Using MesoHOPS: True
+  - Temperature: 295.0 K
+  - Max hierarchy: 10
+
+Running quantum dynamics simulation...
+✓ Quantum dynamics simulation completed
+  - Time points: 1000
+  - Simulation time: 1000.0 fs
+  - Result keys: ['t_axis', 'populations', 'coherences', 'qfi', 'entropy', 'purity', 'linear_entropy', 'simulator', 'n_traj_used', 'max_hierarchy_used']
+  - Population shape: (501, 7)
+  - Initial population (site 1): 1.0000
+  - Final population (site 1): 0.0000
+  - Energy transfer efficiency: 1.0000 (100.00%)
+  - Final total population: 0.0000
+  - Coherence decay: 0.0000 → 0.0000
+
+Initializing Agrivoltaic Coupling Model...
+✓ Agrivoltaic Coupling Model initialized
+  - OPV sites: 4
+  - PSU sites: 7
+  - Total sites: 28
+
+Setting up Spectral Optimization...
+✓ Spectral optimizer initialized with 801 wavelength points
+
+Running spectral optimization...
+differential_evolution step 1: f(x)= -0.3643375506546723
+differential_evolution step 2: f(x)= -0.39898671555017606
+differential_evolution step 3: f(x)= -0.421836518649521
+differential_evolution step 4: f(x)= -0.421836518649521
+differential_evolution step 5: f(x)= -0.4597578281584437
+differential_evolution step 6: f(x)= -0.4597578281584437
+differential_evolution step 7: f(x)= -0.4597578281584437
+differential_evolution step 8: f(x)= -0.47708253359836017
+differential_evolution step 9: f(x)= -0.47708253359836017
+differential_evolution step 10: f(x)= -0.47708253359836017
+differential_evolution step 11: f(x)= -0.47708253359836017
+differential_evolution step 12: f(x)= -0.47708253359836017
+differential_evolution step 13: f(x)= -0.47708253359836017
+differential_evolution step 14: f(x)= -0.49474989051672597
+differential_evolution step 15: f(x)= -0.49474989051672597
+differential_evolution step 16: f(x)= -0.49474989051672597
+differential_evolution step 17: f(x)= -0.4949663034966464
+differential_evolution step 18: f(x)= -0.4949663034966464
+differential_evolution step 19: f(x)= -0.4956102355850637
+differential_evolution step 20: f(x)= -0.4967091005925486
+Polishing solution with 'L-BFGS-B'
+✓ Spectral optimization completed:
+  - Optimal PCE: 0.1883
+  - Optimal ETR: 0.8051
+  - Success: False
+  - Function evaluations: 1736
+  - Results saved to: ../simulation_data/spectral_optimization_20260224_165316.csv
+
+Initializing Eco-Design Analyzer...
+✓ Material evaluation completed:
+  - Material: PM6 Derivative (Molecule A)
+  - PCE: 0.155 (Score: 0.861)
+  - B-index: 72.0
+  - BDE: 285.0 kJ/mol
+  - LC50: 450.0 mg/L
+  - Sustainability Score: 0.991
+  ---
+  - Material: Y6-BO Derivative (Molecule B)
+  - PCE: 0.152 (Score: 0.844)
+  - B-index: 58.0
+  - BDE: 310.0 kJ/mol
+  - LC50: 420.0 mg/L
+  - Sustainability Score: 0.901
+  ---
+Initializing Biodegradability Analyzer...
+✓ Fukui functions calculated successfully
+  - Max nucleophilic: -0.000
+  - Max electrophilic: -0.000
+  - Max radical: -0.000
+
+Initializing Testing and Validation Protocols...
+✓ Validation completed:
+  - Tests passed: 5/8
+  - Pass rate: 62.5%
+  - Hamiltonian validation passed: 2 tests
+
+Initializing LCA Analyzer...
+⚠ LCA calculation failed: LCAAnalyzer.calculate_lca_impact() got an unexpected keyword argument 'energy_yield_kwh_per_m2'
+
+Initializing Data Storage System...
+✓ Quantum dynamics saved to: ../simulation_data/quantum_dynamics_20260224_165552.csv
+✓ Agrivoltaic results saved to: ../simulation_data/agrivoltaic_results_20260224_165552.csv
+✓ Eco-design results saved to: ../simulation_data/eco_design_results_20260224_165552.csv
+
+Initializing Figure Generation System...
+⚠ Quantum dynamics plotting failed: latex was not able to process the following string:
+b'lp'
+
+Here is the full command invocation and its output:
+
+latex -interaction=nonstopmode --halt-on-error file.tex
+
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=latex)
+entering extended mode
+(./file.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-10>
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/size10.clo))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/helvet.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/type1cm/type1cm.sty)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/cm-super/type1ec.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/t1cmr.fd))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty)))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+
+! LaTeX Error: File `sfmath.sty' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+! Emergency stop.
+<read *> 
+         
+l.18 \makeatletter
+                  \@ifpackageloaded{underscore}{}{\usepackage[strings]{under...
+
+No pages of output.
+Transcript written on file.log.
+
+
+
+⚠ Agrivoltaic plotting failed: latex was not able to process the following string:
+b'lp'
+
+Here is the full command invocation and its output:
+
+latex -interaction=nonstopmode --halt-on-error file.tex
+
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=latex)
+entering extended mode
+(./file.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-10>
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/size10.clo))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/helvet.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/type1cm/type1cm.sty)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/cm-super/type1ec.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/t1cmr.fd))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty)))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+
+! LaTeX Error: File `sfmath.sty' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+! Emergency stop.
+<read *> 
+         
+l.18 \makeatletter
+                  \@ifpackageloaded{underscore}{}{\usepackage[strings]{under...
+
+No pages of output.
+Transcript written on file.log.
+
+
+
+⚠ Spectral optimization plotting failed: latex was not able to process the following string:
+b'lp'
+
+Here is the full command invocation and its output:
+
+latex -interaction=nonstopmode --halt-on-error file.tex
+
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=latex)
+entering extended mode
+(./file.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-10>
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/size10.clo))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/helvet.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/type1cm/type1cm.sty)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/cm-super/type1ec.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/t1cmr.fd))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty)))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+
+! LaTeX Error: File `sfmath.sty' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+! Emergency stop.
+<read *> 
+         
+l.18 \makeatletter
+                  \@ifpackageloaded{underscore}{}{\usepackage[strings]{under...
+
+No pages of output.
+Transcript written on file.log.
+
+
+
+
+Initializing Sensitivity Analysis...
+✓ Sensitivity analysis completed:
+  - Parameters analyzed: ['temperature', 'dephasing_rate', 'transmission_center', 'transmission_width', 'dust_thickness']
+  - Total samples: 10
+
+Initializing Environmental Factors Model...
+✓ Environmental modeling completed:
+  - Time range: 365 days
+  - PCE range: 0.157 - 0.169
+  - ETR range: 0.839 - 0.897
+  - Max dust thickness: 1.09
+2026-02-24 16:55:53,329 - quantum_simulations_framework.quantum_coherence_agrivoltaics_mesohops - INFO - Environmental data saved to ../simulation_data/environmental_effects_20260224_165553.csv
+  - Environmental data saved to: ../simulation_data/environmental_effects_20260224_165553.csv
+Traceback (most recent call last):
+  File "/media/taamangtchu/MYDATA/Github/Quantum_Agrivoltaic_HOPS/Redac_Paper1/quantum_simulations_framework/quantum_coherence_agrivoltaics_mesohops_complete.py", line 996, in <module>
+    env_fig_path = env_factors.plot_environmental_effects(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/taamangtchu/MYDATA/Github/Quantum_Agrivoltaic_HOPS/Redac_Paper1/quantum_simulations_framework/quantum_coherence_agrivoltaics_mesohops.py", line 515, in plot_environmental_effects
+    plt.tight_layout()
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/pyplot.py", line 2843, in tight_layout
+    gcf().tight_layout(pad=pad, h_pad=h_pad, w_pad=w_pad, rect=rect)
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/figure.py", line 3640, in tight_layout
+    engine.execute(self)
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/layout_engine.py", line 188, in execute
+    kwargs = get_tight_layout_figure(
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/_tight_layout.py", line 266, in get_tight_layout_figure
+    kwargs = _auto_adjust_subplotpars(fig, renderer,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/_tight_layout.py", line 82, in _auto_adjust_subplotpars
+    bb += [martist._get_tightbbox_for_layout_only(ax, renderer)]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/artist.py", line 1402, in _get_tightbbox_for_layout_only
+    return obj.get_tightbbox(*args, **{**kwargs, "for_layout_only": True})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/axes/_base.py", line 4564, in get_tightbbox
+    ba = martist._get_tightbbox_for_layout_only(axis, renderer)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/artist.py", line 1402, in _get_tightbbox_for_layout_only
+    return obj.get_tightbbox(*args, **{**kwargs, "for_layout_only": True})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/axis.py", line 1353, in get_tightbbox
+    self._update_label_position(renderer)
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/axis.py", line 2448, in _update_label_position
+    bboxes, bboxes2 = self._get_tick_boxes_siblings(renderer=renderer)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/axis.py", line 2241, in _get_tick_boxes_siblings
+    tlb, tlb2 = axis._get_ticklabel_bboxes(ticks_to_draw, renderer)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/axis.py", line 1332, in _get_ticklabel_bboxes
+    return ([tick.label1.get_window_extent(renderer)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/text.py", line 969, in get_window_extent
+    bbox, info, descent = self._get_layout(self._renderer)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/text.py", line 373, in _get_layout
+    _, lp_h, lp_d = _get_text_metrics_with_cache(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/text.py", line 69, in _get_text_metrics_with_cache
+    return _get_text_metrics_with_cache_impl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/text.py", line 77, in _get_text_metrics_with_cache_impl
+    return renderer_ref().get_text_width_height_descent(text, fontprop, ismath)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/backends/backend_agg.py", line 211, in get_text_width_height_descent
+    return super().get_text_width_height_descent(s, prop, ismath)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/backend_bases.py", line 566, in get_text_width_height_descent
+    return self.get_texmanager().get_text_width_height_descent(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/texmanager.py", line 364, in get_text_width_height_descent
+    dvifile = cls.make_dvi(tex, fontsize)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/texmanager.py", line 293, in make_dvi
+    cls._run_checked_subprocess(
+  File "/home/taamangtchu/miniforge3/envs/MesoHOP-sim/lib/python3.12/site-packages/matplotlib/texmanager.py", line 258, in _run_checked_subprocess
+    raise RuntimeError(
+RuntimeError: latex was not able to process the following string:
+b'lp'
+
+Here is the full command invocation and its output:
+
+latex -interaction=nonstopmode --halt-on-error file.tex
+
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=latex)
+entering extended mode
+(./file.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-10>
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/size10.clo))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/helvet.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/type1cm/type1cm.sty)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/cm-super/type1ec.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/t1cmr.fd))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty)))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+
+! LaTeX Error: File `sfmath.sty' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+! Emergency stop.
+<read *> 
+         
+l.18 \makeatletter
+                  \@ifpackageloaded{underscore}{}{\usepackage[strings]{under...
+
+No pages of output.
+Transcript written on file.log.
+
+
+
+
+ERROR conda.cli.main_run:execute(127): `conda run python quantum_coherence_agrivoltaics_mesohops_complete.py` failed. (See above for error)
+

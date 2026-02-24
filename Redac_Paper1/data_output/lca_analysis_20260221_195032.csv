@@ -1,0 +1,11 @@
+metric,value
+manufacturing,"{'energy_mj': 1200, 'carbon_kg_co2eq': 166.68, 'toxicity_score': 0.03, 'resource_depletion': 0.015}"
+operational,"{'energy_mj': 900.0, 'carbon_kg_co2eq': 125.00999999999999, 'maintenance_events': 20.0}"
+end_of_life,"{'recycled_mass': 0.24, 'landfill_mass': 0.059999999999999984, 'recycling_energy_mj': 360.0, 'carbon_kg_co2eq': 49.524, 'landfill_impact': 0.029999999999999992}"
+total_carbon_kg_co2eq,341.214
+total_energy_mj,2460.0
+lifetime_energy_kwh_per_m2,5100.0
+carbon_footprint_gco2eq_per_kwh,66.90470588235294
+energy_payback_time_years,1.3071895424836601
+eroi,7.463414634146342
+comparison_to_silicon,"{'carbon_ratio': 1.6726176470588237, 'epbt_ratio': 0.6535947712418301}"

@@ -34,7 +34,7 @@ class CSVDataStorage:
         os.makedirs(output_dir, exist_ok=True)
         logger.info(f"CSV data storage initialized at {output_dir}")
     
-    def save_quantum_dynamics(
+    def save_quantum_dynamics_results(
         self,
         time_points: np.ndarray,
         populations: np.ndarray,

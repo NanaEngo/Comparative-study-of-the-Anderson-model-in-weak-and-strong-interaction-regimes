@@ -1,0 +1,151 @@
+Traceback (most recent call last):
+  File "/media/taamangtchu/MYDATA/Github/Quantum_Agrivoltaic_HOPS/Redac_Paper1/quantum_simulations_framework/quantum_coherence_agrivoltaics_mesohops_complete.py", line 838, in <module>
+    csv_path = csv_storage.save_eco_design_results(eco_data)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'CSVDataStorage' object has no attribute 'save_eco_design_results'
+
+ERROR conda.cli.main_run:execute(127): `conda run python quantum_coherence_agrivoltaics_mesohops_complete.py` failed. (See above for error)
+2026-02-24 15:32:01,429 - quantum_simulations_framework.__main__ - INFO - MesoHOPS modules imported successfully
+Quantum Agrivoltaics Framework - MesoHOPS Implementation
+========================================================
+Date: 2026-02-24 15:32:01
+MesoHOPS Available: True
+
+✓ Configuration loaded successfully
+  - Temperature: 295 K
+  - Max Hierarchy: 10
+  - Target PCE: 18.0%
+
+✓ Output directories configured:
+  - Simulation Data: /media/taamangtchu/MYDATA/Github/Quantum_Agrivoltaic_HOPS/Redac_Paper1/quantum_simulations_framework/../simulation_data
+  - Graphics: /media/taamangtchu/MYDATA/Github/Quantum_Agrivoltaic_HOPS/Redac_Paper1/quantum_simulations_framework/../Graphics
+  - Figures: /media/taamangtchu/MYDATA/Github/Quantum_Agrivoltaic_HOPS/Redac_Paper1/quantum_simulations_framework/../figures
+
+=== Quantum Information Metrics Available ===
+
+ 1. Quantum Fisher Information (QFI)    - Parameter estimation sensitivity
+ 2. Von Neumann Entropy                 - System mixedness
+ 3. Purity                              - State coherence preservation
+ 4. Linear Entropy                      - Mixed state approximation
+ 5. Concurrence                         - Bipartite entanglement
+ 6. Bipartite Entanglement              - Subsystem correlations
+ 7. Multipartite Entanglement           - Multi-site quantum correlations
+ 8. Pairwise Concurrence                - Average pair entanglement
+ 9. Quantum Discord                     - Non-classical correlations
+10. Coherence (l₁-norm)                 - Quantum coherence measure
+11. Fidelity                            - State preservation
+
+All metrics computed during quantum dynamics simulation.
+2026-02-24 15:32:01,454 - quantum_simulations_framework.__main__ - INFO - Framework modules imported successfully
+✓ Core modules imported successfully
+  - FMO Site Energies: [12410 12530 12210 12320 12480 12630 12440]
+  - FMO Couplings: 21 connections
+  - Default Temperature: 295.0 K
+  - MesoHOPS Available: True
+
+2026-02-24 15:32:01,456 - quantum_simulations_framework.quantum_coherence_agrivoltaics_mesohops - INFO - MesoHOPS modules imported successfully
+2026-02-24 15:32:01,456 - quantum_simulations_framework.quantum_coherence_agrivoltaics_mesohops - INFO - Framework modules imported successfully
+2026-02-24 15:32:01,457 - quantum_simulations_framework.quantum_coherence_agrivoltaics_mesohops - WARNING - EnvironmentalFactors module not found, using full implementation
+2026-02-24 15:32:01,466 - quantum_simulations_framework.quantum_coherence_agrivoltaics_mesohops - INFO - FMO Hamiltonian created with 7 sites
+✓ FMO Hamiltonian created successfully
+  - Size: (7, 7)
+  - Site energies: [12410 12530 12210 12320 12480 12630 12440]
+
+Initializing HOPS Simulator with MesoHOPS integration...
+✓ HOPS Simulator initialized
+  - Simulator type: MesoHOPS
+  - Using MesoHOPS: True
+  - Temperature: 295.0 K
+  - Max hierarchy: 10
+
+Running quantum dynamics simulation...
+✓ Quantum dynamics simulation completed
+  - Time points: 1000
+  - Simulation time: 1000.0 fs
+  - Result keys: ['t_axis', 'populations', 'coherences', 'qfi', 'entropy', 'purity', 'linear_entropy', 'simulator', 'n_traj_used', 'max_hierarchy_used']
+  - Population shape: (501, 7)
+  - Initial population (site 1): 1.0000
+  - Final population (site 1): 0.0000
+  - Energy transfer efficiency: 1.0000 (100.00%)
+  - Final total population: 0.0000
+  - Coherence decay: 0.0000 → 0.0000
+
+Initializing Agrivoltaic Coupling Model...
+✓ Agrivoltaic Coupling Model initialized
+  - OPV sites: 4
+  - PSU sites: 7
+  - Total sites: 28
+
+Setting up Spectral Optimization...
+✓ Spectral optimizer initialized with 801 wavelength points
+
+Running spectral optimization...
+differential_evolution step 1: f(x)= -0.3643375506546723
+differential_evolution step 2: f(x)= -0.39898671555017606
+differential_evolution step 3: f(x)= -0.421836518649521
+differential_evolution step 4: f(x)= -0.421836518649521
+differential_evolution step 5: f(x)= -0.4597578281584437
+differential_evolution step 6: f(x)= -0.4597578281584437
+differential_evolution step 7: f(x)= -0.4597578281584437
+differential_evolution step 8: f(x)= -0.47708253359836017
+differential_evolution step 9: f(x)= -0.47708253359836017
+differential_evolution step 10: f(x)= -0.47708253359836017
+differential_evolution step 11: f(x)= -0.47708253359836017
+differential_evolution step 12: f(x)= -0.47708253359836017
+differential_evolution step 13: f(x)= -0.47708253359836017
+differential_evolution step 14: f(x)= -0.49474989051672597
+differential_evolution step 15: f(x)= -0.49474989051672597
+differential_evolution step 16: f(x)= -0.49474989051672597
+differential_evolution step 17: f(x)= -0.4949663034966464
+differential_evolution step 18: f(x)= -0.4949663034966464
+differential_evolution step 19: f(x)= -0.4956102355850637
+differential_evolution step 20: f(x)= -0.4967091005925486
+Polishing solution with 'L-BFGS-B'
+✓ Spectral optimization completed:
+  - Optimal PCE: 0.1883
+  - Optimal ETR: 0.8051
+  - Success: False
+  - Function evaluations: 1736
+  - Results saved to: ../simulation_data/spectral_optimization_20260224_153305.csv
+
+Initializing Eco-Design Analyzer...
+✓ Material evaluation completed:
+  - Material: PM6 Derivative (Molecule A)
+  - PCE: 0.155 (Score: 0.861)
+  - B-index: 72.0
+  - BDE: 285.0 kJ/mol
+  - LC50: 450.0 mg/L
+  - Sustainability Score: 0.991
+  ---
+  - Material: Y6-BO Derivative (Molecule B)
+  - PCE: 0.152 (Score: 0.844)
+  - B-index: 58.0
+  - BDE: 310.0 kJ/mol
+  - LC50: 420.0 mg/L
+  - Sustainability Score: 0.901
+  ---
+Initializing Biodegradability Analyzer...
+✓ Fukui functions calculated successfully
+  - Max nucleophilic: -0.000
+  - Max electrophilic: -0.000
+  - Max radical: -0.000
+
+Initializing Testing and Validation Protocols...
+✓ Validation completed:
+  - Tests passed: 5/8
+  - Pass rate: 62.5%
+  - Hamiltonian validation passed: 2 tests
+
+Initializing LCA Analyzer...
+✓ LCA calculation completed:
+  - Carbon Footprint: 75.08 gCO2eq/kWh
+  - Energy Payback Time: 1.63 years
+  - Energy Return on Investment: 6.65
+  - Overall Sustainability Score: 0.679
+  - LCA results saved to: ../simulation_data/lca_analysis_20260224_153541.csv
+  - LCA plots saved to: ../Graphics/lca_analysis_20260224_153541.pdf
+
+Initializing Data Storage System...
+✓ Quantum dynamics saved to: ../simulation_data/quantum_dynamics_20260224_153543.csv
+✓ Agrivoltaic results saved to: ../simulation_data/agrivoltaic_results_20260224_153543.csv
+

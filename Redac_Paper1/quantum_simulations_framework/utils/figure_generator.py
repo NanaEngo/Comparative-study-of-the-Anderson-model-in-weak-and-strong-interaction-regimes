@@ -36,7 +36,8 @@ class FigureGenerator:
         
         # Set publication-ready style (use available styles)
         try:
-            plt.style.use(['seaborn-v0_8', 'seaborn-v0_8-notebook'])
+            import scienceplots
+            plt.style.use(['science', 'nature'])
         except OSError:
             # Fallback to default if styles not available
             pass

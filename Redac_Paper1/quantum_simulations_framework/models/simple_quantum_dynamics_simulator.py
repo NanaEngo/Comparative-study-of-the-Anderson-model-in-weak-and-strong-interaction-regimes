@@ -134,5 +134,11 @@ class SimpleQuantumDynamicsSimulator:
             'entropy': entropy_values,
             'purity': purity_values,
             'linear_entropy': linear_entropy_values,
+            'bipartite_ent': np.zeros(n_times),
+            'multipartite_ent': np.zeros(n_times),
+            'pairwise_concurrence': np.zeros(n_times),
+            'discord': np.zeros(n_times),
+            'fidelity': np.ones(n_times),  # Dummy fidelity
+            'mandel_q': np.zeros(n_times),
             'simulator': 'Simple Quantum Simulator',
         }

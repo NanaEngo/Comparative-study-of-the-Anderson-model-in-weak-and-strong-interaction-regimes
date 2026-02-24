@@ -17,8 +17,16 @@ from datetime import datetime
 try:
     from core.hops_simulator import HopsSimulator
 except ImportError:
-    HopsSimulator = None
-    logging.warning("HopsSimulator not available for TestingValidationProtocols")
+    try:
+        from quantum_simulations_framework.core.hops_simulator import HopsSimulator
+    except ImportError:
+        try:
+            import sys
+            import os
+            sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+            from core.hops_simulator import HopsSimulator
+        except ImportError:
+            HopsSimulator = None
 
 try:
     from agrivoltaic_coupling_model import AgrivoltaicCouplingModel
@@ -148,7 +156,7 @@ class TestingValidationProtocols:
             Validation results
         """
         # Run short simulation
-        time_points = np.linspace(0, 500, 100)
+        time_points = np.linspace(0, 500, 500)
 
         if hasattr(self.quantum_simulator, 'simulate_dynamics'):
             result = self.quantum_simulator.simulate_dynamics(
@@ -218,7 +226,7 @@ class TestingValidationProtocols:
             Convergence analysis results
         """
         if max_time_steps is None:
-            max_time_steps = [50, 100, 200, 400]
+            max_time_steps = [125, 250, 500, 1000]
 
         final_populations = []
         final_coherences = []
@@ -291,7 +299,7 @@ class TestingValidationProtocols:
         dict
             Comparison results
         """
-        time_points = np.linspace(0, 500, 100)
+        time_points = np.linspace(0, 500, 500)
 
         # Quantum simulation (non-Markovian)
         if hasattr(self.quantum_simulator, 'simulate_dynamics'):

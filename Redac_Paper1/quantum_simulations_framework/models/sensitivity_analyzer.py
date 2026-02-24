@@ -18,8 +18,16 @@ from datetime import datetime
 try:
     from core.hops_simulator import HopsSimulator
 except ImportError:
-    HopsSimulator = None
-    logging.warning("HopsSimulator not available for SensitivityAnalyzer")
+    try:
+        from quantum_simulations_framework.core.hops_simulator import HopsSimulator
+    except ImportError:
+        try:
+            import sys
+            import os
+            sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+            from core.hops_simulator import HopsSimulator
+        except ImportError:
+            HopsSimulator = None
 
 try:
     from agrivoltaic_coupling_model import AgrivoltaicCouplingModel
@@ -121,8 +129,8 @@ class SensitivityAnalyzer:
                     trans = self.agrivoltaic_model.calculate_spectral_transmission(
                         [0.5, 0.5, 0.5, 0.2]
                     )
-                    pce_values.append(self.agrivoltaic_model.calculate_pce(trans))
-                    etr_values.append(self.agrivoltaic_model.calculate_etr(trans))
+                    pce_values.append(self.agrivoltaic_model.calculate_opv_efficiency(trans))
+                    etr_values.append(self.agrivoltaic_model.calculate_psu_efficiency(trans))
                 else:
                     pce_values.append(0.0)
                     etr_values.append(0.0)
@@ -136,8 +144,8 @@ class SensitivityAnalyzer:
                     trans = self.agrivoltaic_model.calculate_spectral_transmission(
                         [0.5, 0.5, 0.5, 0.2]
                     )
-                    pce_values.append(self.agrivoltaic_model.calculate_pce(trans))
-                    etr_values.append(self.agrivoltaic_model.calculate_etr(trans))
+                    pce_values.append(self.agrivoltaic_model.calculate_opv_efficiency(trans))
+                    etr_values.append(self.agrivoltaic_model.calculate_psu_efficiency(trans))
                 else:
                     pce_values.append(0.0)
                     etr_values.append(0.0)
@@ -201,8 +209,8 @@ class SensitivityAnalyzer:
                 trans = self.agrivoltaic_model.calculate_spectral_transmission(
                     [0.5, 0.5, 0.5, 0.2]
                 )
-                pce_samples.append(self.agrivoltaic_model.calculate_pce(trans))
-                etr_samples.append(self.agrivoltaic_model.calculate_etr(trans))
+                pce_samples.append(self.agrivoltaic_model.calculate_opv_efficiency(trans))
+                etr_samples.append(self.agrivoltaic_model.calculate_psu_efficiency(trans))
 
         pce_samples = np.array(pce_samples)
         etr_samples = np.array(etr_samples)

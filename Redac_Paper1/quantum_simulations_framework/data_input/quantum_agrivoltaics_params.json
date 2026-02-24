@@ -4,14 +4,16 @@
     "dephasing_rate": 20,
     "time_points": 500,
     "max_time": 500,
-    "n_filters": 3
+    "n_filters": 3,
+    "max_hierarchy": 10
   },
   "fmo_hamiltonian_params": {
     "include_reaction_center": false
   },
   "opv_params": {
     "opv_bandgap": 1.4,
-    "opv_absorption_coeff": 1.0
+    "opv_absorption_coeff": 1.0,
+    "target_pce": 0.18
   },
   "quantum_metrics": {
     "calculate_qfi": true,

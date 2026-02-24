@@ -1,0 +1,5 @@
+  File "/media/taamangtchu/MYDATA/Github/Quantum_Agrivoltaic_HOPS/Redac_Paper1/quantum_simulations_framework/quantum_coherence_agrivoltaics_mesohops_complete.py", line 142
+    from pathlib import Path
+IndentationError: unexpected indent
+
+ERROR conda.cli.main_run:execute(127): `conda run python quantum_coherence_agrivoltaics_mesohops_complete.py` failed. (See above for error)

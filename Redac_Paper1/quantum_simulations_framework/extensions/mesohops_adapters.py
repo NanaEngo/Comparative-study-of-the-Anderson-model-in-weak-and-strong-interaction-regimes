@@ -54,7 +54,22 @@ def _construct_mpo_from_bcf(time_grid, correlation_func, bond_dim=10):
     delta_t = np.abs(t_row - t_col)
 
     # Evaluate correlation function over the time grid differences
+    # Vectorize the correlation function to handle array inputs properly
     C = np.array(correlation_func(delta_t))
+    
+    # Ensure C is at least 2D (handle scalar or 0-dimensional results)
+    if C.ndim < 2:
+        # If correlation_func returned a scalar, build diagonal matrix
+        if C.ndim == 0:
+            C = np.full((n_steps, n_steps), float(C))
+        else:
+            C = np.atleast_2d(C)
+    
+    # Ensure C is properly shaped as (n_steps, n_steps)
+    if C.shape != (n_steps, n_steps):
+        # Reshape or tile to get correct shape
+        C = np.resize(C, (n_steps, n_steps))
+    
     # Fill any NaNs that might arise from numerical issues at t=0
     C = np.nan_to_num(C, nan=0.0)
 

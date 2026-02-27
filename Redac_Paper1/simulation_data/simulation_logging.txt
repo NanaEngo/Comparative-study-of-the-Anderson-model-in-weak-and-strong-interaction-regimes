@@ -1,0 +1,7 @@
+2026-02-26 08:45:42 | INFO     | ================================================================================
+2026-02-26 08:45:42 | INFO     | QUANTUM AGRIVOLTAICS SIMULATION - COMPREHENSIVE LOG
+2026-02-26 08:45:42 | INFO     | ================================================================================
+2026-02-26 08:45:42 | INFO     | Simulation Start: 2026-02-26 08:45:42
+2026-02-26 08:45:42 | INFO     | Working Directory: /media/taamangtchu/MYDATA/Github/Quantum_Agrivoltaic_HOPS/Redac_Paper1/quantum_simulations_framework
+2026-02-26 08:45:42 | INFO     | Python Version: 3.12.12 | packaged by conda-forge | (main, Oct 22 2025, 23:25:55) [GCC 14.3.0]
+2026-02-26 08:45:42 | INFO     | --------------------------------------------------------------------------------

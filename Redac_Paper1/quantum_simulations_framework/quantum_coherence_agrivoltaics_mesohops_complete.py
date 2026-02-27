@@ -51,6 +51,40 @@ from utils.logging_config import get_logger, setup_logging
 setup_logging(level=20)  # INFO level
 logger = get_logger(__name__)
 
+# Setup comprehensive simulation logging to file
+import logging
+simulation_log_file = Path("../simulation_data/simulation_logging.txt")
+simulation_log_file.parent.mkdir(parents=True, exist_ok=True)
+sim_file_handler = logging.FileHandler(simulation_log_file, mode='w')
+sim_file_handler.setLevel(logging.INFO)
+sim_file_handler.setFormatter(logging.Formatter(
+    '%(asctime)s | %(levelname)-8s | %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+))
+sim_logger = logging.getLogger("simulation_logger")
+sim_logger.setLevel(logging.INFO)
+sim_logger.addHandler(sim_file_handler)
+sim_logger.info("="*80)
+sim_logger.info("QUANTUM AGRIVOLTAICS SIMULATION - COMPREHENSIVE LOG")
+sim_logger.info("="*80)
+sim_logger.info(f"Simulation Start: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+sim_logger.info(f"Working Directory: {Path.cwd().absolute()}")
+sim_logger.info(f"Python Version: {sys.version}")
+sim_logger.info("-"*80)
+
+# Helper function for dual logging
+def log_simulation(message, level="info"):
+    """Log message to both console and simulation log file."""
+    print(message)
+    if level == "info":
+        sim_logger.info(message)
+    elif level == "warning":
+        sim_logger.warning(message)
+    elif level == "error":
+        sim_logger.error(message)
+    elif level == "debug":
+        sim_logger.debug(message)
+
 # Import MesoHOPS modules with fallback
 try:
     from mesohops.basis.hops_basis import HopsBasis
@@ -1259,3 +1293,11 @@ print("Note: See Graphics/SubSaharan_ETR_Enhancement_Analysis.pdf for detailed v
 # > 4. **Mean-field coupling**: Between complexes to capture inter-system energy transfer
 # >
 # > **Roadmap**: Future versions will implement hierarchical coupling between FMO-like subsystems to achieve full chloroplast representation while maintaining computational tractability.
+
+# Simulation Summary Logging
+sim_logger.info("="*80)
+sim_logger.info("SIMULATION COMPLETED SUCCESSFULLY")
+sim_logger.info("="*80)
+sim_logger.info(f"Simulation End: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+sim_logger.info(f"Log File: {simulation_log_file.absolute()}")
+sim_logger.info("="*80)

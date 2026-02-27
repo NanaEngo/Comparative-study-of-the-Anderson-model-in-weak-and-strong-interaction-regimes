@@ -6,7 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,amsfonts,graphicx,booktabs,bm,multirow,siunitx,physics}
 \usepackage{xcolor,hyperref,cleveref}
-\usepackage{natbib}
+\usepackage{rsc}
 \usepackage[margin=2cm]{geometry}
 
 % Hyperref setup
@@ -53,7 +53,7 @@ $^{2}$Department of Physics, Faculty of Science, University of Douala, Cameroon\
 \section{Environmental factor models}\label{si:environmental}
 %=============================================================================
 
-This section details the environmental factor models used to assess the applicability of quantum-optimized agrivoltaic systems across diverse geographic and climatic conditions. These models underpin the geographic simulations reported in Section~3 of the main text.
+The successful translation of quantum-optimized agrivoltaic designs into functional technologies depends on their continued performance under fluctuating climatic conditions. The models described below establish the atmospheric and geographic parameters used to validate these systems through year-long simulations.
 
 \subsection{Solar spectral modeling}
 
@@ -131,17 +131,38 @@ Dust preferentially scatters shorter wavelengths, shifting the transmitted spect
 
 \subsection{Weather modelling}
 
-Daily and seasonal temperature variations are modelled using sinusoidal cycles. Simulations confirm that the photosynthetic quantum advantage remains significant (\SIrange{18}{26}{\percent}) across the physiological temperature range (\SIrange{280}{310}{\kelvin}), supporting year-round viability across diverse climates.
+Daily and seasonal temperature variations are modelled using sinusoidal cycles. Simulations confirm that the photosynthetic quantum advantage remains significant (\SIrange{18}{28}{\percent}) across the physiological temperature range (\SIrange{280}{310}{\kelvin}), supporting year-round viability across diverse climates.
 
 \subsection{Integration with quantum simulations}
 
 Environmental factors modify the effective incident spectrum through sampling over time (hourly resolution), geography (nine representative sites across four continents), and weather/soiling states. Results confirm that quantum advantages persist under realistic variability, including elevated AOD conditions encountered at Sahel sites, with additional potential for carbon sequestration of \SIrange{0.5}{1.0}{\tonne\,\text{CO}_2\per\hectare\per\yr}.
 
+\Cref{tab:environmental_effects} summarises the year-long environmental simulation results from which the sub-\SI{0.2}{\percent} annual degradation figure reported in the main text is derived.
+
+\begin{table}[ht]
+\centering
+\caption{Year-long environmental simulation results (365 days). PCE and ETR are relative values; dust thickness in \si{\micro\metre}. Annual degradation for both PCE and ETR is \SI{0.17}{\percent}, well below the \SI{<1}{\percent\per\yr} commercial threshold.}
+\label{tab:environmental_effects}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Period} & \textbf{Temp.\ (K)} & \textbf{Humidity} & \textbf{Dust (\si{\micro\metre})} & \textbf{PCE} & \textbf{ETR} \\
+\midrule
+Day 0   & 293.0 & 0.64 & 0.115 & 0.1688 & 0.8936 \\
+Q1 (day 91) & 303.0 & 0.64 & 0.093 & 0.1656 & 0.8859 \\
+Q2 (day 182) & 293.0 & 0.36 & 0.958 & 0.1602 & 0.8482 \\
+Q3 (day 273) & 283.0 & 0.36 & 1.254 & 0.1572 & 0.8322 \\
+Q4 (day 364) & 293.0 & 0.64 & 0.143 & 0.1685 & 0.8921 \\
+\midrule
+\multicolumn{4}{l}{\textbf{Annual degradation}} & \SI{0.17}{\percent} & \SI{0.17}{\percent} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 %=============================================================================
 \section{Biodegradability assessment}\label{si:biodegradability}
 %=============================================================================
 
-Sustainable deployment of agrivoltaic OPV materials requires low environmental impact at end of life. This section describes the computational quantum chemistry framework used to assess enzymatic degradation susceptibility of candidate molecules.
+Beyond purely optical and electronic performance, the long-term deployment of organic photovoltaic (OPV) materials hinges on their end-of-life environmental impact. We evaluate this suitability through a computational framework that predicts enzymatic degradation susceptibility using localized and global quantum reactivity descriptors.
 
 \subsection{Fukui function analysis}
 
@@ -159,7 +180,7 @@ where $\rho_N(\vec{r})$, $\rho_{N+1}(\vec{r})$, and $\rho_{N-1}(\vec{r})$ denote
 
 \subsubsection{Computational details}
 
-Density functional theory (DFT) calculations employ the B3LYP hybrid exchange-correlation functional with a 6-31G(d,p) double-zeta polarised basis set, using Gaussian~16 or ORCA~5.0. Convergence criteria are set to \SI{e-8}{\hartree} for the SCF procedure and \SI{e-5}{\hartree\per\bohr} for geometry optimisation.
+Density functional theory (DFT) calculations employ the wB97X-D4 exchange-correlation functional with the def2-SVP polarized-basis set, using ORCA~6.1.0. Convergence criteria are set to \SI{e-8}{\hartree} for the SCF procedure and \SI{e-5}{\hartree\per\bohr} for geometry optimisation.
 
 For each candidate OPV molecule, the protocol proceeds as follows:
 \begin{enumerate}
@@ -235,7 +256,7 @@ The resulting classification scheme is:
     \item $30 < B_{\mathrm{index}} < 50$: Slowly biodegradable (1.5--5 years).
     \item $B_{\mathrm{index}} < 30$: Recalcitrant (${>}\,5$ years).
 \end{itemize}
-Two candidate non-fullerene acceptor molecules were evaluated for quantum-optimized agrivoltaic systems. \textbf{Molecule~A (PM6 derivative)} exhibits high biodegradability ($B_{\mathrm{index}} = 72$) due to four hydrolyzable ester linkages ($f^-_{\mathrm{max}} = 0.08$ at the carbonyl carbon) and a low minimum BDE of \SI{285}{\kilo\joule\per\mole} at the thiophene--ester bond. \textbf{Molecule~B (Y6-BO derivative)} is moderately biodegradable ($B_{\mathrm{index}} = 58$) with two ester linkages and a minimum BDE of \SI{310}{\kilo\joule\per\mole}. Both candidates achieve ${>}\,\SI{15}{\percent}$ PCE in semi-transparent configurations while ensuring environmental compatibility.
+Two candidate non-fullerene acceptor molecules were evaluated for quantum-optimized agrivoltaic systems. \textbf{Molecule~A (PM6 derivative)} exhibits high biodegradability ($B_{\mathrm{index}} = 101.5$) due to four hydrolyzable ester linkages ($f^-_{\mathrm{max}} = 0.08$ at the carbonyl carbon) and a low minimum BDE of \SI{285}{\kilo\joule\per\mole} at the thiophene--ester bond. Global reactivity descriptors yield a chemical potential $\mu = \SI{-4.30}{\electronvolt}$, chemical hardness $\eta = \SI{1.10}{\electronvolt}$, and electrophilicity index $\omega = \SI{8.40}{\electronvolt}$. \textbf{Molecule~B (Y6-BO derivative)} is moderately biodegradable ($B_{\mathrm{index}} = 58$) with two ester linkages and a minimum BDE of \SI{310}{\kilo\joule\per\mole}. Both candidates achieve ${>}\,\SI{15}{\percent}$ PCE in semi-transparent configurations while ensuring environmental compatibility.
 
 The eco-design assessment framework integrates multiple sustainability metrics:
 \begin{enumerate}
@@ -248,13 +269,13 @@ The integrated eco-design score combines these metrics according to:
 \begin{equation}
 \eta_{\mathrm{eco}} = 0.4 \cdot \eta_{\mathrm{biodeg}} + 0.3 \cdot \eta_{\mathrm{PCE}} + 0.3 \cdot \eta_{\mathrm{LCA}},
 \end{equation}
-where $\eta_{\mathrm{biodeg}}$, $\eta_{\mathrm{PCE}}$, and $\eta_{\mathrm{LCA}}$ are normalized efficiency factors for biodegradability, power conversion efficiency, and life cycle impact respectively. Our analysis yields an eco-design score of $\eta_{\mathrm{eco}} = 0.78$ for the optimized materials, indicating good overall sustainability performance.
+where $\eta_{\mathrm{biodeg}}$, $\eta_{\mathrm{PCE}}$, and $\eta_{\mathrm{LCA}}$ are normalized efficiency factors for biodegradability, power conversion efficiency, and life cycle impact respectively. Our analysis yields an eco-design score of $\eta_{\mathrm{eco}} = 1.12$ for the optimized PM6 derivative, indicating excellent overall sustainability performance.
 
 %=============================================================================
 \section{Extended validation data}\label{si:validation}
 %=============================================================================
 
-This section documents the 12 validation tests referenced in Section~3 of the main text. Each test is assigned a pass/fail criterion; results are summarised in \Cref{tab:validation}.
+A suite of 12 validation tests ensures the numerical reliability and physical consistency of the simulation framework. Each test addresses specific criteria for convergence, asymptotic behavior, or environmental robustness, with results summarized in \Cref{tab:validation}.
 
 \subsection{FMO complex Hamiltonian}
 
@@ -283,7 +304,7 @@ H_{\mathrm{sys}} = \sum_{n=1}^{7} \epsilon_n \dyad{n} + \sum_{n \neq m} J_{nm} \
 \end{tabular}
 \end{table}
 
-Key features of the Hamiltonian include: site energies spanning \SI{420}{\per\cm} ($k_{\mathrm{B}}T$ at \SI{295}{\kelvin} $\approx$ \SI{205}{\per\cm}), placing the system in the mixed quantum--classical regime; a strongest coupling of \SI{87.7}{\per\cm} between sites 1 and 2; and a funnelling network directing excitations along the pathway 1,\,2,\,3 $\to$ 4,\,7 $\to$ 5,\,6 $\to$ reaction centre.
+The Hamiltonian structure reveals several critical features: the site energies span \SI{420}{\per\cm}, placing the complex in a mixed quantum--classical regime at \SI{295}{\kelvin} ($k_{\mathrm{B}}T \approx \SI{205}{\per\cm}$). Electronic couplings are strongest between sites 1 and 2 (\SI{87.7}{\per\cm}), forming a directed energy funnelling network that proceeds from the reaction-center-proximal pigments toward the final trapping sites.
 
 \subsection{Convergence tests (tests 1--4)}
 
@@ -430,11 +451,11 @@ The total reorganization energy is $\lambda_{\mathrm{total}} = \lambda_D + \sum_
 \section{Process Tensor-HOPS and spectrally bundled dissipators framework}\label{si:pthops}
 %=============================================================================
 
-Simulations employ the Process Tensor HOPS (PT-HOPS) and Spectrally Bundled Dissipators (SBD) methods to approximate the non-Markovian open quantum system dynamics. This section details the methods and benchmarks their performance against HEOM and Redfield theory.
+Capturing the non-Markovian dynamics of photosynthetic systems at scale requires computational methods that balance numerical precision with efficiency. We utilize the Process Tensor HOPS (PT-HOPS) and Spectrally Bundled Dissipators (SBD) frameworks to approximate these dynamics, benchmarking their results against numerically exact HEOM and traditional Markovian limits.
 
 \begin{table}[ht]
 \centering
-\caption{\textbf{Computational performance comparison.} All benchmarks are for \SI{1}{\pico\second} of FMO dynamics at \SI{295}{\kelvin} with a Drude + vibronic bath on an AMD Ryzen 5 5500U processor (8 cores at 4 threads with \SI{38}{\giga\byte} of RAM). Redfield (Markovian) results are shown for comparison but fail to capture coherence effects. PT-HOPS achieves near-HEOM accuracy with a \num{10}$\times$ speedup, enabling large-scale simulations ($N > 20$ sites) intractable for HEOM. SBD provides additional computational advantages for systems with $N > 100$ chromophores.}
+\caption{\textbf{Computational performance comparison.} All benchmarks are for \SI{1}{\pico\second} of FMO dynamics at \SI{295}{\kelvin} with a Drude + vibronic bath on an AMD Ryzen 5 5500U processor (6 cores and 12 threads with \SI{40}{\giga\byte} of RAM). Redfield (Markovian) results are shown for comparison but fail to capture coherence effects. PT-HOPS achieves near-HEOM accuracy with a \num{10}$\times$ speedup, enabling large-scale simulations ($N > 20$ sites) intractable for HEOM. SBD provides additional computational advantages for systems with $N > 100$ chromophores.}
 \label{tab:computational_benchmarks}
 \begin{tabular}{lcccc}
 	\toprule
@@ -454,7 +475,7 @@ Simulations employ the Process Tensor HOPS (PT-HOPS) and Spectrally Bundled Diss
 \end{tabular}
 \end{table}
 
-As shown in \Cref{tab:computational_benchmarks}, PT-HOPS achieves a \num{10}-fold speedup over HEOM with $\SI{<2}{\percent}$ accuracy and exhibits near-linear scaling with system size for localised excitons, enabling simulations of complete photosynthetic antenna complexes (100+ chromophores) with non-Markovian accuracy. The SBD approach provides additional computational advantages for very large systems ($N >\num{500}$ chromophores), maintaining $\SI{< 5}{\percent}$ accuracy relative to PT-HOPS while enabling simulation ofems < approaching the size of complete chloroplasts.
+As shown in \Cref{tab:computational_benchmarks}, PT-HOPS achieves a \num{10}-fold speedup over HEOM with $\SI{<2}{\percent}$ accuracy and exhibits near-linear scaling with system size for localised excitons, enabling simulations of complex photosynthetic antenna complexes (100+ chromophores). The SBD approach provides additional computational advantages for large systems ($N >\num{500}$ chromophores), maintains $\SI{< 5}{\percent}$ accuracy relative to PT-HOPS, and enables simulations approaching chloroplast dimensions.
 
 \subsection{Padé decomposition of the bath correlation function}
 
@@ -480,7 +501,7 @@ For simulations at physiological temperatures ($T = \SI{295}{\kelvin}$), the hig
 \section{Full chloroplast modeling and hierarchical coarse-graining}\label{si:chloroplast_modeling}
 %=============================================================================
 
-The ultimate goal of this quantum-enhanced agrivoltaics study is to understand and optimize quantum effects in complete biological systems. This section outlines the hierarchical coarse-graining approach necessary to model complete chloroplasts while preserving essential quantum dynamics.
+Extending molecular dynamics to biological organism scales requires bridging several orders of magnitude in spatial and temporal dimensions. This hierarchical coarse-graining strategy connects quantum coherence in molecular complexes with the macroscopic photosynthetic physiology of a complete chloroplast.
 
 \subsection{Multi-scale modeling roadmap}
 
@@ -575,12 +596,12 @@ This approach enables investigation of how quantum coherence effects observed at
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.9\textwidth]{Graphics/ETR_Under_Environmental_Effects.pdf}
-\caption{\textbf{Agrivoltaic quantum advantage in sub-Saharan Africa.} Environmental robustness data (reproduced from Fig.~4 of the main text for reader convenience) highlighting the sub-Saharan perspective: monthly ETR enhancement heatmap (left) and annual mean metrics (right) for five sites spanning three climate zones---Yaound\'e and Abidjan (equatorial), Abuja (tropical savanna), and Dakar and N'Djamena (Sahel). Persistent enhancements of \SIrange{18}{24}{\percent} demonstrate the regional potential for quantum-enhanced agrivoltaic production.}
+\caption{\textbf{Agrivoltaic quantum advantage in sub-Saharan Africa.} Environmental robustness data (reproduced from Fig.~4 of the main text for reader convenience) highlighting the sub-Saharan perspective: monthly ETR enhancement heatmap (left) and annual mean metrics (right) for five sites spanning three climate zones---Yaound\'e and Abidjan (equatorial), Abuja (tropical savanna), and Dakar and N'Djamena (Sahel). Persistent enhancements of \SIrange{18}{28}{\percent} demonstrate the regional potential for quantum-enhanced agrivoltaic production.}
 \label{fig:SI_subsaharan}
 \end{figure}
 
 %=============================================================================
-\bibliographystyle{unsrt}
+\bibliographystyle{rsc}  % RSC house style (numbered, natbib-compatible)
 \bibliography{references}
 %=============================================================================
 
